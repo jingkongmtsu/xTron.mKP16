@@ -1,0 +1,82 @@
+# 
+# makefile for compiling the module of nai
+# 
+
+
+# include compiler flags
+ifeq (${ON_DARTER}, 1)
+include compile.cfg.darter
+else
+include compile.cfg
+endif
+
+
+# define source code path 
+PARSRC  = ../../gints_engine/hgp_os/first_deriv
+SRC  = ${PARSRC}/nai
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_nai_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_p_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_p_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_f_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_f_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_s_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_d_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_p_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_d_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_f_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_d_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_sp_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_sp_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_f_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_f_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_nai_d_d_d1.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBNAI_D1} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_nai_d1.o:  ${PARSRC}/hgp_os_nai_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_nai_p_s_d1.o:  ${SRC}/hgp_os_nai_p_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_p_p_d1.o:  ${SRC}/hgp_os_nai_p_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_f_d_d1.o:  ${SRC}/hgp_os_nai_f_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_f_s_d1.o:  ${SRC}/hgp_os_nai_f_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_s_s_d1.o:  ${SRC}/hgp_os_nai_s_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_d_s_d1.o:  ${SRC}/hgp_os_nai_d_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_p_sp_d1.o:  ${SRC}/hgp_os_nai_p_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_d_sp_d1.o:  ${SRC}/hgp_os_nai_d_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_f_sp_d1.o:  ${SRC}/hgp_os_nai_f_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_d_p_d1.o:  ${SRC}/hgp_os_nai_d_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_sp_s_d1.o:  ${SRC}/hgp_os_nai_sp_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_sp_sp_d1.o:  ${SRC}/hgp_os_nai_sp_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_f_f_d1.o:  ${SRC}/hgp_os_nai_f_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_f_p_d1.o:  ${SRC}/hgp_os_nai_f_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_nai_d_d_d1.o:  ${SRC}/hgp_os_nai_d_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

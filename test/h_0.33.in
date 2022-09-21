@@ -1,0 +1,85 @@
+# First job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+
+%basis
+#min-basis
+#g3large
+aug-cc-pvtz
+%end
+
+%xcfunc
+name  becke88
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+
+# 2nd job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+
+%basis
+aug-cc-pvtz
+#min-basis
+#g3large
+%end
+
+%xcfunc
+name kp14
+%end
+
+%scf
+max_scf_cycles  150
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+
+# 3rd job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+%basis
+aug-cc-pvtz
+#min-basis
+#g3large
+%end
+
+%xcfunc
+name kp14
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  30  50
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+do_odd_electron true
+%end
+
+%frac_spin
+alpha_frac_infor_mo_begin_index 0
+alpha_frac_infor_nmo 1
+alpha_frac_infor_scale_value 0.333333333333333
+beta_frac_infor_mo_begin_index 0
+beta_frac_infor_nmo 1
+beta_frac_infor_scale_value  0.333333333333333
+%end

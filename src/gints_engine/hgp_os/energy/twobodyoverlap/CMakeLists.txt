@@ -1,0 +1,35 @@
+#
+# build the analytical integral engine for energy of twobodyoverlap
+#
+set(SRC_GINTS_ENGINE_TWOBODYOVERLAP_D0
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/hgp_os_twobodyoverlap.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_d_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_d_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_d_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_d_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_f_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_f_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_f_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_f_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_f_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_g_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_h.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_h_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_p_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_p_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_p_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_s_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_sp_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/twobodyoverlap/hgp_os_twobodyoverlap_sp_sp.cpp
+   )
+add_library(gints_engine_twobodyoverlap_d0 ${SRC_GINTS_ENGINE_TWOBODYOVERLAP_D0})

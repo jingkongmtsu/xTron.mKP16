@@ -1,0 +1,386 @@
+%
+% set up on Feb. 2014
+% * data structure:
+%   *  fundamental data types;
+%   *  composite data types: why we use STL
+% * exception handling;
+%   *  how to deal with exception in our code;
+%   *  general structure for handling exception
+% * design module in this program;
+%   *  how to define a module;
+%   *  structure of module
+% * parallel design:
+%   *  hybrid of threads and processes;
+%   *  memory management;
+% 
+%
+\chapter{Fundamental Components Design}
+\label{fundamental_components_design}
+
+In this chapter we will discuss the design of fundamental components for this 
+program. Why it was chosen, and how it was generally designed and implemented.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Design Modularized Program}
+%
+%
+%
+The biggest challenge in programming is how to deal with complexity.
+The real world is complicated, how to maintain a good framework in the 
+software so that to make the program adapt to variety of requirement for change,
+perhaps is the biggest challenge in the programming.
+
+One of effective method to reduce the complexity in programming is to
+design the modularized program\footnote{
+\url{http://en.wikipedia.org/wiki/Modular_programming}}. After 
+decomposing the program into orthogonal modules, the complexity is 
+hereby encapsulated into the given module. Therefore, this program is designed
+to be a modularized program.
+
+\subsection{How to Form A Module}
+%
+% 1 each module should be a group of function/classes that are interacted 
+%   with each other
+% 2 module means self-encapsulate
+% 3 module may have infor class as a component
+% 4 module could be a group of functions, or a group of classes
+%
+A module is a group of classes and/or functions that are conceptually linking 
+with each other. In the source directory each folder represents an individual 
+module. The discussion in this note is also organized in terms of modules.
+
+In general, module should be conceptually cohesive. One of an ideal feature 
+for module is that module itself is self-encapsulated, other modules
+only talk with the given interface of the module; therefore the whole program
+is decomposed into orthogonal components.   
+
+One of practical feature for modules is the information passing. Module need to
+know some information so as to carry out a specific job. This program handles
+the information passing for modules in two different ways. One way is to parse
+the information from user given input. In this way, each module has its own
+section of data defined in the input file by the user, and the running module
+parses the input requirements before performing the practical jobs. The other
+way is receiving job specification from its top modules in the process of
+constructing.  For both of the two methods, in general we uses the ``infor''
+class in the module to handle the information passing. In other words, the
+information processing work is done inside the infor class of the module,
+and module read out information from the infor class to perform job. Such 
+technique is used for sophisticated modules, such as gints, xcints, scf etc.
+
+A common way to define a module is through it's physical or mathematical
+meaning. For example, ``gints'' module consists of several component classes 
+that are aiming to solve analytical integrals based on Gaussian primitive
+functions. The ``shell'' module is composed by the classes and functions
+that are used to define shell structure and parse related shell properties.
+
+One the other hand, module could be composed by a series of functions or
+classes which are independent with each other, however, these functions or
+classes performs similar functionality in view of the whole program. For
+example, the ``general'' module is consist of a group of independent classes,
+they all serve as global utility components for other modules.
+
+\subsection{Structure of Modules}
+%
+%  four layers:
+%  1  general, math etc.
+%  2  gints, xcints result etc.
+%  3  SCF etc.
+%  4  script as driver 
+%
+%
+This program is generally consist of four layers of modules. The ground layer
+is composed of global utility functions and classes. Second layer involves 
+the heavy computation module ``solely'' based on the first layer. The third
+layer is composed of the modules which implement based on the second layer
+modules. Finally, the top layer is the driver scripts that manipulate the third 
+layer modules so that to perform the given computation job.
+
+The modules inside each layer is given as below (the top layer is trivial so they
+are not listed here):
+\begin{description}
+\item [first layer] The first layer is composed by modules that defined by ourself,
+and outside libraries that the whole implementation is based on.
+\begin{description}
+ \item [STL]     Standard Template Library. We use this library to form all of 
+ composite data types used in this program;
+ \item [TBB]     Threading Building Blocks. This library is used for multi-threading
+ work throughout the whole program;
+ \item [BOOST]   BOOST C++ libraries. This library complements the features missing 
+ in the standard C/C++ libraries, such as file system handling, lexical cast etc.
+ \item [BLAS and LAPACK] BLAS and LAPACK functions support for the program;
+ \item [general] self defined module to provide global utility data, functions and classes;
+ \item [math]    self defined module to provide mathematical support functions;
+\end{description}
+\item [second layer]:
+\begin{description}
+ \item [shell]   defining shell structure and shell properties;
+ \item [geom]    defining geometrical structure;
+ \item [gints]   solving analytical integrals in terms of Gaussian primitive functions; 
+ \item [xcints]  solving numerical integrals for XC part in terms of Gaussian primitive 
+ functions; 
+ \item [xcfunc]  code for calculating functional and functional derivatives in numerical
+ way;
+\end{description}
+\item [third layer]:
+\begin{description}
+ \item [vdw]  VDW interaction calculation based on second layer modules;
+ \item [scf]  SCF calculation based on gints, xcints etc.
+\end{description}
+\end{description}
+
+\subsection{Structure of User Input File}
+%
+%
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Structure}
+%
+%
+%
+
+\subsection{Fundamental Data Types}
+%
+%
+%
+Computation chemistry software usually uses the following fundamental data 
+types:
+\begin{itemize}
+ \item machine dependent unsigned integer (size\_t(see stddef.h));
+ \item signed integer (32 byte one and/or 64 byte one);
+ \item floating point number (32 byte one, 64 byte one or even more);
+ \item normal string and character (no wide type);
+ \item boolean value
+\end{itemize}
+size\_t is used to represent the size of an object. In theory the maximum
+value of size\_t is determined by system's condition. On a 32 bit system,
+size\_t is 32 bit unsigned integer so it's maximum value is $2^{32}-1$.
+On 64 bit system size\_t is 64 bit unsigned integer and it's maximum 
+value is $2^{64}-1$. Therefore, it's an machine dependent data type.
+We use size\_t to be seamlessly linking with STL. 
+
+The most important issue related to fundamental data types is the software 
+portability. In general, program should be able to transfer its fundamental 
+data from one type to another with minor change. To achieve this purpose, 
+we use the ``typedef'' to redefine the data type. For changing one data type 
+to another, in general what it needs is just modifying the head file and 
+recompilation.
+
+\subsection{Composite Data Types}
+\label{composite_data_types}
+%
+%
+%
+Composite data types such as vector, set, map etc. are also widely used 
+in the program, too. We choose to use the standard template library (STL),
+which is considered to be highly efficient and reliable. In STL, the composite
+data types is referred as ``container'', and STL also provides variety of 
+algorithms corresponding to the container, such as searching, sorting etc.
+
+By using STL, there's no need to manually handle the memory allocation
+in the program. STL uses a template class named as ``allocator'' to perform
+the memory allocation, therefore memory management is self-contained
+in the STL (for more discussion, see the \ref{mem_management}).
+
+The STL string class is used in this program to perform string parsing jobs.
+We try to avoid using raw char type of variables.The typedef is also used 
+for composite data types, too for better potability. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Memory Management}
+\label{mem_management}
+%
+% * data racing in terms of memory, STL allocator is safe?
+% * concept of scalable allocator
+% * our rule to use allocator  
+%
+\subsection{Use Allocator for Memory Management}
+%
+%
+%
+In this program we use STL to handle all kinds of composite data types(see
+\ref{composite_data_types}). In consequence, the memory management is hereby
+performed by the allocator corresponding to the composite data types. 
+In contrast to the ``NEW'' and ``DELETE'' to handle the memory allocation
+and deallocation, allocator uses more sophisticated technique to perform
+memory management in more efficient way (such as memory pool etc.). Therefore,
+the raw ``NEW'' and ``DELETE'' way to handle memory should be abandoned.      
+
+\subsection{Data Races in Memory Management}
+%
+%
+%
+Memory for system is global resource. In the multi-threading environment,
+when threads races for the global resource, sometimes the same pieces of 
+memory may occasionally be assigned to different threads so that it forms 
+``Data races''\footnote{the other name is race condition, see 
+\url{http://en.wikipedia.org/wiki/Race_condition} for more information}.
+In this case, if the threads read/write the memory together, then it will
+bring unexpected results.
+
+Quoting from the C++ standard\footnote{see 
+\url{http://www.cplusplus.com/reference/memory/allocator/} for more information},
+it's only C++11 gives satisfied description to the allocator in terms of 
+data race:
+\begin{quote}
+Except for its destructor, no member of the standard default allocator class 
+template shall introduce data races. Calls to member functions that allocate 
+or deallocate storage shall occur in a single total order, and each such deallocation 
+shall happen before the next allocation (if any) in this order.
+\end{quote}
+Since in this program we use allocator to perform memory allocation or deallocation(see
+the section of composite data types), therefore the C++ compiler should be carefully
+selected so that it's obey the C++11 standard. 
+
+\subsection{Scalable Allocator}
+%
+%
+%
+The standard allocator is currently designed for single-thread purpose use. Problem of 
+scalability arises when threads might have to compete for a single shared pool in a way 
+that allows only one thread to allocate at a time. The scalable Allocator could be used
+to allocate/deallocate memory resource to avoid scalability bottlenecks\footnote{
+See the paper\cite{berger2000hoard,michael2004scalable,hudson2006mcrt} for more details}.
+On the other hand, the scalable allocator could be also used in single thread environment,
+where it performs similarly with the traditional allocator.
+
+The use of scalable allocator could greatly improve the efficiency of multi-threading
+program. If the memory allocation takes \%20 percent of time in multi-threading program,
+then according to Amdahl's law, the maximum speedup brought by the multi-threading
+will be less than 5 times. In this case, the use of scalable allocator will relieve 
+this bottleneck.
+
+Heretofore the STL does not provide its own scalable allocator, and C++ standard(the newest
+C++ standard so far is C++11) does not say anything related to it neither. However, we believe
+in the future the scalable allocator will become a necessary feature for all mature allocator.
+That is also the reason why we stick to use it in our program.
+
+\subsection{How to Use Allocator in This Program}
+
+We use scalable allocator for all of STL containers which are based on either fundamental 
+data type (for example, vector<double>, set<int> etc.) or composite data types(for example, 
+vector<AtomShell>in MolShell class etc.). Such manipulation is based on the consideration
+that scalable allocator will use its memory pool to handle the requirement of memory
+allocation and deallocation. The only exception is string class in STL. We uses its default
+form and do not change it. Therefore for handling string parsing etc. you may need to 
+keep on eye on it if it's working in multi-threading environment.
+
+Since in this program we use TBB to parallel the threading part, therefore the TBB scalable
+allocator is used throughout the whole program.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parallel Design}
+%
+%
+%
+
+\subsection{Hybrid of Threads and Processes}
+%
+%
+%
+The computational chemistry program is in general considered to be ``data parallel'' 
+style\footnote{see \ref{hybrid_para_ints} for more discussion}. The parallelism in
+this program is generally designed to be a hybrid of threads and processes. In
+the multi-processes level, the data is distributed to different nodes, then for each
+node the computation is divided among threads. 
+
+In the program, each module may have its own parallel design. For the detailed
+parallel design information, please refer to the module itself.
+
+\subsection{Thread Safety}
+%
+%
+%
+Thread safety is a criteria for code running in the context of multi-threading programs. 
+A piece of code is thread-safe if it only manipulates shared data structures in a manner 
+that guarantees safe execution by multiple threads at the same time. There are various 
+strategies for making thread-safe data structures (for more information, please refer
+to \url{http://en.wikipedia.org/wiki/Thread_safety}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exception Handling}
+\label{exception_handling}
+%
+%
+%
+\subsection{Introduction}
+%
+%
+%
+In the running time of a program, sometimes an anomalous or exceptional event may
+arise. Such an event could be a disaster which causes the program to crash, 
+or it could an error which turns the computation result to be incorrect, 
+or it could be just irregularity and does not change anything ultimately.  
+
+The handling of such exceptional event is called ``exception handling''. C++
+uses a set of instructions (namely ``try'', ``catch'' and ``throw'') to establish
+the handling of exception. In the try block, an exception is tested and thrown
+out, then the program turns to trace back the stack to find the place to ``catch''
+the exception so that it could be processed. Such mechanism enables the exception 
+triggering and processing to be separated, which makes the complicated exception 
+event handling applicable.
+
+The exception handling in C++ is considered to be an powerful tool. However, 
+on the other hand it's considered to be that the benefits of using exceptions 
+outweigh the costs\footnote{See the google c++ style guide}.
+
+Now let's consider a general anomalous event arise in computation chemistry 
+program. In general, the QC program accepts the input from user and it only 
+interacts with the hardware or other programs/libs etc. as required by the user input
+in the running time. Therefore an anomalous event will lead to three kinds 
+of results:
+\begin{itemize}
+ \item cause the program to crash or in an abnormal state;
+ \item program could still normally terminate, but results are ruined;
+ \item cause the program to diverge from its normal flow, and results are correct.
+\end{itemize}
+
+In the first two cases the anomalous event is actually referred as an ``error''
+to the program. Practically such an error reflects that there's bugs inside the 
+program which is needed to be fixed. Therefore, the reasonable handling of 
+the first two types of ``exception'' is to terminate the program, print out detailed
+debugging information and send it back for bug fix.
+
+The third case is actually an ``warning'' message to the program. It indicates
+that the program need to be revised, even though it survives for this run. Therefore
+the reasonable handling for this case is to print out warning sign and detailed 
+debugging information for future revision.
+
+In summary, to handle the exception in a QC program involves two steps:
+\begin{enumerate}
+ \item print out detailed information for debugging;
+ \item decide whether to print out warning message, or completely terminate the program.
+\end{enumerate}
+Hence the exception handling in QC program is direct and simple. For this reason,
+we do not use the exception handling provided in the standard C++ language. Instead,
+a simple way to handle the exception is suggested in the following content.
+
+\subsection{Handle Exception}
+%
+%
+%
+Addition to the above general discussion, the exception has another general feature: 
+it can be standardized and categorized. Therefore it's able to set up an exception 
+list and group the exceptions into categories. Furthermore, each exception could be 
+mapped with an unique code as an ID. The ID will reflects the intrinsic nature of the 
+exceptions, with the ID program can decide whether to terminate the program or enable 
+it to be proceeded.
+
+Based on the exception ID the program use some simple classes to collects and handle 
+the debugging information. There's a base class to hold fundamental information to 
+all exceptions, namely:
+\begin{itemize}
+ \item class name or namespace name;
+ \item function name;
+ \item exception code;
+\end{itemize}
+With these information it's able to locate where the exception come from and what type
+is the exception.
+
+Moreover, sometimes more information is demanded for debugging therefore it's able to 
+derive other kinds of classes based on the ``base class''. For example, the exceptions
+related to file handling requires the information of the file name as well as file 
+directory. For these cases, it's easy to generate derived class to contain more 
+debugging information.

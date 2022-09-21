@@ -1,0 +1,18 @@
+
+this piece of code is to use the matrix class etc. to compare the difference
+between two given matrix data saved on hard disk.
+
+to use this utility program, just type "make" here in this folder to compile
+the code. Make sure that TBB, boost and lapack/blas library is installed.
+
+the command line parameter is like this:
+
+./matrix_compare in  out p1  p2  p3
+in links to the input matrix where we can read in the molecule and shell data
+out is the output file
+p1 defines the path that links to the standard data matrix(from gints or xc)
+p2 defines the path that links to the testing data matrix(must be xc)
+p3 defines the path that links to the density matrix so that we can compute the energy
+p3 is optional
+
+see the code in main.cpp for more information

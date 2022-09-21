@@ -1,0 +1,35 @@
+#
+# build the analytical integral engine for energy of kinetic
+#
+set(SRC_GINTS_ENGINE_KINETIC_D0
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/hgp_os_kinetic.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_d_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_d_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_d_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_d_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_f_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_f_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_f_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_f_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_f_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_g_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_h.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_h_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_p_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_p_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_p_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_s_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_sp_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/kinetic/hgp_os_kinetic_sp_sp.cpp
+   )
+add_library(gints_engine_kinetic_d0 ${SRC_GINTS_ENGINE_KINETIC_D0})

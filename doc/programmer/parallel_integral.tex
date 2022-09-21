@@ -1,0 +1,580 @@
+%
+% set up March, 2014
+%
+\chapter{Parallel Designing for Fundamental Integral Computation}
+\label{parallel_imp_integral}
+%
+%
+%
+In this chapter a general discussion about parallelization design
+for fundamental integral calculation in quantum chemistry is presented.
+The content is organized as follows:
+\begin{enumerate}
+ \item introduction to the integral calculation, so to set up
+ the general procedure and fundamental concepts for parallelization design;
+ \item how to design the parallelism for integral computation. Here
+ ideas follow the book of ``Designing and Building Parallel Programs''
+ \cite{foster1995designingparallel}, so the methodical design is divided into
+ the following topics:
+ \begin{enumerate}
+  \item Partition;
+  \item Communication and Synchronization;
+  \item Mapping and Agglomeration
+ \end{enumerate}
+\end{enumerate}
+
+For the general ideas about the parallelization, for terminology the reader
+could refer to the article by Blaise Barney\cite{barney2010parallelintroduction},
+for the general parallelization method discussion user could refer to materials
+\cite{kumar1994parallelintroduction, pacheco2011parallelintroduction} etc.
+
+The parallelization design for integral calculation will be generally discussed
+over two levels. The first level is distributed memory system, on which the 
+data/task is distributed with tools like message passing interface\footnote{
+see \url{http://en.wikipedia.org/wiki/Message_Passing_Interface} for more information}.
+The second level is shared memory system, on which the data/task is distributed
+among threads.
+
+For calculation on thread level, CPU\footnote{see 
+\url{http://en.wikipedia.org/wiki/Central_processing_unit}
+for more information} and GPU\footnote{see the 
+\url{http://en.wikipedia.org/wiki/Graphics_processing_unit} 
+for more information} are two different kind of processor units currently 
+widely used in computational chemistry. Since their design is different from
+each other, their parallelization model for integral calculation is 
+totally different. The model to set up threads for CPU and GPU will be 
+discussed separately.
+
+\section{Introduction to Analytical Integrals}
+%
+% 1 form of integrals;
+% 2 dimension of integrals;
+% 3 post process step for integrals;
+% 4 general procedure to produce integral, and process it into
+%   final results
+%
+In quantum chemistry calculation, generally there are two types of 
+fundamental integrals. The first type is analytical integrals in the 
+form:
+\begin{equation}
+  I_{ijkl} = \int \phi_{i}(\bm{r})\phi_{j}(\bm{r})f(\bm{r},\bm{r^{'}})
+\phi_{k}(\bm{r^{'}})\phi_{l}(\bm{r^{'}}) d\bm{r} d\bm{r^{'}}
+\end{equation}
+where the $\phi$ is the chosen basis set function, and $f(\bm{r},\bm{r^{'}})$
+represents the operator. Nuclear attraction integrals(NAI), kinetic integrals(KI),
+electron repulsion integrals(ERI), overlap integrals(OVI) etc. are all able to be 
+derived from this general expression. In this program, we use Gaussian form 
+function(GTO) to compose basis set functions\cite{levine,szabo,
+Davidson_Feller_CR_86_681_1986}:
+\begin{align}
+ \chi &= x^{l}y^{m}z^{n}e^{\alpha r^{2}} \quad \text{or} \nonumber \\
+      &= r^{L}Y_{L}^{M}(\theta,\phi)e^{-\alpha r^{2}} 
+\end{align}
+where $Y_{L}^{M}$ is the spherical harmonic function, and $L = l+m+n$.
+Basis set function is generally a linear combination of Gaussian functions:
+\begin{equation}
+ \phi = \sum_{i}d_{i}\chi_{i}
+\end{equation}
+$d_{i}$ is predetermined coefficients.
+
+The basis set functions who sharing the same $L$ are able to be grouped together to 
+form a ``shell'', and one atom could have a list of shells. Finally, the molecular
+shell data is composed by a list of atom shell data. Therefore, the corresponding 
+dimension change for basis set could be expressed as:
+\begin{center}
+ Gaussian function \\
+ $\Downarrow$ \\
+ basis sets \\
+ $\Downarrow$ \\
+ shell \\
+ $\Downarrow$ \\
+ shells for atom \\
+ $\Downarrow$ \\
+ atom shells data for molecule
+\end{center}
+
+Accordingly the dimension change for analytical integrals could be viewed
+as:
+\begin{center}
+ primitive integrals formed by Gaussian function \\
+ $\Downarrow$ \\
+ integrals \\
+ $\Downarrow$ \\
+ shell quartets \\
+ $\Downarrow$ \\
+ shell quartets in a batch 
+\end{center}
+
+The raw integrals may not be the final result of the calculation. In this case,
+after the raw integrals are generated, it's necessary to start ``post-processing''
+step to generate the final results. This step is also called ``digestion''.
+The digestion step may include following steps\footnote{For more information please
+refer to discussion in GInts module}:
+\begin{itemize}
+ \item transform the raw integrals in terms of basis sets (from Cartesian basis
+ sets to spherical basis sets or vice versa);
+ \item scale the normalization factors for Cartesian basis sets;
+ \item combine raw integrals with density matrices or MO coefficients to form
+ final results
+\end{itemize}
+Thus a general analytical integral procedure is as below:
+\begin{verbatim}
+loop over the shells data:
+  for the given shell data, generate raw integrals;
+  digest raw integrals into result (possibly with
+  density matrices or MO data);
+end loop
+\end{verbatim}
+
+\subsection{Shell Pair Data}
+
+In the general integral expression:
+\begin{equation}
+	I_{ijkl} = \int \phi_{i}(\bm{r})\phi_{j}(\bm{r})f(\bm{r},\bm{r^{'}})
+	\phi_{k}(\bm{r^{'}})\phi_{l}(\bm{r^{'}}) d\bm{r} d\bm{r^{'}}
+\end{equation}
+Because any two Gaussian functions could be combined together to form a series of
+new Gaussian functions, it's able to combine the $ \phi_{i}(r)\phi_{j}(r)$ to form 
+``shell pair data'':
+\begin{align}
+	\label{shell_pair_eq:2}
+	\phi_{i}(\bm{r})\phi_{j}(\bm{r}) \Longrightarrow (ij| \nonumber \\
+	\chi_{k}(\bm{r^{'}})\chi_{l}(\bm{r^{'}}) \Longrightarrow |kl)
+\end{align}
+For more information, reader could refer to the shell pair section in GInts module.
+
+The shell pair data has two important roles in integral calculation. Firstly,
+shell pair could form an effective screening test prior to the integral computation.
+For two arbitrary shells, it can either form a ``significant'' shell pair or 
+``insignificant'' shell pair and it's only ``significant'' shell pair contributes
+to the integral computation. In the process to screen out the insignificant shell
+pairs, it also indicates that the corresponding integrals are screened out, too.
+
+The second important role for shell pair is to organize the loop structure of 
+integral calculation. For ERI calculation, to use shell pair other than shell
+could lead to much simpler loop structure on integral computation. On the other 
+hand, load balanced integral calculation is an important feature by using shell
+pair data. Given by the characters of shell pairs (for example, the contraction 
+degree, angular momentum etc. ) it's able to set up sorting process on the shell 
+pair so that to create load balanced input data for integral calculation.
+
+In summary, shell pair is a better choice for organizing the integral calculation
+comparing with using shell. In the following content, we only concentrate on
+shell pair data.
+
+\section{Introduction to Numerical Integrals}
+%
+%  1 form of integrals;
+%  2 dimension;
+%  3 general procedure
+%
+The second type of fundamental integral is in density functional calculation,
+where the integrals are numerically computed. The numerical integral can be 
+expressed in a general form of:
+\begin{equation}
+ \begin{split}
+ I &= \int F[\rho(\bm{r}), \nabla\rho(\bm{r}), \cdots] d\bm{r} \\
+   &=  \sum^{natoms}_{n}\sum^{ngrids}_{g}w_{g}A_{g}(\bm{r_{g}})
+       F[\rho(\bm{r_{g}}), \nabla\rho(\bm{r_{g}}), \cdots] 
+\end{split}
+\end{equation}
+$w_{g}$ is the quadrature weights, $A_{g}$ is the partition weights and $F$
+is the DFT functional\cite{MHL,Becke,OR,EGM}. In contrary to the analytical
+integrals, where the calculation is measured in dimension of basis sets;
+the numerical integrals are measured in dimension of grid points. Generally,
+the dimension in calculation for numerical integrals is following as (from
+smallest to largest):
+\begin{center}
+ grid points in batch(chunk) \\
+ $\Downarrow$ \\
+  grid points for one atom \\
+ $\Downarrow$ \\
+  grid points for all of atoms 
+\end{center}
+
+The general procedure for numerical integrals is following as\footnote{More
+information could be referred to discussion in XCInts module}:
+\begin{verbatim}
+loop over atoms in molecule:
+  loop over batch grids for given atom:
+    form batch grid points and quadrature weights;
+    form corresponding partition weights; 
+    form basis set values etc. on batch grids;
+    convert input density matrices into significant order;
+    form batch variables based on basis set values etc.;
+    form functional and functional derivatives per grid;
+    combine all of them to form final result
+  end loop
+end loop
+\end{verbatim}
+
+\section{Partition}
+
+The partitioning stage of a design is intended to expose opportunities for 
+parallel integral calculation. Hence, the focus is on defining a large number 
+of small tasks in order to yield a proper decomposition of the problem.
+
+\subsection{Hybrid of Threads and Processes}
+\label{hybrid_para_ints}
+%
+% 1  data parallelism
+% 2  communication analysis
+%
+
+From the above discussion to the fundamental integrals, it's clear that the 
+computation of integrals is \textbf{Data Parallelism} job \footnote{See the 
+\url{http://en.wikipedia.org/wiki/Data_parallelism}}. Therefore, the integral
+calculation is basically a ``domain decomposition''problem. The key
+for the parallelization of integrals is to effectively distributing the large
+amount of data to different processes on node and threads. Consequently,
+in general we can use a hybrid of threads and processes model to parallelize
+the integrals calculation, as depicted below:
+\begin{equation}
+ \text{Data} \Longrightarrow 
+\begin{cases}
+\text{Node 1} \overset{\text{chunk data}}{\Longrightarrow}  \begin{cases}
+                                                        \text{thread 1}  \\
+                                                        \text{thread 2}  \\
+                                                        \cdots           \\
+                                                        \text{thread m}
+                                                      \end{cases}
+\\
+\text{Node 2} \overset{\text{chunk data}}{\Longrightarrow}  \begin{cases}
+                                                        \text{thread 1} \\
+                                                        \text{thread 2}  \\
+                                                        \cdots           \\
+                                                        \text{thread n}
+                                                      \end{cases}
+\\
+\cdots       \\
+\text{Node n} \overset{\text{chunk data}}{\Longrightarrow}  \begin{cases}
+                                                         \text{thread 1} \\
+                                                         \text{thread 2}  \\
+                                                         \cdots           \\
+                                                         \text{thread k}
+                                                      \end{cases}
+\\
+\end{cases}
+\label{general_level_of_parallel_ints}
+\end{equation}
+
+In the above general scheme, the data is partitioned into two levels. The first
+level is coarse level, which is to divide the data into large chunks so that 
+to distribute them among nodes. This step carries out the calculation in
+processes within a network of distributed memory system. The second level is 
+fine level division, it decomposes the large chunk on each nodes into smaller 
+chunks so that the each chunk of data could be processed on individual threads 
+per process. This step will perform the calculation in the shared memory system.
+
+\subsection{Granularity}
+
+Granularity is the unit chunk size of data for processes/threads, and the 
+choice of granularity deeply affects the performance of the parallelization. 
+In general, the choice of granularity is influenced by the following factors:
+\begin{itemize}
+ \item the specific hardware condition;
+ \item algorithm for integral calculation
+\end{itemize}
+
+In general, granularity is a qualitative measure of the ratio of computation 
+to communication, since computation on each chunk of data is typically separated 
+from its communication by synchronization events.
+
+Given by the granularity size, there are two types of parallelisms. One is 
+fine-grain parallelism which has small amounts of computational work done 
+between communication events. The other is coarse-grain parallelism, which
+involves heavy computational work between communication events. The fine-grain
+parallelism has good load balancing in general, and the overhead cost for 
+communications and synchronization could be significant. On the other hand,
+the coarse-grain parallelism is typically with low overhead, however, it may
+have a bad performance on load balance. 
+
+The possible granularity for the analytical integrals could be measured through
+basis set dimensions. For each thread, the work could be performed on either
+``shell'' or ``atom shell'' level; for each process on single node, the work could 
+be done on batch of shell or batch of atom shell level which is depending on
+the scale of threads.
+
+For the granularity scale on shell(this is also the fine-grain level parallelism in
+integral calculation), the benefit is that it's able to sort out the 
+shell pair according to angular momentum and contraction degree so that 
+to form load balanced integral calculation. On the other hand, the disadvantage 
+is that synchronization on the results become intensive (do not forget that the 
+ERI integrals scales $N^{4}$ of shell dimension).
+
+For the granularity scale on atom shell size (this is also the coarse-grain level 
+parallelism in integral calculation), the benefit is synchronization on the results
+is less intensive, and the disadvantage is the load balance is hard to maintain
+for atom shell quartet calculation\footnote{In fact, the atom shell pair data could
+be still sorted out, the point is it can not be sorted in precise way. For example,
+it's able to sort atom shell pairs in criteria of basis set numbers, shell numbers etc.}.
+
+\section{Communication and Synchronization}
+%
+% the meaning of communication
+%
+Communication and synchronization analysis will find out the possible communication
+and synchronization between two working threads or processes. Here communication
+refers the behavior of communication between threads or processes during the calculation
+work, and synchronization indicates the updating of local results into global results 
+for threads and processes.
+
+\subsection{Communication and Synchronization Analysis in Integral Calculation}
+
+For both analytical and numerical integral calculation, their possible input 
+data source is as follows:
+\begin{itemize}
+ \item shell or shell pair data;
+ \item geometrical data;
+ \item density matrices or MO data
+\end{itemize}
+All of the input data will keep constant during the integral calculation. 
+For each process/thread carrying out the integral calculation, it will 
+access the whole or part of the input data source and form it's own independent
+result chunk. Finally, each of the result chunk will be merged together to 
+form the whole result. The general procedure for integral calculation is like:
+\begin{verbatim}
+for processes, broadcasting the input data to each node;
+loop over tasks for integral calculation:
+  access input data source;
+  perform integral calculation locally to
+  form its own result chunk;
+  merge the result chunk into the entire
+  result;
+end loop
+\end{verbatim}
+Consequently the local integral calculation involves few communications, but each
+thread or process need to synchronize it's result.
+
+Synchronization is one of important bottle neck for integral calculation. For 
+analytical integral calculation, since it's $N^{4}$ scale, therefore the synchronization
+cost is implicitly very heavy. 
+
+\subsection{General Discussion to Update Local Results}
+%
+%
+%
+In general, the update of localized integral calculation result into global result
+could be expressed as:
+\begin{equation}
+	M_{global} = \bigoplus_{i} M_{local}^{i}
+\end{equation}
+Since all of integral results are in form of matrix format, therefore we use ``M''
+to represent it. In general, the local matrices form a direct sum into the global
+result.
+
+There are two general way to implement the updating process. One way is to make
+each local updating into critical section, therefore each time it's only one 
+thread could merge it's local result into the global one:
+\begin{verbatim}
+loop over tasks for integral calculation:
+  form local results;
+  form a critical section area:
+    perform update from local to global;
+  release the critical section area
+end loop
+\end{verbatim}
+Such implementation implicitly introduces heavy overhead on threads scheduling.
+For example, the cost of locking/unlocking the critical section, the potential
+idle time for threading waiting for unlocking etc. In considering that the 
+number of local results scale with $N^{4}$ of basis set dimension, therefore 
+such cost could be very heavy.
+
+The other way to perform the updating is to convert the summation into associative 
+reduction operations:
+\begin{align}
+	M_{global} &= \bigoplus_{threads} M_{thread} \Rightarrow \nonumber \\
+	M_{thread} &= \bigoplus_{i} M_{local}^{i}
+\end{align}
+In this procedure, each thread will set up it's own local result archive and the local
+results will be merged into the local archive. After the thread finishes it's work,
+reduction operation will be performed between threads so that to merge the thread 
+local results into the global one. The last thread will give the global result. Such 
+process could be expressed as:
+\begin{verbatim}
+set up thead local result archive;
+loop over tasks for integral calculation:
+  form local results;
+  update local results into result archive;
+end loop
+perform reduction on thread's local result archive
+\end{verbatim}
+Comparing with the first method, this implementation get rid of the critical section
+so it release the potential overhead on scheduling the threads. The trade-off is 
+the increasing memory usage on setting up local result archive. However, since 
+the result is in dimension of $N^{2}$, it could be expected that the local
+result archive does not occupy too much memory. Therefore, the second method 
+should be the prior implementation for integral calculation. 
+
+\subsection{Racing Condition}
+%
+% what is racing condition?
+% critical section
+%
+Race conditions is the status that an application depends on the sequence or timing 
+of processes or threads for it to operate properly. Furthermore, the global results for 
+integral calculation always form a ``critical section'' where the operations on these 
+critical sections must be mutually exclusive. Hence the racing condition become 
+the main cost for the integral calculation in terms of communication and synchronization.
+
+In integral calculation, racing conditions happen when program refers to the global
+resources of system, e.g.; requiring memory from system. In general, the cost of 
+racing condition is inevitable. However, the following suggestion could be applied to 
+reduce the pain brought by racing condition:
+\begin{itemize}
+ \item increase the granularity level so that to reduce the number of racing conditions
+ caused by threads or processes;
+ \item reduce the operation in critical sections, and use local data as much as it can;
+ \item use new technique to avoid racing condition (for example, lock-free containers,
+	 scalable memory allocator for multi-threads etc.)
+\end{itemize}
+
+\subsection{False Sharing}
+%
+% what is false sharing?
+%
+\label{false_allocation_parallel_int}
+False sharing is a performance-degrading usage pattern between threads. When a thread 
+attempts to periodically access data that will never be altered by another thread, but that data 
+shares a cache block with data that is altered, the caching protocol by system may force the 
+first thread to reload the whole memory unit despite a lack of logical necessity. In this point,
+the system is unaware of activity within this block and forces the threads to bear the overhead 
+to updating caches.
+
+False sharing is commonly existing in multi-threads work, especially for the fine-grain threads.
+However, comparing with the racing condition and other major consumptions, false sharing 
+is less important. 
+
+\subsection{Memory Allocation}
+%
+%
+%
+\label{mem_allocation_parallel_int}
+Memory allocation is another implicit cost in multi-threading work. This is because the heap
+for allocating memory is global resource shared by all threads, therefore memory allocation
+becomes a racing condition. In integral calculation, considering that each thread may use
+memory in a lot of places, hence the cost of memory allocation for multi-threads mode is 
+another important cost in integral calculation.
+
+However, such cost could be effectively reduced by the following techniques:
+\begin{itemize}
+ \item use memory management for threading work. Allocating memory only once for 
+ each thread and use this management class/function to manipulate memory requirement;
+ \item use library that could allocate memory in scalable way (for example, TBB scalable 
+ memory allocator)
+\end{itemize} 
+
+\section{Mapping and Agglomeration }
+%
+%
+%
+After generally setting up the partition level and discussing the cost underlies beneath 
+the communication and synchronization, now it's the stage to discuss the scheduling 
+of threads/processes, which is called ``mapping''. Finally, by bringing all of pieces 
+together, it's able to concretize the design of parallel structure for integral calculation;
+and this step is ``agglomeration'' \footnote{(initially in the book of 
+\cite{foster1995designingparallel}, it means to increase granularity level so to find out 
+the most situation partition. Here we extend its meaning)}.
+
+\subsection{Load Balance}
+%
+%
+%
+Load balance is a natural requirement for parallel programming. It refers to the practice 
+of distributing approximately equal amounts of work among tasks so that all tasks are 
+kept busy all of the time. It can be considered a minimization of task idle time.
+
+The influence of load balance is close to the way that how the work is scheduled. If 
+the integral work is statically assigned to processes/threads, then the slowest task will 
+determine the overall performance. On the other hand, if the work is dynamically assigned
+to processes/threads, the unbalanced load of initial work will produce much less pain comparing
+with statical way.
+
+For integral calculation, the accurate load balancing is actually will never be achieved. 
+For analytical integral calculation, even though the shell pairs could be precisely sorted
+so to ensure that the input for integral calculation is exactly in same load; the integral
+calculation process may not be even among threads. This is because that the result
+integral could be insignificant even though the input shell pairs are significant\footnote{see
+the \label{shell_pair_para_int} for more information}. For the numerical integral calculation,
+it's impossible to identify the number of significant basis set for the given batch of grids prior
+to the practical calculation; therefore precise load balance is hard to achieve in numerical
+integral calculation too.  
+
+\subsection{Work Scheduler: Dynamic or Static?}
+%
+% 1 dynamic scheduling is better than the static scheduling
+% 2 work stealing 
+%
+In general, there are two general ways to schedule the work between processes/threads.
+One way is static scheduling, which divided the work evenly in compiling stage for 
+processes/threads. The other way is dynamic scheduling, which set up a processes/threads
+pool first, then by following the rule of ``first-come, first-served'', each 
+process/thread will be assigned with new work.
+
+The main cost for work scheduler is the initialization/destruction/switch of the processes or 
+threads. Static scheduling has less overhead than the dynamic scheduling, however; by 
+increasing the granularity size, the percentage of overhead for each threading work could be 
+reduced. On the other hand, static scheduling will be hurting a lot from the improper balanced
+load of calculation. Therefore, for integral calculation, dynamical scheduler is better than
+the static scheduler. 
+
+To minimize the overhead cost, the ``work-stealing algorithm'' is proposed as a powerful 
+candidate for work scheduler. This core of this algorithm is to try to steal work from other 
+unfinishing threads so that to maintain the maximum load of computation with little cost 
+on overhead.
+
+\subsection{Choice of granularity}
+%
+%
+%
+Depending on the above analysis, it's clear that the coarse-grain parallelism is favorable 
+in term of synchronization and dynamic scheduling, the only disadvantage is from the 
+load balance. However, with work stealing algorithm such negative influence could be 
+expected to reduce significantly. 
+
+Therefore, it's suggested that in integral calculation, all of work on threads is preformed 
+based on the unit scale of atom shell. The analytical integral calculation will loop over 
+atom shell pairs, and the input/output will be formed for atom shell scale. For numerical 
+integrals, each thread is working on the grids for an atom.
+
+
+
+\subsection{Choice of Parallel Programming Environment}
+%
+%
+%
+There are a couple of selections for implementing the integral calculation. For example,
+OpenMP\footnote{see \url{http://en.wikipedia.org/wiki/OpenMP}}, TBB\footnote{
+see \url{https://www.threadingbuildingblocks.org/}} etc. Here we choose TBB for parallel
+implementation, the reason is listed below:
+\begin{itemize}
+ \item  it's conceptually derived from object-oriented language, therefore it 
+ could be seamlessly used in the code;
+ \item  it use working stealing algorithm to realize the dispatch of thread work;
+ \item  it has a scalable memory allocator for multi-threading work;
+ \item  the reduce parallel loop is provided so that associative reduction operation
+ could be performed to the local results;
+ \item  it's free software and takes the GPLv2 license
+\end{itemize}
+
+\subsection{Design of Function Object in TBB Threads}
+%
+%
+%
+In TBB, each working thread is associated with a function object; in which the computation
+work is performed. According to the discussion above, generally the function object
+may primarily contain the following members:
+\begin{description}
+ \item [local memory manager] this is used for managing the local memory for work inside
+       threads. For each thread, the memory allocation/deallocation is done when initializing
+       or destructing the threads;
+ \item [local result archive] this is used to preserve the local results and it will be 
+       merged into global results by reduction operation between threads;
+ \item [constant reference on input] so to access the input data;
+ \item [reference on global output] If the global result could be divided into orthogonal 
+       areas for local threads to access, then the calculation between threads is totally
+       local. In this sense, it's possible for each thread to update the result without 
+       interfere with other threads
+\end{description}
+
+

@@ -1,0 +1,24 @@
+
+*************************************
+* problem using intel compiler      *
+* June  2015                        *
+*************************************
+for using Intel compiler, we notice that the running time library for 
+Intel fortran compiler has two versions, one is thread safe and the 
+other one is thread unsafe. The thread safe one is libifcoremt,
+the thread unsafe one is libifcore. For more information, please
+see the post here:
+https://software.intel.com/en-us/articles/threading-fortran-applications-for-parallel-performance-on-multi-core-systems
+search for the keyword of "Thread Safe Libraries".
+
+For KP14 functional, if we do not use the thread safe library in multi-threads
+env. it will give incorrect result. So you need to link against the libifcoremt
+and use the -openmp for linking as well as -fopenmp for compiling with ifort.
+However, it seems that we did not call FOR_RTL_INIT (see the above post), but 
+somehow can get the correct result.
+
+for PSTS functional, ifort just give wrong xc matrix number. No matter ifcore
+or ifcoremt we use. currently ifort version is 17.0.2. Just disable the ifort use.
+
+You should be caution about this!!
+

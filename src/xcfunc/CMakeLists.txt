@@ -1,0 +1,43 @@
+#
+#  build the files in xcfunc folder
+#
+set(SRC_XCFUNC_FORTRAN 
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/b13coor.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/b13strong_ac.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/becke05ex.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/becke88.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/beck_rsc.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/br89exhole.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/br89x.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/br94coor.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/find_diff_check_deriv1.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/initfuncderives.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/kp14ec.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/kp14exc.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/lyp.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pbec.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pbex.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pw86c.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pw86x.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pw91c.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pw91x.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pw92c.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/s.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/vdwbr89.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/vwn1rpa.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/vwn5.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/tpssx.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/tpssc.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/tpssx_pw.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/pbecp.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/lambda_pbe.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/glpbe.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/czeta.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/wt.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/psts.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/scan.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/br89Xhole_s.f
+	${PROJECT_SOURCE_DIR}/src/xcfunc/src/hirao00Xhole_s.f
+	)
+add_library(xcfunc ${SRC_XCFUNC_FORTRAN})
+

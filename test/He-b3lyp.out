@@ -1,0 +1,125 @@
+----------------------------------------------
+          SINGLE POINT SCF CALCULATION        
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+%global_infor
+multi_threads false
+%end
+
+################
+################
+%molecule
+0 1
+He   0  0  0.0
+%end
+
+%basis
+G3LARGEXP
+%end
+
+%xcfunc
+name  b3lyp
+%end
+
+%scf
+max_scf_cycles  50
+result_denmtrx true
+scf_guess core
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-14
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+%end
+
+
+*******************************************
+*            GlobalInfor Print            *
+*******************************************
+input   file is        : He-b3lyp.in
+scratch file is        : /scratch/jing/a1cb-48c7-c3f1-0e3d
+number of CPU threads  : 1
+we use single-threads
+number of basis sets 10
+DIIS error 0.2348656960    
+B3LYP iter is: 0, @@@@@ total energy is: -2.7959252282    
+The most lowest energy so far is: -2.7959252282   , scf index is 0
+NucRepulsion 0.0000000000    
+core -3.9964661684   
+JK   energy is: 2.2427079329    
+XC   -1.0421669927   
+MTAG B3LYP   0   0 -2.7959252282    0.2348656960    
+DIIS error 0.0753936258    
+B3LYP iter is: 1, @@@@@ total energy is: -2.9027064635    
+The most lowest energy so far is: -2.9027064635   , scf index is 1
+NucRepulsion 0.0000000000    
+core -3.7942664022   
+JK   energy is: 1.7055544182    
+XC   -0.8139944794   
+MTAG B3LYP   1   1 -2.9027064635    0.0753936258    
+DIIS error 0.0235076726    
+B3LYP iter is: 2, @@@@@ total energy is: -2.9125703135    
+The most lowest energy so far is: -2.9125703135   , scf index is 2
+NucRepulsion 0.0000000000    
+core -3.8955150515   
+JK   energy is: 1.8669090210    
+XC   -0.8839642830   
+MTAG B3LYP   2   2 -2.9125703135    0.0235076726    
+DIIS error 0.0003443591    
+B3LYP iter is: 3, @@@@@ total energy is: -2.9135437215    
+The most lowest energy so far is: -2.9135437215   , scf index is 3
+NucRepulsion 0.0000000000    
+core -3.8756878826   
+JK   energy is: 1.8302212514    
+XC   -0.8680770902   
+MTAG B3LYP   3   3 -2.9135437215    0.0003443591    
+DIIS error 0.0000014084    
+B3LYP iter is: 4, @@@@@ scf converged energy is: -2.9135439293    
+The most lowest energy so far is: -2.9135439293   , scf index is 4
+NucRepulsion 0.0000000000    
+core -3.8753841847   
+JK   energy is: 1.8296847262    
+XC   -0.8678444709   
+MTAG B3LYP   4   4 -2.9135439293    0.0000014084    
+result density matrix
+                 1            2            3            4            5            6 
+1        0.0733484    0.1281436    0.1040501    0.0091383    0.0000000   -0.0000000 
+2        0.1281436    0.2238736    0.1817811    0.0159651    0.0000000   -0.0000000 
+3        0.1040501    0.1817811    0.1476027    0.0129633    0.0000000   -0.0000000 
+4        0.0091383    0.0159651    0.0129633    0.0011385    0.0000000   -0.0000000 
+5        0.0000000    0.0000000    0.0000000    0.0000000    0.0000000    0.0000000 
+6       -0.0000000   -0.0000000   -0.0000000   -0.0000000    0.0000000    0.0000000 
+7       -0.0000000   -0.0000000   -0.0000000   -0.0000000    0.0000000    0.0000000 
+8        0.0000000    0.0000000    0.0000000    0.0000000    0.0000000    0.0000000 
+9        0.0000000    0.0000000    0.0000000    0.0000000    0.0000000   -0.0000000 
+10       0.0000000    0.0000000    0.0000000    0.0000000    0.0000000   -0.0000000 
+                 7            8            9           10 
+1       -0.0000000    0.0000000    0.0000000    0.0000000 
+2       -0.0000000    0.0000000    0.0000000    0.0000000 
+3       -0.0000000    0.0000000    0.0000000    0.0000000 
+4       -0.0000000    0.0000000    0.0000000    0.0000000 
+5        0.0000000    0.0000000    0.0000000    0.0000000 
+6        0.0000000    0.0000000   -0.0000000   -0.0000000 
+7        0.0000000    0.0000000   -0.0000000   -0.0000000 
+8        0.0000000    0.0000000    0.0000000    0.0000000 
+9       -0.0000000    0.0000000    0.0000000    0.0000000 
+10      -0.0000000    0.0000000    0.0000000    0.0000000 
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: 0.00000000       0.00000000       0.00000000     
+total dipole moment: 0.00000000     
+ 1.141821s wall, 1.370000s user + 0.770000s system = 2.140000s CPU (187.4%)

@@ -1,0 +1,198 @@
+%
+% set up Feb. 2014
+% this chapter is organized as:
+% 1  ground principles for programming to guide us;
+% 2  from the principles, we will make the code conventions for this program
+%
+\chapter{Coding Conventions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Suggested Principles of Good Programming}
+\label{principle}
+
+The principles of good programming are closely related to principles of good
+design and engineering. Here is some general principles we try to follow in our
+program\footnote{The whole content is actually copied from Christopher Diggins's
+Blog, see the original content: 
+\url{http://www.artima.com/weblogs/viewpost.jsp?thread=331531}}.
+
+\textbf{DRY(Do not repeat yourself)} - This is probably the single most fundamental
+tenet in programming is to avoid repetition. Many programming constructs exist
+solely for that purpose (e.g. loops, functions, classes, and more). As soon as
+you start repeating yourself (e.g. a long expression, a series of statements,
+same concept) create a new abstraction.
+\footnote{\url{http://en.wikipedia.org/wiki/Don\%27t_repeat_yourself}}
+
+\textbf{Abstraction Principle} - Related to DRY is the abstraction principle ``Each
+significant piece of functionality in a program should be implemented in just
+one place in the source code.''
+\footnote{\url{http://en.wikipedia.org/wiki/Abstraction_principle_(programming)}}
+
+\textbf{KISS (Keep it simple, stupid!)} - Simplicity (and avoiding complexity) should
+always be a key goal. Simple code takes less time to write, has fewer bugs, and
+is easier to modify.
+\footnote{\url{http://en.wikipedia.org/wiki/KISS_principle}}
+
+\textbf{Avoid Creating a YAGNI (You aren’t going to need it)} - You should try not to
+add functionality until you need it.
+\footnote{\url{http://en.wikipedia.org/wiki/YAGNI}}
+
+\textbf{Do the simplest thing that could possibly work} - A good question to ask one's
+self when programming is ``What is the simplest thing that could possibly
+work?'' This helps keep us on the path towards simplicity in the design.
+\footnote{\url{http://c2.com/xp/DoTheSimplestThingThatCouldPossiblyWork.html}}
+
+\textbf{Do not make me think} - This is actually the title of a book by Steve Krug on
+web usability that is also relevant in programming. The point is that code
+should be easily read and understood with a minimum of effort required. If code
+requires too much thinking from an observer to understand, then it can probably
+stand to be simplified. \footnote{\url{http://www.sensible.com/dmmt.html}}
+
+\textbf{Open/Closed Principle} - Software entities (classes, modules, functions, etc.)
+should be open for extension, but closed for modification. In other words,
+don't write classes that people can modify, write classes that people can
+extend. \footnote{\url{http://en.wikipedia.org/wiki/Open_Closed_Principle}}
+
+\textbf{Write Code for the Maintainer} - Almost any code that is worth writing is worth
+maintaining in the future, either by you or by someone else. The future you who
+has to maintain code often remembers as much of the code, as a complete
+stranger, so you might as well always write for someone else. A memorable way
+to remember this is ``Always code as if the person who ends up maintaining your
+code is a violent psychopath who knows where you live.''
+\footnote{\url{http://c2.com/cgi/wiki?CodeForTheMaintainer}}
+
+\textbf{Principle of least astonishment} - The principle of least astonishment is
+usually referenced in regards to the user interface, but the same principle
+applies to written code. Code should surprise the reader as little as possible.
+The means following standard conventions, code should do what the comments and
+name suggest, and potentially surprising side effects should be avoided as much
+as possible.
+\footnote{\url{http://en.wikipedia.org/wiki/Principle_of_least_astonishment}}
+
+\textbf{Single Responsibility Principle} - A component of code (e.g. class or function)
+should perform a single well defined task.
+\footnote{\url{http://en.wikipedia.org/wiki/Single_responsibility_principle}}
+
+\textbf{Minimize Coupling} - Any section of code (code block, function, class, etc)
+should minimize the dependencies on other areas of code. This is achieved by
+using shared variables as little as possible. ``Low coupling is often a sign of
+a well-structured computer system and a good design, and when combined with
+high cohesion, supports the general goals of high readability and
+maintainability''.
+\footnote{\url{http://en.wikipedia.org/wiki/Coupling_(computer_programming)}}
+
+\textbf{Maximize Cohesion} - Code that has similar functionality should be found within
+the same component.
+\footnote{\url{http://en.wikipedia.org/wiki/Cohesion_(computer_science)}}
+
+\textbf{Hide Implementation Details} - Hiding implementation details allows change to
+the implementation of a code component while minimally affecting any other
+modules that use that component.
+\footnote{\url{http://en.wikipedia.org/wiki/Information_Hiding}}
+
+\textbf{Law of Demeter} - Code components should only communicate with their direct
+relations (e.g. classes that they inherit from, objects that they contain,
+objects passed by argument, etc.)
+\footnote{\url{http://en.wikipedia.org/wiki/Law_of_Demeter}}
+
+\textbf{Avoid Premature Optimization} - Don't even think about optimization unless your
+code is working, but slower than you want. Only then should you start thinking
+about optimizing, and then only with the aid of empirical data. "We should
+forget about small efficiencies, say about 97 percent of the time: premature
+optimization is the root of all evil - Donald Knuth.
+\footnote{\url{http://en.wikipedia.org/wiki/Program_optimization}}
+
+\textbf{Code Reuse is Good} - Not very pithy, but as good a principle as any other.
+Reusing code improves code reliability and decrease development time.
+\footnote{\url{http://en.wikipedia.org/wiki/Code_reuse}}
+
+\textbf{Separation of Concerns} - Different areas of functionality should be managed by
+distinct and minimally overlapping modules of code.
+\footnote{\url{http://en.wikipedia.org/wiki/Separation_of_concerns}}
+
+\textbf{Embrace Change} - This is the subtitle of a book by Kent Beck, and is also
+considered a tenet of extreme programming and the agile methodology in general.
+Many other principles are based on the concept that you should expect and
+welcome change. In fact very old software engineering principles like
+minimizing coupling are related directly to the requirement of making code
+easier to change. Whether or not you are an extreme programming practitioner,
+this approach to writing code just makes sense.
+\footnote{\url{http://www.amazon.com/gp/product/0321278658}}
+
+\begin{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coding Conventions}
+\label{code_convention}
+
+By following the above general principles, here we provide a set of conventions
+to follow.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conventions for Designing}
+\label{conventions_design}
+%
+%
+%
+
+\textbf{Design Portable Software}
+
+This is the natural requirement for software engineering. 
+
+\textbf{Design Modularized Program} 
+
+The biggest challenge in programming is how to deal with complexity.
+The real world is complicated, how to maintain a good framework in the 
+software so that to make the program adapt to variety of changes requirement,
+perhaps is the biggest challenge in the programming.
+
+One of effective method to reduce the complexity in programming is to
+design the modularized program\footnote{
+\url{http://en.wikipedia.org/wiki/Modular_programming}}. After 
+decomposing the program into orthogonal modules, the complexity is 
+hereby encapsulated into the given module. Therefore, \textbf{We 
+recommend that the program should be writing for module-forming 
+purpose}.
+
+\textbf{Design Program by Following }  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conventions for Implementation}
+\label{conventions_implementation}
+%
+%
+%
+
+\textbf{Use Good Library as much as We Can} 
+
+Following the ``Do not repeat yourself'' principle, it's better not to 
+create wheels again by yourself, except that you really have a good 
+reason in hand. Therefore, use the reliable, good quality library,
+which stands the test of the time. Use these libraries as 
+much as we can.
+
+Here is a list of libraries we currently used in the program:
+\begin{itemize}
+ \item  Standard Template Library in C++;
+ \item  Some parts of Boost Library:
+ \begin{itemize}
+  \item Filesystem;
+  \item Lexical Cast;
+  \item Special Functions in Math;
+ \end{itemize}
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conventions for Software Maintenance}
+\label{conventions_maintenance}
+%
+%
+%
+
+
+\end{comment}
+
+

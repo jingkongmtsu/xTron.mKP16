@@ -1,0 +1,116 @@
+# 
+# makefile for compiling the module of twobodyoverlap
+# 
+
+
+# include compiler flags
+include compile.cfg
+
+# define source code path 
+PARSRC  = ../hgp_os/first_deriv
+SRC  = ${PARSRC}/twobodyoverlap
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_twobodyoverlap_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_d_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_g_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_d_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_p_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_g_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_s_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_p_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_f_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_sp_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_f_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_h_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_f_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_f_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_sp_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_d_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_f_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_p_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_d_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_h_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_twobodyoverlap_g_s_d1.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBTWOBODYOVERLAP_D1} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_twobodyoverlap_d1.o:  ${PARSRC}/hgp_os_twobodyoverlap_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_twobodyoverlap_g_d_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_d_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_d_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_p_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_g_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_g_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_d_d_d1.o:  ${SRC}/hgp_os_twobodyoverlap_d_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_p_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_p_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_g_g_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_g_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_s_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_s_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_p_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_p_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_f_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_f_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_f_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_sp_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_sp_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_f_p_d1.o:  ${SRC}/hgp_os_twobodyoverlap_f_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_h_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_h_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_f_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_f_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_f_d_d1.o:  ${SRC}/hgp_os_twobodyoverlap_f_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_g_p_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_d_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_sp_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_sp_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_d_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_d_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_g_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_f_f_d1.o:  ${SRC}/hgp_os_twobodyoverlap_f_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_p_p_d1.o:  ${SRC}/hgp_os_twobodyoverlap_p_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_d_p_d1.o:  ${SRC}/hgp_os_twobodyoverlap_d_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_g_f_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_h_sp_d1.o:  ${SRC}/hgp_os_twobodyoverlap_h_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_twobodyoverlap_g_s_d1.o:  ${SRC}/hgp_os_twobodyoverlap_g_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

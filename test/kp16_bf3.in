@@ -1,0 +1,74 @@
+%global_infor
+CPU_THREADS_NUMBER   8
+%end
+
+%molecule
+0 1
+B     0.000000    0.000000    0.000000
+F     0.000000    0.000000    1.308363
+F     1.133075    0.000000   -0.654181
+F    -1.133075    0.000000   -0.654181
+%end
+
+%basis
+G3LARGEXP
+%end
+
+
+%xcfunc
+name B3LYP 
+%end
+
+%scf
+max_scf_cycles  400
+#scf_guess core
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  baker
+grid_quality fine
+threshold   1.0e-14
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+
+########### 2ND JOB #######
+
+
+%molecule
+0 1
+B     0.000000    0.000000    0.000000
+F     0.000000    0.000000    1.308363
+F     1.133075    0.000000   -0.654181
+F    -1.133075    0.000000   -0.654181
+%end
+
+%basis
+G3LARGEXP
+%end
+
+%xcfunc
+name KP14_MNDPAR1
+KP14_C_NDPAR_CAP 0.5
+%end
+
+%scf
+max_scf_cycles  1
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  128  302
+threshold  1.0e-14
+%end
+

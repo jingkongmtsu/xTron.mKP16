@@ -1,0 +1,51 @@
+
+#
+# set up the compiler flags etc. for multiple makefile
+#
+CC		   	         = icpc
+CFLAGS       			= -Wall -fopenmp -O3
+LOWCFLAGS            = -Wall -fopenmp -O3
+FC                   = ifort
+FFLAGS               = -cpp -O3
+INCLUDE              = -I../../general/include  \
+                       -I../../math/include  \
+							  -I../../scf/include \
+                       -I../../geom/include \
+							  -I../../gints/engine/hgp_os/energy \
+							  -I../../xcints/include  \
+							  -I../../gints/include  \
+							  -I../../xcfunc/include  \
+							  -I../../result/include  \
+							  -I../../vdw/include  \
+							  -I../../shell/include \
+                       -I${TBBROOT}/include  \
+                       ${GSL_INC} ${BOOST_INC}
+
+# setting for the macro, considering with gdm or not
+ifeq (${USE_GDM}, 1)
+MACRO                = -DWITH_GDM -DUSE_MKL # -DUSE_GENERAL_BLAS -DUSE_GENERAL_LAPACK #-DWITH_SINGLE_PRECISION 
+else
+MACRO                = -DUSE_MKL # -DUSE_GENERAL_BLAS -DUSE_GENERAL_LAPACK #-DWITH_SINGLE_PRECISION 
+endif
+
+# libraries
+ifeq (${USE_GDM}, 1)
+LIBGDM               = libgdm.a
+endif
+MATH_LIB             = -L$(MKLROOT)/lib/intel64 -lmkl_intel_lp64 -lmkl_core \
+					        -lmkl_intel_thread -liomp5 -ldl -lpthread -lm  
+LIBRARY              = -L${TBBROOT}  -ltbb -ltbbmalloc ${GSL_LIB}  ${MATH_LIB} ${BOOST_LIB} \
+							  -lboost_filesystem -lboost_system -limf -lifcore -lboost_timer -lrt -lm ${LIBGDM}
+BIN                  = binary
+MKDIR                = mkdir
+AR                   = ar
+MAKE                 = make
+
+#
+# define the library names
+#
+LIBTWOBODYOVERLAP    = libtwobodyoverlap.a
+LIBKINETIC           = libkinetic.a
+LIBNAI               = libnai.a
+LIBERI               = liberi.a
+LIBESP               = libesp.a

@@ -1,0 +1,13 @@
+this is the testing samples for special DFT functionals, namely
+the functionals based on exchange energy density. 
+
+Typically, these functionals need the first round SCF calculation
+to generate a better density matrix, then it's SCF runs at the second
+round.
+
+Thse samples can be used to debug the functionals. Currently, functionals
+testing in this folder include:
+*  B05
+*  B13 coorelational
+*  B13
+*  KP14

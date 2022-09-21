@@ -1,0 +1,120 @@
+# 
+# makefile for compiling the module of esp
+# 
+
+
+# include compiler flags
+ifeq (${ON_DARTER}, 1)
+include compile.cfg.darter
+else
+include compile.cfg
+endif
+
+# define source code path 
+PARSRC  = ../../gints_engine/hgp_os/energy
+SRC  = ${PARSRC}/esp
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_esp.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_p.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_d.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_g.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_p.o
+OBJ  +=  ${BIN}/hgp_os_esp_s_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_p.o
+OBJ  +=  ${BIN}/hgp_os_esp_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_d.o
+OBJ  +=  ${BIN}/hgp_os_esp_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_f.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_d.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_h.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_p.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_f.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_g.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_p.o
+OBJ  +=  ${BIN}/hgp_os_esp_g_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_d.o
+OBJ  +=  ${BIN}/hgp_os_esp_h_s.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_f.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBESP} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_esp.o:  ${PARSRC}/hgp_os_esp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_esp_g_p.o:  ${SRC}/hgp_os_esp_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_s.o:  ${SRC}/hgp_os_esp_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_sp.o:  ${SRC}/hgp_os_esp_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_d.o:  ${SRC}/hgp_os_esp_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_g_g.o:  ${SRC}/hgp_os_esp_g_g.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_s.o:  ${SRC}/hgp_os_esp_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_p.o:  ${SRC}/hgp_os_esp_h_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_s_s.o:  ${SRC}/hgp_os_esp_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_p.o:  ${SRC}/hgp_os_esp_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_sp_s.o:  ${SRC}/hgp_os_esp_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_d.o:  ${SRC}/hgp_os_esp_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_sp_sp.o:  ${SRC}/hgp_os_esp_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_f.o:  ${SRC}/hgp_os_esp_h_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_s.o:  ${SRC}/hgp_os_esp_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_g_sp.o:  ${SRC}/hgp_os_esp_g_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_g_d.o:  ${SRC}/hgp_os_esp_g_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_h.o:  ${SRC}/hgp_os_esp_h_h.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_p.o:  ${SRC}/hgp_os_esp_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_g_f.o:  ${SRC}/hgp_os_esp_g_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_sp.o:  ${SRC}/hgp_os_esp_h_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_sp.o:  ${SRC}/hgp_os_esp_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_g.o:  ${SRC}/hgp_os_esp_h_g.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_p.o:  ${SRC}/hgp_os_esp_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_g_s.o:  ${SRC}/hgp_os_esp_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_d.o:  ${SRC}/hgp_os_esp_h_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_h_s.o:  ${SRC}/hgp_os_esp_h_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_sp.o:  ${SRC}/hgp_os_esp_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_f.o:  ${SRC}/hgp_os_esp_f_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

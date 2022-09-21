@@ -1,0 +1,330 @@
+%
+% April 2014
+%
+%
+\chapter{Shell Module}
+%
+%
+%
+The shell module consist of the following components:
+\begin{itemize}
+ \item raw shell data parsing and reading (parseshell.cpp);
+ \item formal shell data forming (shell.cpp);
+ \item spherical and Cartesian type of basis set data transformation
+ and basis set normalization factor scaling (c2ptrans.cpp);
+ \item utility functions for shell data (shellprop.cpp and util folder)
+\end{itemize}
+
+\section{Raw Shell Data Parsing}
+
+leave it to the future....
+
+currently we did not finish it
+
+\section{Shell Class}
+%
+%
+%
+Shell forms the foundation for quantum chemistry calculation. It's the atomic
+component for building wave functions in quantum chemistry. This program
+takes the following method to organize the shell data for an arbitrary molecular 
+system\footnote{This idea is suggested by Prof. Jing Kong}:
+
+
+In terms of 
+programming point of view, shell is a collection of basis set data
+either from user-defined file or from standard basis set data file. Therefore,
+to produce the shell data we basically performs: 
+\begin{itemize}
+\item Read in shell information(usually it's basis set name) from the 
+user file, and then we parse the name to get the corresponding basis set
+files(if the shell data is provided by user, then the basis set data 
+file is just the user input file). This is done in parseshell.cpp;
+\item Read in the raw shell data from the basis set files(see RawShell etc. 
+in the parseshell.h);
+\item Convert the raw shell data into the final shell data in the MolShell class etc.
+\end{itemize}
+
+Now the next question is how we organize the shell data? Right now 
+the shell data is defined in such hierarchy:
+\begin{center}
+shell $\Rightarrow$ atom shell $\Rightarrow$ molecule shell
+\end{center}
+
+Here the shell refers to the normal shell data.
+Atom shell is a collection of shells where they all belong to the given atom. 
+Molecular shell is a collection of all atom shells where these atoms forms
+the given molecule. 
+
+\subsection{Running Calculation for Huge System: Split Shell into Pieces}
+
+For achieving running huge molecular system, generally we need to divide
+the whole calculation job into batches, and run the job for different batch.
+
+Based on this idea, we may need to split the whole molecule shell into many pieces.
+Each molecular shell piece would be the beginning point for the following calculation job.
+In our code, we have a ``split'' function in molecule shell class to realize 
+such function. After split function, we will create a new molecule shell
+which is only a piece of the original data. 
+
+How to consider the grain size in the splitting process? We note that 
+we consider the atom shell as the basic unit in splitting. That is 
+to say, one or several atom shells are grouped together to form a 
+piece, and one atom shell is the smallest scale of splitting process.
+
+Here we have a question, that how to connect the piece with the original
+data? In considering this, it's natural to record the original atom shell 
+index in the piece molecule shell(that's the reason that we have a variable
+called ``index'' in atom shell class). Therefore, for each atom shell in the 
+piece molecule shell, we are able to know it's original position.
+
+\section{Shell Pair Module}
+ 
+Shell pair is the pair between given shells. According to the Gaussian Product
+theorem, that any two Gaussian functions combined is leading to a new Gaussian
+function on a new center. Therefore, any shells composed by the Gaussian functions
+will pair into a new set of Gaussian functions. This is the theoretical background
+for shell pair. 
+  
+In quantum chemistry, shell pair is used in analytical integrals calculation. For 
+example, the kinetic integrals, nuclear-electron attraction integrals, electron-
+electron repulsion integrals etc. In the practical calculation, the most important
+feature for shell pair is the screening function. That is to say, the screening 
+process divide the shell pairs into two categories: one is significant shell pair
+and the other is negligible shell pair. The significant shell pair is that both
+of the two shells are able to overlap together so that to contribute to the integral
+calculations, and the negligible shell pair is that two shells are far away from each
+other so that they can not form effective overlap within given error range. Since
+the Gaussian functions decays exponentially, therefore it could be well expected 
+that most of shell pairs in a big molecule are negligible. Thus the concept of 
+screening is very important for integral calculations.
+  
+On the other hand, shell pair may provide another function which is called ``sorting''.
+Sorting is to organized the same type of shell pairs together. The criteria for sorting
+of shell pair is usually comes to the angular momentum and contraction degree. That
+is to say, the shell pairs with same type of angular momentum and contractions will
+put together. The benefit for sorting process is that we could create balanced load
+for integral calculation. However, the disadvantage for sorting is that it breaks the 
+locality of the data. More specifically, the data in the shell pair may not be adjacent.
+For example, the current shell pair may be from atom 1 and atom 3; but the next shell 
+pair could be from atom 100 and atom 200. 
+  
+Based on this considering, we may not sort the shell pairs and arrange the shell pairs 
+in adjacent way. For example, the shell pairs could be stored according to the atom 
+pairs: (atom 1, atom 2), (atom 1, atom 3), (atom 1, atom 4) etc. Currently we do not have
+good comparison between the two ways, sorting or not sorting. However, it could be 
+an interesting point in the further study.
+ 
+\subsection{Designs for Shell Pair Module}
+  
+Based on the general discussion above, we devised the shell pairs into the following
+classes:
+\begin{itemize}
+  \item significant shell pair;
+  \item shell pairs;
+  \item batch shell pair information;
+\end{itemize}
+  
+The significant shell pairs is to perform screening test for the given pair of 
+shells. If the test is passed, then we store all of data for the given shell pair
+for further use.
+ 
+In the final shell pairs, we will form a vector to hold all of significant shell pair
+data. Here we use vector rather than the list is because that we need randomly accessing
+the data. 
+ 
+In forming the shell pair data, besides the screening job we also need to divide 
+the shell pairs data into batches. The criteria for batch dividing could be 
+shell pair sorting(as we have discussed above), or other ways. Currently we just
+use sorting method. The sorting process is performed by the batch shell pair
+information class.
+
+\subsection{Further Consideration for Dealing with Huge System}
+
+Shell pair concept is some natural derivation based on the shell. Therefore,
+in designing the shell pair it's natural that we should not distinguish whether
+the input shell is given in ``full'' or given in ``part''. Therefore,
+
+\section{Shell Transform and Scale Module}
+  
+This class is designed to handle the Cartesian and pure transformation work plus the
+basis set scale work.
+ 
+What kind of situations we need to handle for transformation and scale work?
+Generally, for pure and cart transformation/scale work, there are two situations in
+terms of shells:
+\begin{itemize}
+  \item the row shell and column shell are same;
+  \item the row shell and column shell are different.
+\end{itemize}
+  
+On the other hand, considering the requirement of transformation, there could be
+three situations:
+\begin{itemize}
+  \item transformation/scale work is only done on row shell;
+  \item transformation/scale work is only done on column shell;
+  \item transformation/scale work is done on both row shell and column shell.
+\end{itemize}
+Therefore, we need to consider that how to handle all of these situations.
+ 
+\subsection{Design for The Class}
+
+Currently we can find two general ways to handle the work mentioned above.
+
+\begin{description}
+ \item[shell pair loop method] For this method, the transformation work
+ is loop over shell pairs data block of the given matrix. We note that 
+ it's only the lower triangular part of matrix is transformed in this 
+ method, so it's only applied to symmetrical matrix;
+\item[row column method] This method perform the transformation work
+from column to row. The column of the matrix is transformed first, then
+do the work to the row part.
+\end{description}
+
+Comparing with first method The second method has the following features:
+\begin{itemize}
+ \item Pro:
+  \begin{enumerate}
+   \item   the calls to dgemm is less than the other choice;
+   \item   necessary for the work if only row/column of the matrix is converted;
+   \item   also necessary for the work if the matrix has different row shell and 
+           column shell data;
+  \end{enumerate}
+ \item Con:
+   \begin{enumerate}
+    \item for symmetrical matrix, two times data is converted;
+    \item the matrix dimension could be not quite fit for dgemm work. For example,
+		    we may need to take care of $5\times 20000$ dimension of matrix. We do not 
+          know whether dgemm is efficient in this case?
+   \end{enumerate}
+\end{itemize}
+
+On the other hand, the shell pair method has the following features 
+by comparing with row column method:
+\begin{itemize}
+ \item Pro:
+  \begin{enumerate}
+   \item   parallel friendly. Since the matrix corresponding to shell pair is so small so 
+           that we can do it in the GPU threads. Also we could do it in the openmp threads;
+   \item   only half size of data is transformed, no additional work is done;
+  \end{enumerate}
+ \item Con:
+   \begin{enumerate}
+    \item more dgemm calls;
+	 \item use is limited;
+ \end{enumerate}
+\end{itemize}
+    
+\subsection{Additional Notes} 
+ 
+For SP shell block, we do nothing for either transformation work or the scale work.
+Therefore, it’s necessary to identify the SP shell block for each atom in the work 
+so that to reduce to work for transformation/scale.
+
+For the transforming and scale work, there’s very good point for the parallel
+implementation. That is, the data after converted will never be mixed up. That 
+is to say, when we divide the work into threads, each threads will read different 
+matrix block and then write into different block. They never work on the same block! 
+therefore, threads are parallel independent.
+
+Currently the transformation work is performed with additional memory use, which 
+is roughly the same size of the matrix waiting to be transformed. Therefore, such
+transformation is not in-place transformation work. Currently we do not think this
+could be a problem even for huge system.
+
+
+
+\begin{comment}
+
+%
+% since we have abandon the corresponding code in shellprop.cpp, 
+% we also comment out the words here
+%
+ 
+\section{Shell Property Module} 
+ 
+In the shell module, sometimes we may have some small functions that could 
+be used across the whole program. For example, to calculate the number
+of basis set functions according to the shell type, get shell name by
+given angular momentum etc. For these functions, it's not appropriate 
+to put them into classes because sometime we want to use them without 
+any object. Therefore, we set up this file to hold these type of functions.
+ 
+On the other hand, there are some classes used as accessory for the main
+shell classes. For example, the shell property class. Such classes are 
+also listed here.
+ 
+\subsection{Multi-Shell Compounds}
+ 
+Based on the shell concept, we can form the multi-shell compounds; that is 
+to say, some physical quantity that possesses more than one shells. For example,
+the shell pair is formed by two shells, the electron repulsion integral is 
+composed by four shells(so called shell quartet). Therefore, we face a question
+that how to express the angular momentum for these multi-shell compounds?
+
+In dealing with this situation, we have a group of functions which is called 
+``codeL'' and ``decodeL''. What does it mean? These functions are used to generate
+a code to represent the angular momentum status for shell pair, shell quartet
+etc. In these case, the angular momentum are compressed together to form a 
+code, we use the code to designate the status of angular momentum. On the other
+hand, we could decode it to restore the original angular momentum for each
+component in the multi-shell compounds. Such function is necessary in the integral
+calculation, since the integral files are organized according to the angular 
+momentum types. Based on the code of angular momentum, now we are able to connect
+the given multi-shell integral with it's given integral file.
+ 
+Additionally, it's worthy to note that for the multi-shell compounds, it possesses
+an property that for the same side(bra or ket), the shells could exchange between
+each other without changing the value of these multi-shell compounds. For example,
+for the two body overlap integral between S shell and D shell, we can have 
+(S|D) = (D|S). Therefore, we do not need to write the integral codes for dealing with 
+both (S|D) and (D|S) situation; we only need one file to do the job.
+ 
+This brings benefits to reduce the number of integral files. Based on this property,
+now we do not necessarily have integral files which cover all of angular momentum
+combination. As for the above case, we can only has integral file to calculate (D|S) 
+integrals, and the (S|D) is safe to use this file, too.
+ 
+However, here we need some sort of ``standard expression'' for the combination of 
+angular momentum in the multi-shell compounds. Shall we choose (D|S) or (S|D)?
+In our program, we require that for the same shell pair, the left side of shell
+is always larger or greater than the right ones(see the operator < defined in
+the shell class). We have a functions of ``sortAngPair'' to get the correct 
+angular momentum combination for the multi-shell compounds.
+ 
+\subsection{Shell Property Class}
+ 
+Sometimes it could be quite common to get statistical data for a given 
+shell property among all of shells in the molecule. For example, we want
+to know that how many S type of shells in the molecule shell data. Therefore,
+we set up this shell property class.
+ 
+What's more, two shell properties could be paired together to form some more
+advanced form. For example, in forming shell pairs we may need to know that
+for a given angular momentum and the contraction degree how many shells on
+it. Therefore, we designed the class of shell property pair to further 
+describe that for a given shell property pair, the distribution status of 
+of the given molecule shell. Here it's worthy to note, that in the given 
+shell property pair, one shell property is worked as ``key'' and the other 
+shell property is worked as ``value''. We note that there could be multiple 
+value corresponding to one key.
+ 
+However, the shell property class and shell property pair class is not sufficient
+for practical use. For example, in forming the shell pair data we cares about
+that for a given angular momentum pair and the contraction pair, that how many
+shell pairs we can have? To answer such question we need to further consider 
+the shell pairs distribution over the shell property pairs. So that's the origin
+that we have this class of shell pair property.
+
+Currently, we did not use these class in practical code. That is because we found 
+a problem in real usage. For example, we are sorting shell pair according to the 
+angular momentum and contraction degree. We can get distribution analysis through 
+shell pair property class, but practically, since the shell pairs could be significant
+or not significant, then it's actually contraction degree could vary. For example,
+we have two S shells and each of them have 8 contracting Gaussian primitive functions.
+However, in the final shell pair only 32 function pairs are significant, therefore
+the contraction degree is not 64 but 32. Such information could not be anticipated 
+without real calculation, and the shell pair property class fails on this point.
+
+\end{comment}
+ 

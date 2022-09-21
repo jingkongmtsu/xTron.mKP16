@@ -1,0 +1,254 @@
+%
+%  set up on Feb. 2014
+%  1  component list: we do not need to detailed introduce them
+%     unless it's needed;
+%  2  xcfunc class introduction;
+%  3  parallel class;
+%
+\chapter{General Module}
+%
+%
+%
+The general folder provides fundamental component functions, classes and 
+data for all of other modules. It forms the foundation for the whole 
+program.
+
+\section{Components List in General Folder}
+
+The general folder contains the following components:
+\begin{description}
+ \item [libgen.h] This is the head file handles the fundamental data types
+ as well as global constants such as math threshold, all kinds of physical
+ constants.
+ \item [scalablevec.h] This head file defines the fundamental vectors based 
+ on the scalable allocator and STL vectors.
+ \item [GlobalInfor] This class gathers the global setting information.
+ \item [ParameterParsing] This class parses the user's setting parameters 
+ for a given class/module from user input file.
+ \item [Exep] This class is responsible for exception handling for the whole
+ program.
+ \item [TextRead] This class parses the string information in unit of line.
+ \item [WordConvert] This class manipulates the convertion between fundamental
+ data types, such as string to integer/floating point number etc.
+ \item [FileReadWrite] This class is responsible for binary file hanlding. 
+ For a given directory and file name, it will read/write files in binary form.
+ \item [xcfunc] This class parse the functional information per user's request.
+ \item [LocalMemScr] This class manipulates local memory for a given working
+ thread so that to avoid frequent memory allocation.
+\end{description}
+
+\subsection{Large File Support}
+
+There's an additional point worthy to note, which is related to large 
+file support in the file IO\footnote{Please refer to 
+\url{http://en.wikipedia.org/wiki/Large_file_support} for more information}.
+
+In the FileReadWrite class, we use fread and fwrite function to do the file
+reading/writing work. They are implemented in the standard C library, and 
+for the data length it uses size\_t as data type. Hence for the 64 bit system,
+the large file support is intrinsically solved by using the size\_t. However,
+for the 32 bit machine the problem remains. Therefore, for a 32 bit system
+large file support is not available in our software and the program will 
+crash if it's handling large file (larger than 4GB) on a 32 bit system.
+
+However, such deficiency is not a quite serious problem since currently most 
+of the system have already migrated from 32 bit system to 64 bit system. For
+this reason we make a note here to remind ourself the existing of such problem.
+
+\section{XCFunc Class}
+%%
+%%
+
+\subsection{How to Design The XCFunc Class}
+%
+%
+
+XCFunc class is used to parse the general quantum chemistry method name.
+Such method is not only limited on density functionals, but also including 
+these post-HF methods etc. In general, for any quantum chemistry method;
+it could be characterized by two features, whether it has exchange 
+components and whether it has correlation components. For traditional 
+HF method, it only has exchange, for MP2 or B3LYP methods etc., they 
+both have exchange and correlation components(MP2's exchange is HF). 
+The XCFunc class is designed based on this general idea.
+
+Furthermore, the functional is constructed based on ``VARIABLES''. For 
+normal DFT calculation, the possible variables could be electron density,
+kinetic density etc. For HF method, the energy is a functional of molecular
+orbital. Therefore, currently we support the following variables in XCFunc
+class\footnote{The reader could refer to the \ref{xcvar} for more information
+about DFT variables}:
+\begin{itemize}
+ \item  electron density ($\rho$);
+ \item  gradient of electron density ($\nabla\rho$);
+ \item  kinetic density ($\tau$);
+ \item  Laplacian ($\nabla\cdotp\nabla\rho$);
+ \item  exchange energy density ($e^{ex}$);
+ \item  molecular orbital.
+\end{itemize}
+
+It's worthy to note, that such classification is not rigorous. For example, the
+exchange energy density is also molecular orbital based functional. Therefore
+the classification is designed for the sake of convenience only. In this
+program, all of HF, post-HF methods(CI, CC, MP2 etc. ) and the multi-reference
+methods(MRCI,MCSCF etc.) will be termed as ``ORBITAL FUNCTIONAL''. Therefore,
+it the methods contains HF components (like B3LYP) or contain the post-HF
+components etc. \footnote{like these double hybrid functional, see
+\url{http://computationalchemistry.wikia.com/wiki/Double_hybrid}} then such
+methods will be orbital functional.
+
+\subsection{How to Implement XCFunc Class}
+%
+%
+XCFunc gets functional information from two resources: one is the user input file,
+the other is the xcfunc.conf file which is contained in the setting file 
+folder(see the appendix discussing environmental variable). 
+
+To define the quantum chemistry methods, there are two ways. One way is to 
+define it in the xcfunc.conf, the other way is to define it in the user 
+input file. The xcfunc.conf file contains all of pre-defined standard methods
+such as HF, Becke88, LYP etc. xcfunc.conf is designed to hold these stable 
+methods. On the other hand, user could create his own methods at his 
+convenience in the user's input file.
+
+On the other hand, XCFunc accepts two forms of inputs to form the constructor.
+One way is to simply pass in the exchange and correlation functional name
+to the XCFunc class (for example, ``HF  MP2'' will do HF exchange and 
+MP2 correlation). The other way is to get the functional name from 
+input file and parse it in the xcfunc.conf, or to get functional definition 
+directly from input file. Details could be referred from the xcfunc.cpp
+in the general folder.
+
+\section{LocalMemScr Class}
+
+The LocalMemScr class is to provide a simple wrapper to manipulate
+memory for working threads. The manipulation is concentrating on two points:
+firstly, set up a local memory pool for a working thread; secondly, return
+a usable memory position for a required length which is used by the thread.
+Therefore, this class is used within the threads.
+
+The reason to set up this class is to attentionally avoid memory allocation
+inside the heavy calculation module, e.g. the integral calculations. In the 
+ERI calculation, simple survey clearly demonstrates frequent memory allocation
+and deallocation occupies a significant amount of time consumption. The purpose
+of this class is to reduce such time consumption for the heavy calculation
+modules.
+
+\begin{comment}
+ 
+HistDataMan Class is moved to the math folder, since it handles all of 
+matrix or vector<Double> type information. It does not belong here.
+
+\section{HistDataMan Class}
+%%
+%%
+HistDataMan represents ``Historical Data manipulation''. This class 
+is used to manipulate large size data such as matrix, vectors etc.
+The user of the class can choose either to store the data in the 
+memory, or store the data on the disk for future recovery. This class
+provides a generic interface so that user need not to know where the 
+data stores.
+
+The HistDataMan class is actually some compromise between the reality and the
+ideal programming styles. Ideally the data is better ``localized'', the
+HistDataMan breaks it by setting up data in one place and use it in the other
+place. Therefore it cause a potential ``coupling'' between the two places of
+the codes.  However; to repeatedly calculate large data could be obviously a
+drawback for programs (see \ref{suggestion_Implementation_data} for more
+information).  Therefore, this class is used to hold these data who is
+expensive for repeat calculation, and would be used in several different
+places. This class is trying to monitor the creation/use of the data, so that
+to minimize the potential hazard introduced by creating/using data in different
+places.
+
+It's strongly recommended that HistDataMan should be use with a good reason,
+else it's better to use another way to skip the use of HistDataMan class.
+
+\subsection{Rules for HistDataMan Class}
+%
+%
+For safely constructing/using the data. HistDataMan class has a rule that 
+the data inside this class is constructed ``only once''. The class user
+could recover the data in the following codes, but the rewritten action
+for same section data is prohibited. By setting up this rule, HistDataMan
+class try to avoid the situation that the same data could be changed 
+in many different places.
+
+On the other hand, HistDataMan class does not provide the function to
+``recover'' the constructor. If the HistDataMan object is set up, then to
+recover the data should be with the same object. Such restriction is based on
+the point that the creation/using data inside HistDataMan class should be close
+with each other. User of this class can pass the object to another function for
+recovering the data, but it's not allowed to recover data in totally
+independent place.
+
+Finally, since the class also monitors the status of stored data, therefore
+a prerequisite data order is necessary storing/retrieving data. In this 
+class, data is stored by following their sequence of storing order. For 
+the spin-polarized data, the alpha and beta part of data are stored in
+sequence for each section.
+
+\subsection{Basic Features of HistDataMan Class}
+%
+%
+By following the rules, the data construction/recovery could be divided
+into two different processes depending on whether the data is saved 
+on disk or saved in memory.
+
+If the data is saved on disk, then when class user firstly set up the
+data, HistDataMan class will erase all of existing data and create new empty
+data folder for saving data files in future. When data is asked to 
+save into HistDataMan, each data will be given a unique file name 
+(associated with its number) for future recognition. If the data is 
+saved into the memory, the given data is pushed back to the end of 
+the list. Finally, the data information is stored in the HistDataMan
+object.
+
+Furthermore, since the input data could be either vector form or matrix form;
+therefore for matrix form data; HistDataMan saves the symmetrical matrix
+only with lower-triangular part. 
+
+On the other hand, HistDataMan does monitor the data status for each input
+data. If the input data is matrix form, then it's row and column will be 
+recorded and future recovery. For vector form of data, its total length
+will be recorded, too.
+
+All of the data will be stored into binary file if it's saving to disk. 
+On the other hand, currently it's only the Double type of data could be 
+saved inside this class.
+
+\subsection{Basic Data of HistDataMan Class}
+%
+%
+For the HistDataMan class, it needs to know the following  data to 
+construct the basic class:
+\begin{itemize}
+ \item some container to hold the data if it's stored in memory;
+ \item the location where the data stores on disk;
+ \item data status which is used to monitor the data length etc.;
+ \item whether the data is spin-polarized. 
+\end{itemize}
+
+\subsection{Storing Data on Disk}
+%
+%
+HistDataMan class is using FileReadWrite class to manipulating requirement 
+of reading/writing data on disk. Generally, HistDataMan class knows the 
+data file name, and where it stores; therefore it directs the FileReadWrite
+class to manipulates the file. 
+
+The files are structured in the following way:
+\begin{itemize}
+ \item Each user input file has its own scratch directory who is 
+ defined in GlobalInfor class (this is the root directory);
+ \item Each geometry has its own working directory in the   
+ subdirectory level(directory name is the geometry section number);
+ \item Each type of data manipulated by HistDataMan class 
+ has its own folder even it only has one data inside. The data is 
+ named by the section number together with its spin-polarized 
+ situation.
+\end{itemize}
+
+\end{comment}
+
+

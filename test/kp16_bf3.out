@@ -1,0 +1,202 @@
+----------------------------------------------
+          SINGLE POINT SCF CALCULATION        
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+%global_infor
+CPU_THREADS_NUMBER   8
+%end
+
+%molecule
+0 1
+B     0.000000    0.000000    0.000000
+F     0.000000    0.000000    1.308363
+F     1.133075    0.000000   -0.654181
+F    -1.133075    0.000000   -0.654181
+%end
+
+%basis
+G3LARGEXP
+%end
+
+
+%xcfunc
+name B3LYP 
+%end
+
+%scf
+max_scf_cycles  400
+#scf_guess core
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  baker
+grid_quality fine
+threshold   1.0e-14
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+
+########### 2ND JOB #######
+
+
+%molecule
+0 1
+B     0.000000    0.000000    0.000000
+F     0.000000    0.000000    1.308363
+F     1.133075    0.000000   -0.654181
+F    -1.133075    0.000000   -0.654181
+%end
+
+%basis
+G3LARGEXP
+%end
+
+%xcfunc
+name KP14_MNDPAR1
+KP14_C_NDPAR_CAP 0.5
+%end
+
+%scf
+max_scf_cycles  1
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  128  302
+threshold  1.0e-14
+%end
+
+
+*******************************************
+*            GlobalInfor Print            *
+*******************************************
+input   file is        : kp16_bf3.in
+scratch file is        : /nfshome/jkong/scratch_xtron/961a-2bfa-d0ec-b0e4
+number of CPU threads  : 8
+we use multi-threads 
+number of basis sets 188
+here nkey1
+here nkey1
+DIIS error 2.5404136757    
+B3LYP iter is: 0, @@@@@ total energy is: -281.8618611179  
+The most lowest energy so far is: -281.8618611179 , scf index is 0
+NucRepulsion 111.3456184279  
+core -718.7488545300 
+JK   energy is: 365.6923260617  
+XC   -40.1509510775  
+MTAG B3LYP   0   0 -281.8618611179  2.5404136757    
+DIIS error 0.7749590166    
+B3LYP iter is: 1, @@@@@ total energy is: -282.9033244438  
+The most lowest energy so far is: -282.9033244438 , scf index is 1
+NucRepulsion 111.3456184279  
+core -532.2984081864 
+JK   energy is: 158.4619455252  
+XC   -20.4124802104  
+MTAG B3LYP   1   1 -282.9033244438  0.7749590166    
+DIIS error 1.6600214810    
+B3LYP iter is: 2, @@@@@ total energy is: -306.1864375133  
+The most lowest energy so far is: -306.1864375133 , scf index is 2
+NucRepulsion 111.3456184279  
+core -711.5754078987 
+JK   energy is: 330.0167890325  
+XC   -35.9734370750  
+MTAG B3LYP   2   2 -306.1864375133  1.6600214810    
+DIIS error 0.7357768148    
+B3LYP iter is: 3, @@@@@ total energy is: -318.4229021225  
+The most lowest energy so far is: -318.4229021225 , scf index is 3
+NucRepulsion 111.3456184279  
+core -699.3902760845 
+JK   energy is: 302.4956552822  
+XC   -32.8738997481  
+MTAG B3LYP   3   3 -318.4229021225  0.7357768148    
+DIIS error 0.1936302781    
+B3LYP iter is: 4, @@@@@ total energy is: -323.9894803279  
+The most lowest energy so far is: -323.9894803279 , scf index is 4
+NucRepulsion 111.3456184279  
+core -683.3531169502 
+JK   energy is: 278.1433918854  
+XC   -30.1253736910  
+MTAG B3LYP   4   4 -323.9894803279  0.1936302781    
+DIIS error 0.0330258661    
+B3LYP iter is: 5, @@@@@ total energy is: -324.6651712129  
+The most lowest energy so far is: -324.6651712129 , scf index is 5
+NucRepulsion 111.3456184279  
+core -673.8472300736 
+JK   energy is: 266.8119617898  
+XC   -28.9755213569  
+MTAG B3LYP   5   5 -324.6651712129  0.0330258661    
+DIIS error 0.0067619840    
+B3LYP iter is: 6, @@@@@ total energy is: -324.6901376821  
+The most lowest energy so far is: -324.6901376821 , scf index is 6
+NucRepulsion 111.3456184279  
+core -672.6962841095 
+JK   energy is: 265.4409606342  
+XC   -28.7804326347  
+MTAG B3LYP   6   6 -324.6901376821  0.0067619840    
+DIIS error 0.0024586702    
+B3LYP iter is: 7, @@@@@ total energy is: -324.6920276175  
+The most lowest energy so far is: -324.6920276175 , scf index is 7
+NucRepulsion 111.3456184279  
+core -672.3356863939 
+JK   energy is: 265.0587804634  
+XC   -28.7607401149  
+MTAG B3LYP   7   7 -324.6920276175  0.0024586702    
+DIIS error 0.0017777825    
+B3LYP iter is: 8, @@@@@ total energy is: -324.6920954854  
+The most lowest energy so far is: -324.6920954854 , scf index is 8
+NucRepulsion 111.3456184279  
+core -672.3389814039 
+JK   energy is: 265.0630233268  
+XC   -28.7617558362  
+MTAG B3LYP   8   8 -324.6920954854  0.0017777825    
+DIIS error 0.0000494859    
+B3LYP iter is: 9, @@@@@ total energy is: -324.6921213150  
+The most lowest energy so far is: -324.6921213150 , scf index is 9
+NucRepulsion 111.3456184279  
+core -672.3550492490 
+JK   energy is: 265.0805834108  
+XC   -28.7632739046  
+MTAG B3LYP   9   9 -324.6921213150  0.0000494859    
+DIIS error 0.0000039863    
+B3LYP iter is: 10, @@@@@ scf converged energy is: -324.6921213605  
+The most lowest energy so far is: -324.6921213605 , scf index is 10
+NucRepulsion 111.3456184279  
+core -672.3583788857 
+JK   energy is: 265.0842594428  
+XC   -28.7636203455  
+MTAG B3LYP  10  10 -324.6921213605  0.0000039863    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      -0.00000000      -0.00001843    
+total dipole moment: 0.00001843     
+ 6.620303s wall, 42.450000s user + 69.120000s system = 111.570000s CPU (1685.3%)
+-----------Second SCF begins-----------
+here nkey2
+DIIS error 0.0000000000    
+KP14_MNDPAR1 iter is: 0, @@@@@ scf converged energy is: -324.7971961237  
+The most lowest energy so far is: 0.0000000000    , scf index is 0
+NucRepulsion 111.3456184279  
+core -672.3579329750 
+JK   energy is: 237.7265537721  
+XC   -1.5114353487   
+MTAG KP14_MNDPAR1   0   0 -324.7971961237  0.0000000000    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000001      0.00000000       -0.00070781    
+total dipole moment: 0.00070781     
+ 4.333930s wall, 33.250000s user + 6.840000s system = 40.090000s CPU (925.0%)

@@ -1,0 +1,79 @@
+%global_infor
+multi_threads false
+%end
+
+################
+################
+%molecule
+0 3
+C   0  0  0.0
+%end
+
+%basis
+G3LARGEXP-NOSP
+%end
+
+%xcfunc
+name HF 
+%end
+
+%scf
+max_scf_cycles  280
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+threshold   1.0e-14
+do_odd_electron false
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+###################
+##################
+
+%molecule
+0 3
+C    0  0  0.0
+%end
+
+%basis
+G3LARGEXP-NOSP
+%end
+
+%global_infor
+CPU_THREADS_NUMBER   1
+%end
+
+
+%xcfunc
+name BR89X 
+%end
+
+%scf
+max_scf_cycles  1
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points 32 50
+npt_cpu_thread 550000
+threshold  1.0e-14
+do_odd_electron false
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+%scfconv
+scf_algorithm  DIIS
+%end

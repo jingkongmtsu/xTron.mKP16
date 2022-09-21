@@ -1,0 +1,92 @@
+# First job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name  HF
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+%end
+
+
+# 2nd job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name kp14_mndpar1_br94c
+%end
+
+%scf
+max_scf_cycles  150
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+%scfconv
+max_iterations_gdm_conv  7   #  SCF iterations we test the GDM convergence
+threshold_gdm_conv  1.0E-7   # this is the threshold of energy difference
+scf_algorithm  GDM
+%end
+
+
+# 3rd job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name kp14_mndpar1_br94c
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+%frac_spin
+alpha_frac_infor_mo_begin_index 4
+alpha_frac_infor_nmo 1
+alpha_frac_infor_scale_value 1.0
+beta_frac_infor_mo_begin_index 4
+beta_frac_infor_nmo 1
+beta_frac_infor_scale_value 0.5
+%end

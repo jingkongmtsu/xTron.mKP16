@@ -1,0 +1,57 @@
+#
+#  this is the template file to set up the parameter opt for running emul (see ParamOpt)
+#  here below is the keywords that ParamOpt supports
+#
+
+#  exchange functional, pw86x is the default one
+#  exchange    pw86x
+
+#  correlation functional, pbec is the default choice
+# correlation  pbec
+
+#  the first monomer name, either atom or molecule file name
+mono1   Ne
+
+#  the second monomer name, either atom or molecule file name
+mono2   Ne
+
+# opt method selection. Two choices you can select, one is scanning the curve,
+# the other is to do single point calculation against the bottom well data
+# default is single point calculation (single_point or scanning)
+#opt   single_point
+
+# in the method of scanning the curve, we need to know three things:
+# 1  the starting distance between the two monomers,
+# 2  the ending distance between two monomers;
+# 3  step size for the scanning
+# 1  and 2 will be got depending on the monomer type in the program,
+# and 3 is given here
+# step length is in default as 0.1
+# distance_step   0.1
+
+# in the program, the XDM parameters will be testing between the given range
+# which determined by the "begin" and "end". XDM has two parameters, one
+# is p1 and the other one is p2
+# there's not default paramters for them, you have to specify them here below
+xdm_p1_begin       1.00
+xdm_p1_end          1.30
+xdm_p2_begin       0.70
+xdm_p2_end          1.40
+
+# step length in scanning XDM parameters
+# both p1 and p2 use the same step length
+# default is  0.01, but you can set it as 0.1 for coarse scanning
+xdm_step                0.1
+
+# in the curve scanning method, if the calculate energy is approaching to zero,
+# we need to determine that whether we need this energy result or not
+# the ratio is defined as: abs(E)/bottom_well_energy
+# is ratio <=standard_ratio below, then we think that the scanning should end
+# 0.02 is the default value
+# standard_ratio    0.02
+
+# do you want to keep the generated input and output files for emul?
+# in default it's true
+# clean_file  true
+
+

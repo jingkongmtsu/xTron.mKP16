@@ -1,0 +1,12 @@
+here we store some cases that by comparing with GAMESS,
+we are not same. This may indicate that our code still have
+some bug.
+
+***  Li atom for HF calcualtion with G3LARGE basis set  ***
+currently the core guess and the atomic guess both can not lead to 
+correct SCF result. However, with also core guess GAMESS gives
+the same SCF energy; which means we should revise our atomic guess.
+For B3LYP calculation, we see the similar thing for the ch3ch2o,
+also with G3large basis set. We believe both of the two cases
+can be corrected through improvement of SCF guess method.
+

@@ -1,0 +1,76 @@
+----------------------------------------------
+          SINGLE POINT SCF CALCULATION        
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+# First job
+%molecule
+0 3
+he   0.  0.   0.0
+%end
+
+%basis
+He 0
+S 4 1.00
+     35.52322122       -0.0053088      
+      6.513143725      -0.0297144      
+      1.822142904      -0.1041907      
+      0.625955266      -0.2756566      
+S 2 1.00
+      0.243076747      -0.4030997      
+      0.100112428      -0.3217401 
+%end
+
+%xcfunc
+name kp14 
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+
+%xcints
+grid_points  128  302
+threshold   1.0e-14
+do_xc_energy_profile true
+do_odd_electron true
+%end
+
+
+
+*******************************************
+*            GlobalInfor Print            *
+*******************************************
+input   file is        : he.in
+scratch file is        : /scratch/jing/bce8-bd31-bbee-ca8f
+number of CPU threads  : 8
+we use multi-threads 
+number of basis sets 2
+here nkey1
+here nkey1
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             2.00000000
+Odd electron population summary for all of atoms is: 2.00000000  
+$ParamOptLSF 0.000000000      0.007449473      0.000000000      -0.013361990     $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0000000000    
+KP14 iter is: 0, @@@@@ scf converged energy is: -1.9207772536    
+The most lowest energy so far is: -1.9207772536   , scf index is 0
+NucRepulsion 0.0000000000    
+core -2.3770384250   
+JK   energy is: 0.4612201562    
+XC   -0.0049589848   
+MTAG KP14   0   0 -1.9207772536    0.0000000000    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: 0.00000000       0.00000000       0.00000000     
+total dipole moment: 0.00000000     
+ 0.321998s wall, 1.700000s user + 0.300000s system = 2.000000s CPU (621.1%)

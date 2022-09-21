@@ -1,0 +1,9 @@
+Nov. 2013:
+add in functional code for 1st derivatives:
+slater, vwn5, vwn1rpa, pw92c
+becke88, PBE(XC), PW91(XC), LYP
+All of them are well tested.
+
+We implement the PW86C, however; the value can not match
+with other QC package. We need to keep en eye on this 
+later.

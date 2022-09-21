@@ -1,0 +1,34 @@
+#
+#  this is the template file to set up the parameters for curve scanning
+#  after you get your optimized basis sets, xdm paramters;
+#  you can run it to see what kind of curve it will produce 
+#
+
+#  exchange functional, pw86x is the default one
+#  exchange    pw86x
+
+#  correlation functional, pbec is the default choice
+#  correlation  pbec
+
+#  the first monomer name, either atom or molecule file name
+mono1   Ne
+
+#  the second monomer name, either atom or molecule file name
+mono2   Ne
+
+# in scanning the curve, we need to know three things:
+# 1  the starting distance between the two monomers,
+# 2  the ending distance between two monomers;
+# 3  step size for the scanning
+# step length is in default as 0.1
+distance_begin    2.00
+distance_end      9.00
+# distance_step   0.1
+
+#
+# here you need to give the xdm parameters, they do not have
+# any default value:
+#
+xdm1  1.1  
+xdm2  1.08
+

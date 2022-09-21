@@ -1,0 +1,280 @@
+
+2003
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+0
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100004
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+3
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+3004
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+4
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1002
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1004
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+2004
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+3003
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+5005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100001
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+2005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100100
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100002
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+4004
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1003
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+2002
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+100003
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+3005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+2
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+4005
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+1001
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####
+
+5
+BRA1  BRA1
+X  X
+X  Y
+X  Z
+Y  Y
+Y  Z
+Z  Z
+####

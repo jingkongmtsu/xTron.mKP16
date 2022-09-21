@@ -1,0 +1,222 @@
+----------------------------------------------
+          SINGLE POINT SCF CALCULATION        
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+%global_infor
+CPU_THREADS_NUMBER   8
+%end
+
+
+%molecule
+1 2
+Ar  0   0   0
+Ar 0   0   5.0
+%end
+
+%basis
+G3LARGEXP
+%end
+
+%xcfunc
+name HF 
+%end
+
+%scf
+do_jk_apart  true
+max_scf_cycles  180
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-14
+do_odd_electron  false
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+################
+# 2nd job
+################
+%molecule
+1 2
+Ar  0   0   0
+Ar 0   0   5.0
+%end
+
+%basis
+G3LARGEXP
+%end
+
+%xcfunc
+name KP14_MNDPAR1
+KP14_C_NDPAR_CAP 0.5
+%end
+
+%scf
+max_scf_cycles  1
+%end
+
+%gints
+gints4d_threshold  1.0E-14
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-14
+do_odd_electron true
+%end
+
+%scfintscontroller
+integral_controller_option  NO_CONTROLLER
+%end
+
+
+*******************************************
+*            GlobalInfor Print            *
+*******************************************
+input   file is        : mkp16_ar2+_5.0.in
+scratch file is        : /nfshome/jkong/scratch_xtron/8c76-4077-9455-ce00
+number of CPU threads  : 8
+we use multi-threads 
+number of basis sets 142
+here nkey1
+here nkey1
+Coulomb energy is: 767.9125035690  
+Exchange energy is: -82.6242312369  
+DIIS error 8.8931348059    
+HF iter is: 0, @@@@@ total energy is: -909.6752793119  
+The most lowest energy so far is: -909.6752793119 , scf index is 0
+NucRepulsion 34.2906832677   
+core -1629.2542349118
+JK   energy is: 685.2882723322  
+XC   0.0000000000    
+MTAG HF   0   0 -909.6752793119  8.8931348059    
+Coulomb energy is: 328.3188390285  
+Exchange energy is: -46.8556646590  
+DIIS error 2.6574708438    
+HF iter is: 1, @@@@@ total energy is: -1013.1419930052 
+The most lowest energy so far is: -1013.1419930052, scf index is 1
+NucRepulsion 34.2906832677   
+core -1328.8958506424
+JK   energy is: 281.4631743695  
+XC   0.0000000000    
+MTAG HF   1   1 -1013.1419930052 2.6574708438    
+Coulomb energy is: 550.7802196238  
+Exchange energy is: -65.0974572554  
+DIIS error 1.4520414778    
+HF iter is: 2, @@@@@ total energy is: -1045.8917941499 
+The most lowest energy so far is: -1045.8917941499, scf index is 2
+NucRepulsion 34.2906832677   
+core -1565.8652397860
+JK   energy is: 485.6827623684  
+XC   0.0000000000    
+MTAG HF   2   2 -1045.8917941499 1.4520414778    
+Coulomb energy is: 489.8894683983  
+Exchange energy is: -60.0492741222  
+DIIS error 0.0760488181    
+HF iter is: 3, @@@@@ total energy is: -1052.9947381380 
+The most lowest energy so far is: -1052.9947381380, scf index is 3
+NucRepulsion 34.2906832677   
+core -1517.1256156817
+JK   energy is: 429.8401942760  
+XC   0.0000000000    
+MTAG HF   3   3 -1052.9947381380 0.0760488181    
+Coulomb energy is: 485.0774881538  
+Exchange energy is: -59.7865844512  
+DIIS error 0.0211421545    
+HF iter is: 4, @@@@@ total energy is: -1053.0391850623 
+The most lowest energy so far is: -1053.0391850623, scf index is 4
+NucRepulsion 34.2906832677   
+core -1512.6207720325
+JK   energy is: 425.2909037025  
+XC   0.0000000000    
+MTAG HF   4   4 -1053.0391850623 0.0211421545    
+Coulomb energy is: 486.7320169767  
+Exchange energy is: -59.9113532921  
+DIIS error 0.0014850380    
+HF iter is: 5, @@@@@ total energy is: -1053.0446559896 
+The most lowest energy so far is: -1053.0446559896, scf index is 5
+NucRepulsion 34.2906832677   
+core -1514.1560029419
+JK   energy is: 426.8206636846  
+XC   0.0000000000    
+MTAG HF   5   5 -1053.0446559896 0.0014850380    
+Coulomb energy is: 486.8379115194  
+Exchange energy is: -59.9197007209  
+DIIS error 0.0002388380    
+HF iter is: 6, @@@@@ total energy is: -1053.0447187299 
+The most lowest energy so far is: -1053.0447187299, scf index is 6
+NucRepulsion 34.2906832677   
+core -1514.2536127961
+JK   energy is: 426.9182107985  
+XC   0.0000000000    
+MTAG HF   6   6 -1053.0447187299 0.0002388380    
+Coulomb energy is: 486.8297205749  
+Exchange energy is: -59.9191742833  
+DIIS error 0.0000688200    
+HF iter is: 7, @@@@@ total energy is: -1053.0447220325 
+The most lowest energy so far is: -1053.0447220325, scf index is 7
+NucRepulsion 34.2906832677   
+core -1514.2459515919
+JK   energy is: 426.9105462916  
+XC   0.0000000000    
+MTAG HF   7   7 -1053.0447220325 0.0000688200    
+Coulomb energy is: 486.8285271376  
+Exchange energy is: -59.9190908722  
+DIIS error 0.0000251958    
+HF iter is: 8, @@@@@ total energy is: -1053.0447223916 
+The most lowest energy so far is: -1053.0447223916, scf index is 8
+NucRepulsion 34.2906832677   
+core -1514.2448419248
+JK   energy is: 426.9094362654  
+XC   0.0000000000    
+MTAG HF   8   8 -1053.0447223916 0.0000251958    
+Coulomb energy is: 486.8287069864  
+Exchange energy is: -59.9191050991  
+DIIS error 0.0000047281    
+HF iter is: 9, @@@@@ scf converged energy is: -1053.0447224237 
+The most lowest energy so far is: -1053.0447224237, scf index is 9
+NucRepulsion 34.2906832677   
+core -1514.2450075787
+JK   energy is: 426.9096018873  
+XC   0.0000000000    
+MTAG HF   9   9 -1053.0447224237 0.0000047281    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      0.00000000       12.00773104    
+total dipole moment: 12.00773104    
+ 6.652695s wall, 20.670000s user + 45.440000s system = 66.110000s CPU (993.7%)
+-----------Second SCF begins-----------
+here nkey2
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.56446692
+2             0.56446706
+Odd electron population summary for all of atoms is: 1.12893398  
+DIIS error 0.0000000000    
+KP14_MNDPAR1 iter is: 0, @@@@@ scf converged energy is: -1054.4830976577 
+The most lowest energy so far is: 0.0000000000    , scf index is 0
+NucRepulsion 34.2906832677   
+core -1514.2449735884
+JK   energy is: 426.9095678957  
+XC   -1.4383752327   
+MTAG KP14_MNDPAR1   0   0 -1054.4830976577 0.0000000000    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: 0.00000000       -0.00000000      12.00759275    
+total dipole moment: 12.00759275    
+ 1.925432s wall, 13.130000s user + 4.080000s system = 17.210000s CPU (893.8%)

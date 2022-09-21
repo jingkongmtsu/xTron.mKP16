@@ -1,0 +1,61 @@
+
+********************************
+*  sto-NG basis set (N=3 and 6)
+********************************
+both sto-3g and sto-6g basis sets are using spherical basis set for D and F shells.
+the sto-3g and sto-6g basis sets data are directly copied from NWCHEM and without
+modifications.
+
+********************************
+*  3-21G basis set
+********************************
+they are directly copied from NWCHEM and without any further changes. However, it seems
+3-21G support much more elements than 3-21G*.
+
+********************************
+*  6-31G basis set
+********************************
+6-31G basis set uses the 6D basis set. However, it's F is spherical. Therefore for the 
+6-31G* and 6-31G** basis set we use the modified form of Gaussian basis set data(so that
+we can add "C" for the D to signal that it's 6D). The 6-31G does not have F shell, therefore
+we directly copied the NWCHEM basis set data.
+
+Although 6-31G* and 6-31G** support elements up to Kr, 6-31G only supports elements to Zn.
+However, we just keep the original data as in NWCHEM.
+
+for the basis set data with diffuse function (with "+" or "++"), we all directly copied from
+NWCHEM. They are using the 6D shell, too. all of these basis set data only support the elements
+up to Ca, however it seems the data for trasition metals etc. are also published but somehow
+they are not included in the EMSL library. 
+
+**********************************************
+*  cc-pvnz and aug-cc-pvnz basis set (n=D,T)
+**********************************************
+The Dunning basis set cc-pvnz are all spherical basis set, directly copied from NWCHEM program
+without modifications.
+
+********************************
+*  G3LARGE basis set
+********************************
+G3LARGE uses all spherical basis set. We copied from the website:
+http://www.cse.anl.gov/OldCHMwebsiteContent/compmat/g3theory.htm
+
+********************************
+*  G3LARGEXP basis set
+********************************
+G3LARGEXP uses all spherical basis set. It's the improved basis set for G3large.
+We downloaded the data form EMSL library.
+
+********************************
+*  ADZP and ATZP
+********************************
+the two basis set data are directly copied from NWCHEM and without any changes.
+
+
+********************************
+*  DZP and TZP
+********************************
+the two basis set data are directly copied from NWCHEM and without any changes.
+
+
+

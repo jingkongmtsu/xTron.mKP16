@@ -1,0 +1,415 @@
+----------------------------------------------
+          INITIAL GUESS CALCULATION           
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+# First job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+
+%basis
+#min-basis
+#g3large
+aug-cc-pvtz
+%end
+
+%xcfunc
+name  becke88
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+
+# 2nd job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+
+%basis
+aug-cc-pvtz
+#min-basis
+#g3large
+%end
+
+%xcfunc
+name kp14
+%end
+
+%scf
+max_scf_cycles  150
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+
+# 3rd job
+%molecule
+-1 1
+h   0.  0.   0.0
+%end
+
+%basis
+aug-cc-pvtz
+#min-basis
+#g3large
+%end
+
+%xcfunc
+name kp14
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  30  50
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+do_odd_electron true
+%end
+
+%frac_spin
+alpha_frac_infor_mo_begin_index 0
+alpha_frac_infor_nmo 1
+alpha_frac_infor_scale_value 0.333333333333333
+beta_frac_infor_mo_begin_index 0
+beta_frac_infor_nmo 1
+beta_frac_infor_scale_value  0.333333333333333
+%end
+number of basis sets 23
+here nkey1
+DIIS error 0.1220565477    
+BECKE88 iter is: 0, @@@@@ total energy is: -0.3695959529    
+The most lowest energy so far is: -0.3695959529   , scf index is 0
+NucRepulsion 0.0000000000    
+core -0.9996423520   
+JK   energy is: 1.2491682483    
+XC   -0.6191218492   
+MTAG BECKE88   0   0 -0.3695959529    0.1220565477    
+DIIS error 0.0750804216    
+BECKE88 iter is: 1, @@@@@ total energy is: -0.2043608309    
+The most lowest energy so far is: -0.3695959529   , scf index is 0
+NucRepulsion 0.0000000000    
+core -0.3579047508   
+JK   energy is: 0.3109934477    
+XC   -0.1574495278   
+MTAG BECKE88   1   0 -0.2043608309    0.0750804216    
+DIIS error 0.1824103109    
+BECKE88 iter is: 2, @@@@@ total energy is: -0.2982020973    
+The most lowest energy so far is: -0.3695959529   , scf index is 0
+NucRepulsion 0.0000000000    
+core -0.9899439321   
+JK   energy is: 1.3715182689    
+XC   -0.6797764340   
+MTAG BECKE88   2   0 -0.2982020973    0.1824103109    
+DIIS error 0.1157021442    
+BECKE88 iter is: 3, @@@@@ total energy is: -0.3989065111    
+The most lowest energy so far is: -0.3989065111   , scf index is 3
+NucRepulsion 0.0000000000    
+core -0.9952638187   
+JK   energy is: 1.1906988705    
+XC   -0.5943415628   
+MTAG BECKE88   3   3 -0.3989065111    0.1157021442    
+DIIS error 0.0593953681    
+BECKE88 iter is: 4, @@@@@ total energy is: -0.4641194677    
+The most lowest energy so far is: -0.4641194677   , scf index is 4
+NucRepulsion 0.0000000000    
+core -0.9624483366   
+JK   energy is: 1.0092033286    
+XC   -0.5108744597   
+MTAG BECKE88   4   4 -0.4641194677    0.0593953681    
+DIIS error 0.0379932341    
+BECKE88 iter is: 5, @@@@@ total energy is: -0.4822479538    
+The most lowest energy so far is: -0.4822479538   , scf index is 5
+NucRepulsion 0.0000000000    
+core -0.9374435250   
+JK   energy is: 0.9293316211    
+XC   -0.4741360500   
+MTAG BECKE88   5   5 -0.4822479538    0.0379932341    
+DIIS error 0.0030574099    
+BECKE88 iter is: 6, @@@@@ total energy is: -0.4985323983    
+The most lowest energy so far is: -0.4985323983   , scf index is 6
+NucRepulsion 0.0000000000    
+core -0.8708572433   
+JK   energy is: 0.7734593363    
+XC   -0.4011344913   
+MTAG BECKE88   6   6 -0.4985323983    0.0030574099    
+DIIS error 0.0010334826    
+BECKE88 iter is: 7, @@@@@ total energy is: -0.4986200637    
+The most lowest energy so far is: -0.4986200637   , scf index is 7
+NucRepulsion 0.0000000000    
+core -0.8666215947   
+JK   energy is: 0.7651915632    
+XC   -0.3971900322   
+MTAG BECKE88   7   7 -0.4986200637    0.0010334826    
+DIIS error 0.0000027298    
+BECKE88 iter is: 8, @@@@@ scf converged energy is: -0.4986314359    
+The most lowest energy so far is: -0.4986314359   , scf index is 8
+NucRepulsion 0.0000000000    
+core -0.8644388533   
+JK   energy is: 0.7609881318    
+XC   -0.3951807144   
+MTAG BECKE88   8   8 -0.4986314359    0.0000027298    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      -0.00000000      -0.00000000    
+total dipole moment: 0.00000000     
+ 1.129251s wall, 2.200000s user + 3.000000s system = 5.200000s CPU (460.5%)
+----------------------------------------------
+             SECOND SCF CALCULATION           
+----------------------------------------------
+here nkey1
+$ParamOptLSF -0.023674215     -0.000000000     -0.019069161     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0178995262    
+KP14 iter is: 0, @@@@@ total energy is: -0.5266872683    
+The most lowest energy so far is: -0.5266872683   , scf index is 0
+NucRepulsion 0.0000000000    
+core -0.8644190197   
+JK   energy is: 0.3804751283    
+XC   -0.0427433769   
+MTAG KP14   0   0 -0.5266872683    0.0178995262    
+$ParamOptLSF -0.026787896     -0.000000000     -0.018877523     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0053772976    
+KP14 iter is: 1, @@@@@ total energy is: -0.5275507807    
+The most lowest energy so far is: -0.5275507807   , scf index is 1
+NucRepulsion 0.0000000000    
+core -0.8692774455   
+JK   energy is: 0.3873920833    
+XC   -0.0456654185   
+MTAG KP14   1   1 -0.5275507807    0.0053772976    
+$ParamOptLSF -0.028826756     -0.000000000     -0.017971196     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0082210530    
+KP14 iter is: 2, @@@@@ total energy is: -0.5275414595    
+The most lowest energy so far is: -0.5275507807   , scf index is 1
+NucRepulsion 0.0000000000    
+core -0.8519770427   
+JK   energy is: 0.3712335348    
+XC   -0.0467979516   
+MTAG KP14   2   1 -0.5275414595    0.0082210530    
+$ParamOptLSF -0.028875942     0.000000000      -0.018186778     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0032568791    
+KP14 iter is: 3, @@@@@ total energy is: -0.5277404914    
+The most lowest energy so far is: -0.5277404914   , scf index is 3
+NucRepulsion 0.0000000000    
+core -0.8575967076   
+JK   energy is: 0.3769189356    
+XC   -0.0470627195   
+MTAG KP14   3   3 -0.5277404914    0.0032568791    
+$ParamOptLSF -0.029751438     -0.000000000     -0.018102547     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0005624539    
+KP14 iter is: 4, @@@@@ total energy is: -0.5277711078    
+The most lowest energy so far is: -0.5277711078   , scf index is 4
+NucRepulsion 0.0000000000    
+core -0.8575818475   
+JK   energy is: 0.3776647246    
+XC   -0.0478539850   
+MTAG KP14   4   4 -0.5277711078    0.0005624539    
+$ParamOptLSF -0.029747902     0.000000000      -0.018129912     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0000328309    
+KP14 iter is: 5, @@@@@ total energy is: -0.5277726421    
+The most lowest energy so far is: -0.5277726421   , scf index is 5
+NucRepulsion 0.0000000000    
+core -0.8582732895   
+JK   energy is: 0.3783784611    
+XC   -0.0478778138   
+MTAG KP14   5   5 -0.5277726421    0.0000328309    
+$ParamOptLSF -0.029767379     0.000000000      -0.018124947     0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0000003188    
+KP14 iter is: 6, @@@@@ scf converged energy is: -0.5277726517    
+The most lowest energy so far is: -0.5277726517   , scf index is 6
+NucRepulsion 0.0000000000    
+core -0.8581951477   
+JK   energy is: 0.3783148222    
+XC   -0.0478923262   
+MTAG KP14   6   6 -0.5277726517    0.0000003188    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      -0.00000000      -0.00000000    
+total dipole moment: 0.00000000     
+ 2.537257s wall, 13.840000s user + 2.360000s system = 16.200000s CPU (638.5%)
+----------------------------------------------
+             THIRD SCF CALCULATION            
+----------------------------------------------
+Molecule information for section 3
+charge         : -1
+multiplicity   : 1
+nelectron      : 2
+nalpha         : 1
+nbeta          : 1
+the molecule is forced to the unrestricted 
+the input geometry data is in unit of angstrom 
+H    0       1    0.00000     0.00000     0.00000   
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+here nkey1
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666346
+Odd electron population summary for all of atoms is: 0.66666346  
+$ParamOptLSF -0.041525512     -0.000381830     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0379160730    
+KP14 iter is: 0, @@@@@ total energy is: -0.2859863893    
+The most lowest energy so far is: -0.2859863893   , scf index is 0
+NucRepulsion 0.0000000000    
+core -0.2860651989   
+JK   energy is: 0.0420350255    
+XC   -0.0419562159   
+MTAG KP14   0   0 -0.2859863893    0.0379160730    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666724
+Odd electron population summary for all of atoms is: 0.66666724  
+$ParamOptLSF -0.062636944     -0.000024591     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0094764819    
+KP14 iter is: 1, @@@@@ total energy is: -0.3298081750    
+The most lowest energy so far is: -0.3298081750   , scf index is 1
+NucRepulsion 0.0000000000    
+core -0.3299843807   
+JK   energy is: 0.0628408875    
+XC   -0.0626646817   
+MTAG KP14   1   1 -0.3298081750    0.0094764819    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666691
+Odd electron population summary for all of atoms is: 0.66666691  
+$ParamOptLSF -0.067034012     -0.000000407     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0028758321    
+KP14 iter is: 2, @@@@@ total energy is: -0.3324356955    
+The most lowest energy so far is: -0.3324356955   , scf index is 2
+NucRepulsion 0.0000000000    
+core -0.3329866326   
+JK   energy is: 0.0675854089    
+XC   -0.0670344718   
+MTAG KP14   2   2 -0.3324356955    0.0028758321    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666669
+Odd electron population summary for all of atoms is: 0.66666669  
+$ParamOptLSF -0.069490582     -0.000000168     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0004781190    
+KP14 iter is: 3, @@@@@ total energy is: -0.3327942494    
+The most lowest energy so far is: -0.3327942494   , scf index is 3
+NucRepulsion 0.0000000000    
+core -0.3331749712   
+JK   energy is: 0.0698714938    
+XC   -0.0694907721   
+MTAG KP14   3   3 -0.3327942494    0.0004781190    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666675
+Odd electron population summary for all of atoms is: 0.66666675  
+$ParamOptLSF -0.069242855     -0.000000196     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0001690204    
+KP14 iter is: 4, @@@@@ total energy is: -0.3327995466    
+The most lowest energy so far is: -0.3327995466   , scf index is 4
+NucRepulsion 0.0000000000    
+core -0.3332054914   
+JK   energy is: 0.0696490203    
+XC   -0.0692430755   
+MTAG KP14   4   4 -0.3327995466    0.0001690204    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************************
+*    Results of ODD Elec. Calculation     *
+*******************************************
+Odd electron population summary for each atom 
+atom index    population value
+1             0.66666673
+Odd electron population summary for all of atoms is: 0.66666673  
+$ParamOptLSF -0.069348210     -0.000000187     0.000000000      0.000000000      $end
+#KP14C_U_STATIC_OPP KP14C_U_STATIC_PAR B13COOR_OPP B13COOR_PAR 
+DIIS error 0.0000053207    
+KP14 iter is: 5, @@@@@ scf converged energy is: -0.3328005417    
+The most lowest energy so far is: -0.3328005417   , scf index is 5
+NucRepulsion 0.0000000000    
+core -0.3331986676   
+JK   energy is: 0.0697465472    
+XC   -0.0693484212   
+MTAG KP14   5   5 -0.3328005417    0.0000053207    
+for alpha spin mo
+mo begin index: 0, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 0, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 1, and new beta electron occupation number 1
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      0.00000000       -0.00000000    
+total dipole moment: 0.00000000     
+ 1.047523s wall, 1.900000s user + 2.020000s system = 3.920000s CPU (374.2%)

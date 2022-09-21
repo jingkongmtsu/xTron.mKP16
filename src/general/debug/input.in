@@ -1,0 +1,47 @@
+%global_infor
+multi_threads   true
+cpu_threads_number  6
+%end
+
+%molecule
+0 1
+He  0   0  0
+He  0   0  1
+%end
+
+####standard energy is 1.00000 hatree (for testing)
+%xcfunc
+name  b3lyp
+%end
+
+%basis
+ He 0 
+ S    3 1.00 
+  0.9812430000D+02  0.2874520000D-01
+  0.1476890000D+02  0.2080610000D+00
+  0.3318830000D+01  0.8376350000D+00
+ S    1 1.00 
+  0.8740470000D+00  0.1000000000D+01
+ S    1 1.00 
+  0.2445640000D+00  0.1000000000D+01
+ S    1 1.00 
+  0.8600000000D-01  0.1000000000D+01
+ P    1 1.00 
+  0.1500000000D+01  0.1000000000D+01
+ P    1 1.00 
+  0.3750000000D+00  0.1000000000D+01
+%end
+
+@@@@
+
+%molecule
+0 1
+He  0   0  0
+He  0   0  2
+%end
+
+%xcfunc
+name     VDWBR89   # functional name
+%end
+
+

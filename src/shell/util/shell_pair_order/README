@@ -1,0 +1,16 @@
+
+This simple program is used to create 
+correct shell pair order.
+
+the shell pair order means that for 
+any two shell pairs, who should be 
+ahead, who should be after.
+
+This is used to create correct LCode
+that matching the integral deriver 
+engine. We use this shell pair order
+in the cppints program.
+
+The result of this simple program
+creates an array, which defined
+the shell pair order. 

@@ -1,0 +1,66 @@
+This program, called xTron, has been developed at Jing Kong's group at
+Middle Tennessee State University. The primary focus is to develop new
+methods for density functional theory. The current code includes:
+
+1. Computation of the Hartree-Fock exchange (HFX) energy density;
+2. Computation of the HFX hole;
+3. B05 and B13, KP16/B13 implementations.
+
+
+The code was written mainly by Fenglai Liu with design input from Jing Kong.
+Emil Proynov and Jing also help in coding. Yiting Wang wrote the code for the 
+computation of HFX hole.
+
+You need three external libraries: netlib, gsl and tbb.  Note that the 
+most recent release of tbb will not work.  You need an older version, 
+like released before 2020.  Also some fortran codes do not seem to pass the
+latest gfortran either.
+
+Please check bshrc.example to see the env's needed to compile and run xTron.
+Once you set the env's correctly, you can go the top folder of xTron and
+type 'perl configure.pl', and then go to build/, and type 'make'.  That
+should be it.
+
+The test folder includes a few examples. To run the code, simply type 
+'xtron input output'.
+
+Note that this README is very brief. I trust that a lot of stuff are 
+self-explanatory to those who have code development experience on linux. 
+But feel free to ask me if you have questions.
+
+
+Note: This initial release of code is (very) experimental. Please feel free 
+to contact me at jing.kong@mtsu.edu if you want to use it.  Your feedback 
+will help us to improve it.
+
+
+Below are functionalities unique to xTron.
+
+Descriptions:
+
+1. HFX energy density: halfjkrho.cpp, espints.cpp, batchexrhomtrx.cpp. The
+HFX energy density is calculated in halfjkrho.cpp, which calls espints.cpp
+for computing the electrostatic potential of a shell pair. This part of 
+code eventually calls cppints on github, an efficient four-center integral
+package developed by Fenglai. It is included in this distribution.
+batchexrhomtrx.cpp is to construct the 
+HFX-related part of XC matrix.
+Reference: Liu, Kong, JCTC, https://doi.org/10.1021/acs.jctc.7b00055
+
+2. HFX hole: halfjkrho.cpp, gaussian.cpp, sphereInt.cpp, coefCalculator.cpp.
+doHalfJKRhoXHole in halfjkrho.cpp calls sphereInt the computation of the HFX
+hole value at a given interelectronic distance.
+Reference: Wang, Proynov, Kong, JCP, https://doi.org/10.1063/5.0031995
+
+3. B05, B13, KP16/B13, mKP16/B13: All the Fortran files (*.f). Note that 
+'kp14' was used internally for KP16 method because its implementation 
+started in 2014.
+References: 
+B05: Becke, JCP, https://doi.org/10.1063/1.1844493
+B13: Becke, JCP, https://doi.org/10.1063/1.4790598
+KP16/B13: Kong, Proynov, JCTC, https://doi.org/10.1021/acs.jctc.5b00801
+mKP16/B13: Proynov, Kong, JCTC, https://doi.org/10.1021/acs.jctc.1c00197
+
+
+Jing
+

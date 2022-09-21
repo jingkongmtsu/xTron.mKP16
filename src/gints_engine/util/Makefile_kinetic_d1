@@ -1,0 +1,116 @@
+# 
+# makefile for compiling the module of kinetic
+# 
+
+
+# include compiler flags
+include compile.cfg
+
+# define source code path 
+PARSRC  = ../hgp_os/first_deriv
+SRC  = ${PARSRC}/kinetic
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_kinetic_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_f_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_f_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_g_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_s_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_d_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_f_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_p_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_f_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_g_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_h_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_f_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_p_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_h_f_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_sp_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_d_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_d_d_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_sp_sp_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_d_s_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_p_p_d1.o
+OBJ  +=  ${BIN}/hgp_os_kinetic_g_p_d1.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBKINETIC_D1} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_kinetic_d1.o:  ${PARSRC}/hgp_os_kinetic_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_kinetic_f_d_d1.o:  ${SRC}/hgp_os_kinetic_f_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_f_f_d1.o:  ${SRC}/hgp_os_kinetic_f_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_d_d1.o:  ${SRC}/hgp_os_kinetic_g_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_sp_d1.o:  ${SRC}/hgp_os_kinetic_h_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_g_d1.o:  ${SRC}/hgp_os_kinetic_h_g_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_s_s_d1.o:  ${SRC}/hgp_os_kinetic_s_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_d_sp_d1.o:  ${SRC}/hgp_os_kinetic_d_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_sp_d1.o:  ${SRC}/hgp_os_kinetic_g_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_f_sp_d1.o:  ${SRC}/hgp_os_kinetic_f_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_p_s_d1.o:  ${SRC}/hgp_os_kinetic_p_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_f_p_d1.o:  ${SRC}/hgp_os_kinetic_f_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_g_d1.o:  ${SRC}/hgp_os_kinetic_g_g_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_s_d1.o:  ${SRC}/hgp_os_kinetic_h_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_p_d1.o:  ${SRC}/hgp_os_kinetic_h_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_h_d1.o:  ${SRC}/hgp_os_kinetic_h_h_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_f_d1.o:  ${SRC}/hgp_os_kinetic_g_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_f_s_d1.o:  ${SRC}/hgp_os_kinetic_f_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_d_d1.o:  ${SRC}/hgp_os_kinetic_h_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_s_d1.o:  ${SRC}/hgp_os_kinetic_g_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_p_sp_d1.o:  ${SRC}/hgp_os_kinetic_p_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_h_f_d1.o:  ${SRC}/hgp_os_kinetic_h_f_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_sp_s_d1.o:  ${SRC}/hgp_os_kinetic_sp_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_d_p_d1.o:  ${SRC}/hgp_os_kinetic_d_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_d_d_d1.o:  ${SRC}/hgp_os_kinetic_d_d_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_sp_sp_d1.o:  ${SRC}/hgp_os_kinetic_sp_sp_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_d_s_d1.o:  ${SRC}/hgp_os_kinetic_d_s_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_p_p_d1.o:  ${SRC}/hgp_os_kinetic_p_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_kinetic_g_p_d1.o:  ${SRC}/hgp_os_kinetic_g_p_d1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

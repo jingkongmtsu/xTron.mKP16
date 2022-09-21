@@ -1,0 +1,81 @@
+# 
+# makefile for compiling the module of esp
+# 
+
+
+# include compiler flags
+ifeq (${ON_DARTER}, 1)
+include compile.cfg.darter
+else
+include compile.cfg
+endif
+
+# define source code path 
+PARSRC  = ../../gints_engine/hgp_os/second_deriv
+SRC  = ${PARSRC}/esp
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_esp_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_s_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_p_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_d_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_sp_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_p_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_sp_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_sp_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_d_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_p_s_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_d_p_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_sp_s_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_s_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_f_f_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_s_s_d2.o
+OBJ  +=  ${BIN}/hgp_os_esp_sp_sp_d2.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBESP_D2} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_esp_d2.o:  ${PARSRC}/hgp_os_esp_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_esp_d_s_d2.o:  ${SRC}/hgp_os_esp_d_s_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_p_d2.o:  ${SRC}/hgp_os_esp_f_p_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_d_d2.o:  ${SRC}/hgp_os_esp_d_d_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_sp_d2.o:  ${SRC}/hgp_os_esp_p_sp_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_p_d2.o:  ${SRC}/hgp_os_esp_p_p_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_sp_d2.o:  ${SRC}/hgp_os_esp_f_sp_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_sp_d2.o:  ${SRC}/hgp_os_esp_d_sp_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_d_d2.o:  ${SRC}/hgp_os_esp_f_d_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_p_s_d2.o:  ${SRC}/hgp_os_esp_p_s_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_d_p_d2.o:  ${SRC}/hgp_os_esp_d_p_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_sp_s_d2.o:  ${SRC}/hgp_os_esp_sp_s_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_s_d2.o:  ${SRC}/hgp_os_esp_f_s_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_f_f_d2.o:  ${SRC}/hgp_os_esp_f_f_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_s_s_d2.o:  ${SRC}/hgp_os_esp_s_s_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_esp_sp_sp_d2.o:  ${SRC}/hgp_os_esp_sp_sp_d2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

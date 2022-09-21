@@ -1,0 +1,672 @@
+# 
+# makefile for compiling the module of eri
+# 
+
+
+# include compiler flags
+ifeq (${ON_DARTER}, 1)
+include compile.cfg.darter
+else
+include compile.cfg
+endif
+
+# define source code path 
+PARSRC  = ../../gints_engine/hgp_os/energy
+SRC  = ${PARSRC}/eri
+
+# define objs 
+OBJ  =  ${BIN}/hgp_os_eri.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_s_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_f_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_f_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_f_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_d_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_f_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_hrr1_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_s_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr2_3.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr2_4.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_s_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_vrr_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_vrr_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_vrr_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_f_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_sp_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr2_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_s_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_d_vrr_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_d_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_f_f.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_s_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_f.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_sp_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_sp_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_vrr_3.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_hrr1_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_f_vrr_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_f_vrr_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_p_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_s_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_sp_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_f_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_s_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_f_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_s_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_g_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_g_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_vrr_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_f_f.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_f_hrr2_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr1_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr1_3.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_d_hrr2_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_sp_d_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_f_hrr2_2.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_d_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_g_f.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_g_g_hrr1_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_d_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_sp_sp.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_g_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_p_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_d_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_s_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_p_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_p_p_s_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_sp_sp_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_f_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_sp_sp_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_d_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_d_sp_f_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_d_d.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_p_s.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_d_f_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_g_f_d_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_p_p_p.o
+OBJ  +=  ${BIN}/hgp_os_eri_g_f_f_f_hrr2_1.o
+OBJ  +=  ${BIN}/hgp_os_eri_f_s_p_s.o
+
+# define large objs - they need lower compiler opt option
+# create lib file 
+ALL: ${OBJ}
+		$(AR) -r ${LIBERI} ${OBJ}
+
+# compile all of objs - entry cpp file first
+${BIN}/hgp_os_eri.o:  ${PARSRC}/hgp_os_eri.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are small
+${BIN}/hgp_os_eri_d_d_p_sp.o:  ${SRC}/hgp_os_eri_d_d_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_p_sp.o:  ${SRC}/hgp_os_eri_f_sp_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_d_p.o:  ${SRC}/hgp_os_eri_g_d_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_s_p_s.o:  ${SRC}/hgp_os_eri_p_s_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f.o:  ${SRC}/hgp_os_eri_g_g_g_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_p_s.o:  ${SRC}/hgp_os_eri_g_p_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_f_d.o:  ${SRC}/hgp_os_eri_g_f_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_s_s.o:  ${SRC}/hgp_os_eri_f_sp_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_p_sp.o:  ${SRC}/hgp_os_eri_d_sp_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_f_d.o:  ${SRC}/hgp_os_eri_g_d_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_d_sp.o:  ${SRC}/hgp_os_eri_f_p_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_p_sp.o:  ${SRC}/hgp_os_eri_f_f_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_f_s.o:  ${SRC}/hgp_os_eri_f_sp_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_d_d.o:  ${SRC}/hgp_os_eri_g_p_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_f_hrr2_1.o:  ${SRC}/hgp_os_eri_g_f_g_f_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_s_s.o:  ${SRC}/hgp_os_eri_f_d_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_f_p.o:  ${SRC}/hgp_os_eri_g_p_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_d_hrr2_1.o:  ${SRC}/hgp_os_eri_g_g_g_d_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_p_s.o:  ${SRC}/hgp_os_eri_f_f_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_s_s.o:  ${SRC}/hgp_os_eri_g_p_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_p_p.o:  ${SRC}/hgp_os_eri_g_s_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_f_d.o:  ${SRC}/hgp_os_eri_f_f_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_hrr1_2.o:  ${SRC}/hgp_os_eri_g_g_g_f_hrr1_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_s_s.o:  ${SRC}/hgp_os_eri_f_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_p_p.o:  ${SRC}/hgp_os_eri_g_f_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_s_s_s.o:  ${SRC}/hgp_os_eri_sp_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_g_s.o:  ${SRC}/hgp_os_eri_f_d_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_sp_sp.o:  ${SRC}/hgp_os_eri_f_sp_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_s_d_s.o:  ${SRC}/hgp_os_eri_d_s_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_d_s.o:  ${SRC}/hgp_os_eri_g_p_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_sp_sp.o:  ${SRC}/hgp_os_eri_d_p_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_sp_sp.o:  ${SRC}/hgp_os_eri_d_d_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr2_3.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr2_3.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_p_p.o:  ${SRC}/hgp_os_eri_d_d_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_p_sp.o:  ${SRC}/hgp_os_eri_f_d_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_sp_sp.o:  ${SRC}/hgp_os_eri_f_s_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_p_sp.o:  ${SRC}/hgp_os_eri_p_p_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_s_s.o:  ${SRC}/hgp_os_eri_g_g_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_p_p.o:  ${SRC}/hgp_os_eri_g_g_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_p_sp.o:  ${SRC}/hgp_os_eri_d_p_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g.o:  ${SRC}/hgp_os_eri_g_g_g_g.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr2_4.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr2_4.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_d_s.o:  ${SRC}/hgp_os_eri_f_f_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_d_sp.o:  ${SRC}/hgp_os_eri_d_sp_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_d.o:  ${SRC}/hgp_os_eri_g_g_g_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_s_p_s.o:  ${SRC}/hgp_os_eri_d_s_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_vrr_2.o:  ${SRC}/hgp_os_eri_g_g_g_g_vrr_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_vrr_1.o:  ${SRC}/hgp_os_eri_g_g_g_f_vrr_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_s.o:  ${SRC}/hgp_os_eri_g_f_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_vrr_2.o:  ${SRC}/hgp_os_eri_g_g_g_f_vrr_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_d_p.o:  ${SRC}/hgp_os_eri_f_p_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_f_p.o:  ${SRC}/hgp_os_eri_d_d_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_p_s.o:  ${SRC}/hgp_os_eri_f_d_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_f_hrr2_1.o:  ${SRC}/hgp_os_eri_g_g_f_f_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_p_s.o:  ${SRC}/hgp_os_eri_p_p_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_s_s_s.o:  ${SRC}/hgp_os_eri_p_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_sp_s.o:  ${SRC}/hgp_os_eri_p_sp_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_g_p.o:  ${SRC}/hgp_os_eri_g_p_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_p_s.o:  ${SRC}/hgp_os_eri_d_p_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_sp_d_s.o:  ${SRC}/hgp_os_eri_sp_sp_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_f_p.o:  ${SRC}/hgp_os_eri_f_f_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr2_2.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr2_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_p_p.o:  ${SRC}/hgp_os_eri_d_sp_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_f_s.o:  ${SRC}/hgp_os_eri_f_s_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_sp_s.o:  ${SRC}/hgp_os_eri_d_d_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_s_s_s_s.o:  ${SRC}/hgp_os_eri_s_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_d_s.o:  ${SRC}/hgp_os_eri_f_p_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_d_p.o:  ${SRC}/hgp_os_eri_f_f_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_f_s.o:  ${SRC}/hgp_os_eri_d_p_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_d_s.o:  ${SRC}/hgp_os_eri_d_p_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_sp_s.o:  ${SRC}/hgp_os_eri_p_p_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_d_vrr_1.o:  ${SRC}/hgp_os_eri_g_g_g_d_vrr_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_d_hrr2_1.o:  ${SRC}/hgp_os_eri_g_f_g_d_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_d_s.o:  ${SRC}/hgp_os_eri_f_sp_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_p_s.o:  ${SRC}/hgp_os_eri_d_sp_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_d_p.o:  ${SRC}/hgp_os_eri_f_d_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_f_s.o:  ${SRC}/hgp_os_eri_g_d_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_s_s.o:  ${SRC}/hgp_os_eri_p_sp_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_p_sp.o:  ${SRC}/hgp_os_eri_f_s_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_p_s.o:  ${SRC}/hgp_os_eri_f_p_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_f_sp.o:  ${SRC}/hgp_os_eri_d_d_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_s_s.o:  ${SRC}/hgp_os_eri_d_sp_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_s_s.o:  ${SRC}/hgp_os_eri_f_f_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_sp_sp.o:  ${SRC}/hgp_os_eri_p_sp_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_f_f.o:  ${SRC}/hgp_os_eri_f_f_f_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_s_s.o:  ${SRC}/hgp_os_eri_g_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_s_s_s.o:  ${SRC}/hgp_os_eri_d_s_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_p_p.o:  ${SRC}/hgp_os_eri_p_p_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_d_p.o:  ${SRC}/hgp_os_eri_f_sp_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_f_s.o:  ${SRC}/hgp_os_eri_f_d_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_d_s.o:  ${SRC}/hgp_os_eri_d_sp_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_f_p.o:  ${SRC}/hgp_os_eri_f_p_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_p_p.o:  ${SRC}/hgp_os_eri_f_f_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_f_p.o:  ${SRC}/hgp_os_eri_g_d_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_f.o:  ${SRC}/hgp_os_eri_g_g_f_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_d_p.o:  ${SRC}/hgp_os_eri_g_s_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_s_s.o:  ${SRC}/hgp_os_eri_d_p_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_d_sp.o:  ${SRC}/hgp_os_eri_f_sp_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_d_p.o:  ${SRC}/hgp_os_eri_g_f_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_f_sp.o:  ${SRC}/hgp_os_eri_f_p_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_sp_s_s.o:  ${SRC}/hgp_os_eri_sp_sp_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_d_s.o:  ${SRC}/hgp_os_eri_d_d_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_d_s.o:  ${SRC}/hgp_os_eri_g_s_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_sp_sp_s.o:  ${SRC}/hgp_os_eri_sp_sp_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_d.o:  ${SRC}/hgp_os_eri_g_f_g_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_vrr_3.o:  ${SRC}/hgp_os_eri_g_g_g_g_vrr_3.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_d_s.o:  ${SRC}/hgp_os_eri_g_g_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_f_s.o:  ${SRC}/hgp_os_eri_d_d_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_d_d.o:  ${SRC}/hgp_os_eri_g_g_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_p_p.o:  ${SRC}/hgp_os_eri_g_d_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_s_s.o:  ${SRC}/hgp_os_eri_g_f_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_s_s.o:  ${SRC}/hgp_os_eri_g_d_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_g_s.o:  ${SRC}/hgp_os_eri_d_d_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_sp_s.o:  ${SRC}/hgp_os_eri_f_d_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_f_sp.o:  ${SRC}/hgp_os_eri_f_d_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_f_sp.o:  ${SRC}/hgp_os_eri_f_sp_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_d_s.o:  ${SRC}/hgp_os_eri_f_d_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_d_p.o:  ${SRC}/hgp_os_eri_d_p_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_hrr1_1.o:  ${SRC}/hgp_os_eri_g_g_g_f_hrr1_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_d_s.o:  ${SRC}/hgp_os_eri_g_d_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_d_d.o:  ${SRC}/hgp_os_eri_g_d_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_g_s.o:  ${SRC}/hgp_os_eri_g_s_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_sp_s.o:  ${SRC}/hgp_os_eri_f_f_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_p_sp.o:  ${SRC}/hgp_os_eri_f_p_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_sp_sp.o:  ${SRC}/hgp_os_eri_f_p_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_f_vrr_1.o:  ${SRC}/hgp_os_eri_g_g_f_f_vrr_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_g_s.o:  ${SRC}/hgp_os_eri_g_d_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_p_p.o:  ${SRC}/hgp_os_eri_f_d_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_g_p.o:  ${SRC}/hgp_os_eri_f_d_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_f_vrr_1.o:  ${SRC}/hgp_os_eri_g_f_g_f_vrr_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_p_sp.o:  ${SRC}/hgp_os_eri_p_sp_p_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_d.o:  ${SRC}/hgp_os_eri_g_g_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_d_sp.o:  ${SRC}/hgp_os_eri_d_p_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_d_d.o:  ${SRC}/hgp_os_eri_d_d_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_s.o:  ${SRC}/hgp_os_eri_g_g_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_s_sp_s.o:  ${SRC}/hgp_os_eri_p_s_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_d_s.o:  ${SRC}/hgp_os_eri_g_f_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_p_p.o:  ${SRC}/hgp_os_eri_f_p_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_p.o:  ${SRC}/hgp_os_eri_g_g_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_d_s.o:  ${SRC}/hgp_os_eri_p_p_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_g_p.o:  ${SRC}/hgp_os_eri_g_d_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_p_s.o:  ${SRC}/hgp_os_eri_f_sp_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_d_p.o:  ${SRC}/hgp_os_eri_g_g_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_p.o:  ${SRC}/hgp_os_eri_g_f_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_sp_sp_sp.o:  ${SRC}/hgp_os_eri_sp_sp_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_f_d.o:  ${SRC}/hgp_os_eri_f_d_f_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_s_sp_s.o:  ${SRC}/hgp_os_eri_d_s_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_d_p.o:  ${SRC}/hgp_os_eri_d_d_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_f_sp.o:  ${SRC}/hgp_os_eri_f_f_f_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_sp_sp.o:  ${SRC}/hgp_os_eri_p_p_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_d_sp.o:  ${SRC}/hgp_os_eri_f_d_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr2_1.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_hrr2_1.o:  ${SRC}/hgp_os_eri_g_g_g_f_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_s_sp_s.o:  ${SRC}/hgp_os_eri_sp_s_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_sp_s.o:  ${SRC}/hgp_os_eri_f_s_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_g_p.o:  ${SRC}/hgp_os_eri_f_f_g_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_d_s.o:  ${SRC}/hgp_os_eri_f_s_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_sp_sp.o:  ${SRC}/hgp_os_eri_f_d_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_g_d.o:  ${SRC}/hgp_os_eri_g_d_g_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_g_s.o:  ${SRC}/hgp_os_eri_g_p_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_p_s.o:  ${SRC}/hgp_os_eri_g_s_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_vrr_1.o:  ${SRC}/hgp_os_eri_g_g_g_g_vrr_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_f_f.o:  ${SRC}/hgp_os_eri_g_f_f_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_f_s.o:  ${SRC}/hgp_os_eri_f_p_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_f_p.o:  ${SRC}/hgp_os_eri_g_f_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_g_s.o:  ${SRC}/hgp_os_eri_f_p_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_p_s.o:  ${SRC}/hgp_os_eri_g_f_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_p_s.o:  ${SRC}/hgp_os_eri_d_d_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_p_p.o:  ${SRC}/hgp_os_eri_f_s_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_g_s.o:  ${SRC}/hgp_os_eri_f_f_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_f_hrr2_2.o:  ${SRC}/hgp_os_eri_g_g_g_f_hrr2_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_sp_sp.o:  ${SRC}/hgp_os_eri_f_f_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr1_2.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr1_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr1_3.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr1_3.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_p_s.o:  ${SRC}/hgp_os_eri_p_sp_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_s.o:  ${SRC}/hgp_os_eri_g_g_g_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_d_hrr2_2.o:  ${SRC}/hgp_os_eri_g_g_g_d_hrr2_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_sp_d_s.o:  ${SRC}/hgp_os_eri_p_sp_d_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_d_sp.o:  ${SRC}/hgp_os_eri_d_d_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_f_hrr2_2.o:  ${SRC}/hgp_os_eri_g_g_f_f_hrr2_2.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_d_d.o:  ${SRC}/hgp_os_eri_f_f_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_sp_s.o:  ${SRC}/hgp_os_eri_d_sp_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_d_sp.o:  ${SRC}/hgp_os_eri_f_f_d_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_g_f.o:  ${SRC}/hgp_os_eri_g_f_g_f.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_g_g_hrr1_1.o:  ${SRC}/hgp_os_eri_g_g_g_g_hrr1_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_d_s_s.o:  ${SRC}/hgp_os_eri_d_d_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_sp_s.o:  ${SRC}/hgp_os_eri_d_p_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_p_p.o:  ${SRC}/hgp_os_eri_f_sp_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_d_d.o:  ${SRC}/hgp_os_eri_f_d_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_f_s.o:  ${SRC}/hgp_os_eri_g_p_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_f_s.o:  ${SRC}/hgp_os_eri_g_f_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_sp_sp.o:  ${SRC}/hgp_os_eri_d_sp_sp_sp.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_g_d.o:  ${SRC}/hgp_os_eri_f_f_g_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_p_p_p.o:  ${SRC}/hgp_os_eri_d_p_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_d_p.o:  ${SRC}/hgp_os_eri_g_p_d_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_s_f_s.o:  ${SRC}/hgp_os_eri_g_s_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_s_s.o:  ${SRC}/hgp_os_eri_f_p_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_p_sp_s.o:  ${SRC}/hgp_os_eri_f_p_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_p_p_s_s.o:  ${SRC}/hgp_os_eri_p_p_s_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_sp_sp_s.o:  ${SRC}/hgp_os_eri_f_sp_sp_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_f_f_s.o:  ${SRC}/hgp_os_eri_f_f_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_p.o:  ${SRC}/hgp_os_eri_g_g_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_sp_sp_p_s.o:  ${SRC}/hgp_os_eri_sp_sp_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_d_p_s.o:  ${SRC}/hgp_os_eri_g_d_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_d_sp_f_s.o:  ${SRC}/hgp_os_eri_d_sp_f_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_d_d.o:  ${SRC}/hgp_os_eri_g_f_d_d.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_p_s.o:  ${SRC}/hgp_os_eri_g_g_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_d_f_p.o:  ${SRC}/hgp_os_eri_f_d_f_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_g_f_d_hrr2_1.o:  ${SRC}/hgp_os_eri_g_g_f_d_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_p_p_p.o:  ${SRC}/hgp_os_eri_g_p_p_p.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_g_f_f_f_hrr2_1.o:  ${SRC}/hgp_os_eri_g_f_f_f_hrr2_1.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+${BIN}/hgp_os_eri_f_s_p_s.o:  ${SRC}/hgp_os_eri_f_s_p_s.cpp
+		$(CC) $(CFLAGS) $(MACRO) $(INCLUDE) -c  $<   -o $@
+
+
+# these are normal objs whose size are large
+
+
+

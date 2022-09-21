@@ -1,0 +1,98 @@
+%
+% set up on Feb. 2014
+% 1 atom and element;
+% 2 molecule class;
+%   2.1  how to obtains its source data;
+%   2.2  section number in molecule class;
+%   2.3  indexing of atoms in molecule
+%
+\chapter{Geom Module}
+%
+%
+%
+This module handles the variety issues related to molecular geometry.
+For example, the molecular geometry reading in/out, parsing the symmetry 
+of a given molecular system; Cartesian and Z-Matrix transformation etc.
+
+\section{Components List in Geom Module}
+
+Geom module contains the following components:
+\begin{description}
+ \item [element] It defines the general property related to element 
+ in periodic table.
+ \item [Atom] This class defines a specific atom.
+ \item [Molecule] This class defines a particular molecule through user's input file.
+\end{description}
+
+\section{Atom, Element and Molecule}
+%
+%
+To define a geometrical structure in chemistry, the fundamental concept is 
+atom and element. Element refers to the general properties for a given element
+in periodic table, on the other hand; atom class defines a specific ``atom''
+which locates in a given location in three dimensional space.
+
+Molecule class is used to reflect the natural recognition of a ``MOLECULE''
+in chemistry. In general, it's an aggregation of atoms.  Molecule object
+is initialized based on user's providing data (e.g. input file).
+
+Currently there's only one way to form an molecule object. That is, 
+to read it through user's input data. It's intentionally designed to be in
+such simple way so that to avoid other way of forming, for example; 
+to form a molecule by adding atoms one by one. The additional way 
+to form molecule may bring flexibility, however; it will also bring complexity
+for forming properties based on molecule object (shell data, for instance).
+
+However there's a special case which is referring to ``free atom''
+molecule. In this molecule, it has only one atom. Such special molecule 
+is useful in some cases (e.g. density matrix construction etc.).
+
+\subsection{Section Number in Molecule Class}
+%
+%
+In this program, each job is corresponding to one user's input file. However,
+in the given input file there could be multiple geometrical structures defined.
+These structures could be loosely connected, or closely interdependent. Therefore,
+for each geometry an ``ID'' is provided, this ID is the section index for the 
+given molecule in the input file. We note that for the molecule object, section
+index begins from 1 and the following molecule section index is with an increment 
+of 1. For the cluster object, since it's unique to the whole job (in the input file),
+therefore it's section index is defined as 0.
+
+Section number is the ``ID'' to distinguished the molecule objects in a running job.
+Such ID could be derived into properties attached to the given molecule object, such
+as shell and shell pair etc. With this unique ID (``uniqueness'' is only meaningful
+for running job), it's able to discriminate different molecule objects.
+
+\subsection{Index of Atom in Molecule}
+%
+%
+In molecule, the atoms are aggregated in an order. Such order indicates that atom
+retains a property of ``index'' inside the molecule. In molecule class, the
+indexing is reflected by its position in atom vector.
+
+Such index of atom provides a fundamental order to arrange data in program. For 
+all of following properties attached to the molecule, e.g. the shell, shell pairs,
+density matrix, molecular orbital etc. their arrangement of data are all based 
+on the index of atom.
+
+
+
+\begin{comment}
+
+\section{Cluster}
+%
+%
+In this program, cluster is used to express the ``super molecule''.  ``Super
+molecule'' has two senses of meanings, first, it's the aggregation of
+molecules; second, it defines how to link these molecules together.
+
+Since cluster is a special case of molecule, therefore cluster class is a
+derived class of molecule. The additional data in the cluster class is used to
+express that ``How the cluster is formed by linking different molecular
+pieces''. 
+
+
+\end{comment}
+
+

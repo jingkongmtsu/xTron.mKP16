@@ -1,0 +1,52 @@
+this small function is used to generate the 
+constant matrix between C2P and P2C matrix.
+
+examine results:
+C2P for normalized cart(Lx,Ly,Lz) to normalized pure: well tested for L = 4
+C2P for normalized cart(Lx=L,Ly=0,Lz=0) to normalized pure: tested
+C2P for unormalized matrix: not tested
+P2C for normalized pure to normalized cart(Lx,Ly,Lz): well tested for L = 4
+P2C for normalized pure to normalized cart(Lx=L,Ly=0,Lz=0): tested 
+scale vectors is also examined
+
+If you want to change the basis set order,
+please modify the angmomlist.h
+the rest of code does not need to modify.
+
+All of float point data is with long double 
+precision. This should be good enough. 
+
+the arrangement of the spherical basis sets:
+more details see the test.cpp
+M = -L -> M = L
+
+cartesian basis set order is in libint
+
+/////////////////////////////////////////////////////
+concerns:
+we may worry about the factorial calculation inside
+this module. So we set up a folder names as "test_large_l",
+we typically test the factorial calculation for L up to 30 (which may be necessary).
+
+Inside the test_large_l, I do two testings. One is to calculate 
+the pre-factor of C inside the C2P matrix (see the function of 
+getElementTransFormationMatrixToPure). For this module, we will
+calculate very large number and the result is very small. We 
+do testing to see that wether the result could be reliable enough.
+
+the similar situation happens too in the formMatrixPureToCart.
+Therefore we just do one example testing to see that whether our 
+code in the test.cpp will introduce great error.
+
+The other test is to calculate very large number. This could be 
+happen in the getElementTransFormationMatrixToPure function
+the line of code like this:
+Double c1 = getFactorial(2*(L-i))*pow(MINUS_ONE,i)/getFactorial(L-absm-2*i)
+You see that if i == 0, and possibly absm == 0;
+then we will have (2L)!/L! which is very large for big L.
+We will have to test that whether this could be done. 
+This is the big number test.
+
+From the testing results, currently for L up to 30, it seems 
+that we are safe to still use the current coding for doing 
+factorial calculations.

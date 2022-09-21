@@ -1,0 +1,94 @@
+%
+%
+%
+\chapter{Result Module}
+
+The result module describes variety kind of calculation results for
+quantum chemistry calculation. Currently, the following 
+type of results are supported:
+\begin{itemize}
+  \item Matrix in AO dimension, which is derived from the normal matrix class;
+  \item MO result, which is derived from normal matrix class;
+  \item density matrix, which is derived from matrix AO class
+\end{itemize}
+All of these classes are constructed based on their physical definition.
+If two results are physically different, then it implies that the data
+may behave differently. Therefore, it's better to set up different classes
+to describe them. It's worthy to note that the inheritance relationship
+between the classes are also based on their physical definition.
+
+\section{Spin Consideration}
+%
+%
+
+One of important feature for calculation results is the spin states.  Usually
+the spin states is know before the practical calculation applies (for example,
+In SCF calculation we will know it's restricted/unrestricted calculation in
+advance). Therefore, the problem here is that how can we express the spin 
+information for the results?
+
+Here one important consideration is that it may not be preferable to ``expose'' 
+the spin information outside the result, which implies that the class 
+user need to handle the spin states of the results by themselves. However,
+some times the class user may need to deal with the spin state directly. Therefore,
+we need to provide an way to satisfy both of the two contrary demands.
+
+Generally, in most of the cases the result is processed for both of the spin 
+states. In other cases when class user requires to handle the given spin
+state result, it's necessary that such assigned result could be successfully
+returned to the class user. Based on such observations, we set up some general
+principle to handle the spin information for the result:
+\begin{itemize}
+  \item Two classes are set up for dealing with spin information. One class is
+  used to describe the result data for given spin state (which is lower level
+  class), and the other is used to hold the aggregation of the spin data (which
+  is upper level class). Since the spin information is ``symmetrical'' between
+  alpha and beta, therefore the alpha spin state and beta spin state should share
+  the same functions (that means, for the lower level class it's not needed to
+  distinguish whether it's alpha or beta in its member functions). Therefore,
+  such arrangement should be satisfied;
+  \item When the class user need to handle both of the spin states data, the 
+  upper level class should be passed to him and this should be good enough. 
+  \item When the class user need to handle a given spin state data, a reference
+  of lower level class is returned from the upper level class to the class user. 
+\end{itemize}
+
+Such principle also leads to another question, that how can we decide that 
+the given function should be implemented into the lower level class, or 
+into the upper level class? I think the answer just lies in the principle itself.
+If the function is only designed for handle data without considering its 
+spin character, then it's should be in the upper level class; else it should 
+be in the lower level class.
+
+\section{MtrxAO and MtrxsAO Class}
+%
+%
+
+\subsection{Shell Code and Symmetrical Matrix}
+%
+%
+
+\subsection{Relationship with MO Class}
+%
+%
+
+\section{MO and MOs Class}
+%
+%
+
+MO class is used to store the molecular orbital (MO) result. Basically, MO
+class just contains the MO data for a given spin state. Therefore, it's a 
+square/rectangular matrix hence it's a derived class from Mtrx class. The 
+row of MO matrix is always the number of normal basis sets\ref{}, and the 
+column of MO matrix is the number of molecular orbitals.
+
+Comparing with the MtrxAO class, who's shape is primarily determined by it's 
+row shell and column shell; the MO matrix may encounter a situation that 
+the number of molecular orbitals would be less than the number of basis
+set number, which is because the linear dependency of the basis sets.
+Such possibility is carefully considered in the forming of MO data. Therefore,
+originally the MO would be initialized with square matrix shape, and it's column
+would be automatically revised if linear dependency exists in basis set data.
+
+
+

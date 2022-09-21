@@ -1,0 +1,150 @@
+C Here it's the functional derivatives information for Fortran codes
+C The information here is about the position of variables.
+C How can we use it? It's quite simple.
+C For example, as for ID_RA_GAA(second functional derivative
+C with respect to RA and GAA), we can get the real functional
+C derivatives postion of POS_RA_GAA as:
+C POS_RA_GAA = D2VARS[ID_RA_GAA]
+C D2VARS is the array holds the functional deriavtives infor
+C see the init_func_deriv_2 function for more information
+
+
+      INTEGER ID_RA_RA
+      INTEGER ID_RA_RB
+      INTEGER ID_RB_RB
+      INTEGER ID_RA_GAA
+      INTEGER ID_RB_GAA
+      INTEGER ID_RA_GAB
+      INTEGER ID_RB_GAB
+      INTEGER ID_RA_GBB
+      INTEGER ID_RB_GBB
+      INTEGER ID_GAA_GAA
+      INTEGER ID_GAA_GAB
+      INTEGER ID_GAB_GAB
+      INTEGER ID_GAA_GBB
+      INTEGER ID_GAB_GBB
+      INTEGER ID_GBB_GBB
+      INTEGER ID_RA_TA
+      INTEGER ID_RB_TA
+      INTEGER ID_RA_TB
+      INTEGER ID_RB_TB
+      INTEGER ID_GAA_TA
+      INTEGER ID_GAB_TA
+      INTEGER ID_GBB_TA
+      INTEGER ID_GAA_TB
+      INTEGER ID_GAB_TB
+      INTEGER ID_GBB_TB
+      INTEGER ID_TA_TA
+      INTEGER ID_TA_TB
+      INTEGER ID_TB_TB
+      INTEGER ID_RA_LA
+      INTEGER ID_RB_LA
+      INTEGER ID_RA_LB
+      INTEGER ID_RB_LB
+      INTEGER ID_GAA_LA
+      INTEGER ID_GAB_LA
+      INTEGER ID_GBB_LA
+      INTEGER ID_GAA_LB
+      INTEGER ID_GAB_LB
+      INTEGER ID_GBB_LB
+      INTEGER ID_TA_LA
+      INTEGER ID_TB_LA
+      INTEGER ID_TA_LB
+      INTEGER ID_TB_LB
+      INTEGER ID_LA_LA
+      INTEGER ID_LA_LB
+      INTEGER ID_LB_LB
+      INTEGER ID_RA_EXA
+      INTEGER ID_RB_EXA
+      INTEGER ID_RA_EXB
+      INTEGER ID_RB_EXB
+      INTEGER ID_GAA_EXA
+      INTEGER ID_GAB_EXA
+      INTEGER ID_GBB_EXA
+      INTEGER ID_GAA_EXB
+      INTEGER ID_GAB_EXB
+      INTEGER ID_GBB_EXB
+      INTEGER ID_TA_EXA
+      INTEGER ID_TB_EXA
+      INTEGER ID_TA_EXB
+      INTEGER ID_TB_EXB
+      INTEGER ID_LA_EXA
+      INTEGER ID_LB_EXA
+      INTEGER ID_LA_EXB
+      INTEGER ID_LB_EXB
+      INTEGER ID_EXA_EXA
+      INTEGER ID_EXA_EXB
+      INTEGER ID_EXB_EXB
+      PARAMETER(ID_RA_RA = 1)
+      PARAMETER(ID_RA_RB = 2)
+      PARAMETER(ID_RB_RB = 3)
+      PARAMETER(ID_RA_GAA = 4)
+      PARAMETER(ID_RB_GAA = 5)
+      PARAMETER(ID_RA_GAB = 6)
+      PARAMETER(ID_RB_GAB = 7)
+      PARAMETER(ID_RA_GBB = 8)
+      PARAMETER(ID_RB_GBB = 9)
+      PARAMETER(ID_GAA_GAA = 10)
+      PARAMETER(ID_GAA_GAB = 11)
+      PARAMETER(ID_GAB_GAB = 12)
+      PARAMETER(ID_GAA_GBB = 13)
+      PARAMETER(ID_GAB_GBB = 14)
+      PARAMETER(ID_GBB_GBB = 15)
+      PARAMETER(ID_RA_TA = 16)
+      PARAMETER(ID_RB_TA = 17)
+      PARAMETER(ID_RA_TB = 18)
+      PARAMETER(ID_RB_TB = 19)
+      PARAMETER(ID_GAA_TA = 20)
+      PARAMETER(ID_GAB_TA = 21)
+      PARAMETER(ID_GBB_TA = 22)
+      PARAMETER(ID_GAA_TB = 23)
+      PARAMETER(ID_GAB_TB = 24)
+      PARAMETER(ID_GBB_TB = 25)
+      PARAMETER(ID_TA_TA = 26)
+      PARAMETER(ID_TA_TB = 27)
+      PARAMETER(ID_TB_TB = 28)
+      PARAMETER(ID_RA_LA = 29)
+      PARAMETER(ID_RB_LA = 30)
+      PARAMETER(ID_RA_LB = 31)
+      PARAMETER(ID_RB_LB = 32)
+      PARAMETER(ID_GAA_LA = 33)
+      PARAMETER(ID_GAB_LA = 34)
+      PARAMETER(ID_GBB_LA = 35)
+      PARAMETER(ID_GAA_LB = 36)
+      PARAMETER(ID_GAB_LB = 37)
+      PARAMETER(ID_GBB_LB = 38)
+      PARAMETER(ID_TA_LA = 39)
+      PARAMETER(ID_TB_LA = 40)
+      PARAMETER(ID_TA_LB = 41)
+      PARAMETER(ID_TB_LB = 42)
+      PARAMETER(ID_LA_LA = 43)
+      PARAMETER(ID_LA_LB = 44)
+      PARAMETER(ID_LB_LB = 45)
+      PARAMETER(ID_RA_EXA = 46)
+      PARAMETER(ID_RB_EXA = 47)
+      PARAMETER(ID_RA_EXB = 48)
+      PARAMETER(ID_RB_EXB = 49)
+      PARAMETER(ID_GAA_EXA = 50)
+      PARAMETER(ID_GAB_EXA = 51)
+      PARAMETER(ID_GBB_EXA = 52)
+      PARAMETER(ID_GAA_EXB = 53)
+      PARAMETER(ID_GAB_EXB = 54)
+      PARAMETER(ID_GBB_EXB = 55)
+      PARAMETER(ID_TA_EXA = 56)
+      PARAMETER(ID_TB_EXA = 57)
+      PARAMETER(ID_TA_EXB = 58)
+      PARAMETER(ID_TB_EXB = 59)
+      PARAMETER(ID_LA_EXA = 60)
+      PARAMETER(ID_LB_EXA = 61)
+      PARAMETER(ID_LA_EXB = 62)
+      PARAMETER(ID_LB_EXB = 63)
+      PARAMETER(ID_EXA_EXA = 64)
+      PARAMETER(ID_EXA_EXB = 65)
+      PARAMETER(ID_EXB_EXB = 66)
+
+
+C Here finally it's the array length
+      INTEGER N_FUNC_DERIV_2
+      PARAMETER(N_FUNC_DERIV_2 = 66)
+
+

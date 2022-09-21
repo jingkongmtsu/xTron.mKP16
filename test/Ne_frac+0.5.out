@@ -1,0 +1,2385 @@
+----------------------------------------------
+          INITIAL GUESS CALCULATION           
+----------------------------------------------
+
+*******************************************
+*     The Original Input File Content     *
+*******************************************
+# First job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name  HF
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+%end
+
+
+# 2nd job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name kp14_mndpar1_br94c
+%end
+
+%scf
+max_scf_cycles  150
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+%scfconv
+max_iterations_gdm_conv  7   #  SCF iterations we test the GDM convergence
+threshold_gdm_conv  1.0E-7   # this is the threshold of energy difference
+scf_algorithm  GDM
+%end
+
+
+# 3rd job
+%molecule
+0 1
+Ne   0.  0.   0.0
+%end
+
+%basis
+#sto-3g
+g3large
+%end
+
+%xcfunc
+name kp14_mndpar1_br94c
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+%xcints
+grid_points  128  302
+threshold   1.0e-12
+DO_XC_ENERGY_PROFILE true
+%end
+
+%frac_spin
+alpha_frac_infor_mo_begin_index 4
+alpha_frac_infor_nmo 1
+alpha_frac_infor_scale_value 1.0
+beta_frac_infor_mo_begin_index 4
+beta_frac_infor_nmo 1
+beta_frac_infor_scale_value 0.5
+%end
+number of basis sets 42
+here nkey1
+DIIS error 2.9396682926    
+HF iter is: 0, @@@@@ total energy is: -114.3951708283  
+The most lowest energy so far is: -114.3951708283 , scf index is 0
+NucRepulsion 0.0000000000    
+core -199.1530876497 
+JK   energy is: 84.7579168214   
+XC   0.0000000000    
+MTAG HF   0   0 -114.3951708283  2.9396682926    
+DIIS error 1.3653903113    
+HF iter is: 1, @@@@@ total energy is: -115.1884090665  
+The most lowest energy so far is: -115.1884090665 , scf index is 1
+NucRepulsion 0.0000000000    
+core -139.1474207534 
+JK   energy is: 23.9590116869   
+XC   0.0000000000    
+MTAG HF   1   1 -115.1884090665  1.3653903113    
+DIIS error 1.4677970767    
+HF iter is: 2, @@@@@ total energy is: -124.7360553956  
+The most lowest energy so far is: -124.7360553956 , scf index is 2
+NucRepulsion 0.0000000000    
+core -195.1857001117 
+JK   energy is: 70.4496447161   
+XC   0.0000000000    
+MTAG HF   2   2 -124.7360553956  1.4677970767    
+DIIS error 0.4786988072    
+HF iter is: 3, @@@@@ total energy is: -127.7018555353  
+The most lowest energy so far is: -127.7018555353 , scf index is 3
+NucRepulsion 0.0000000000    
+core -189.4650782698 
+JK   energy is: 61.7632227345   
+XC   0.0000000000    
+MTAG HF   3   3 -127.7018555353  0.4786988072    
+DIIS error 0.0823662112    
+HF iter is: 4, @@@@@ total energy is: -128.4969359504  
+The most lowest energy so far is: -128.4969359504 , scf index is 4
+NucRepulsion 0.0000000000    
+core -183.9571988044 
+JK   energy is: 55.4602628540   
+XC   0.0000000000    
+MTAG HF   4   4 -128.4969359504  0.0823662112    
+DIIS error 0.0059173466    
+HF iter is: 5, @@@@@ total energy is: -128.5265245951  
+The most lowest energy so far is: -128.5265245951 , scf index is 5
+NucRepulsion 0.0000000000    
+core -182.6327400728 
+JK   energy is: 54.1062154777   
+XC   0.0000000000    
+MTAG HF   5   5 -128.5265245951  0.0059173466    
+DIIS error 0.0003133196    
+HF iter is: 6, @@@@@ total energy is: -128.5267231555  
+The most lowest energy so far is: -128.5267231555 , scf index is 6
+NucRepulsion 0.0000000000    
+core -182.5205070522 
+JK   energy is: 53.9937838967   
+XC   0.0000000000    
+MTAG HF   6   6 -128.5267231555  0.0003133196    
+DIIS error 0.0000350883    
+HF iter is: 7, @@@@@ total energy is: -128.5267245863  
+The most lowest energy so far is: -128.5267245863 , scf index is 7
+NucRepulsion 0.0000000000    
+core -182.5121208439 
+JK   energy is: 53.9853962576   
+XC   0.0000000000    
+MTAG HF   7   7 -128.5267245863  0.0000350883    
+DIIS error 0.0000080698    
+HF iter is: 8, @@@@@ scf converged energy is: -128.5267245880  
+The most lowest energy so far is: -128.5267245880 , scf index is 8
+NucRepulsion 0.0000000000    
+core -182.5123342946 
+JK   energy is: 53.9856097066   
+XC   0.0000000000    
+MTAG HF   8   8 -128.5267245880  0.0000080698    
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: 0.00000000       0.00000000       -0.00000000    
+total dipole moment: 0.00000000     
+ 1.305809s wall, 1.820000s user + 8.070000s system = 9.890000s CPU (757.4%)
+----------------------------------------------
+             SECOND SCF CALCULATION           
+----------------------------------------------
+here nkey1
+DIIS error 0.1561846910    
+KP14_MNDPAR1_BR94C iter is: 0, @@@@@ total energy is: -128.9919389337  
+The most lowest energy so far is: -128.9919389337 , scf index is 0
+NucRepulsion 0.0000000000    
+core -182.5125126971 
+JK   energy is: 53.9857881090   
+XC   -0.4652143456   
+MTAG KP14_MNDPAR1_BR94C   0   0 -128.9919389337  0.1561846910    
+ effective thresh:   1.0000000000000000E-010
+GDM is in use
+DIIS error 0.0229170421    
+KP14_MNDPAR1_BR94C iter is: 1, @@@@@ total energy is: -129.0008680803  
+The most lowest energy so far is: -129.0008680803 , scf index is 1
+NucRepulsion 0.0000000000    
+core -181.7120683902 
+JK   energy is: 53.2088524212   
+XC   -0.4976521114   
+MTAG KP14_MNDPAR1_BR94C   1   1 -129.0008680803  0.0229170421    
+GDM is in use
+DIIS error 0.0272832090    
+KP14_MNDPAR1_BR94C iter is: 2, @@@@@ total energy is: -129.0027638924  
+The most lowest energy so far is: -129.0027638924 , scf index is 2
+NucRepulsion 0.0000000000    
+core -182.4141936565 
+JK   energy is: 53.9067136517   
+XC   -0.4952838875   
+MTAG KP14_MNDPAR1_BR94C   2   2 -129.0027638924  0.0272832090    
+GDM is in use
+DIIS error 0.0033226978    
+KP14_MNDPAR1_BR94C iter is: 3, @@@@@ total energy is: -129.0041607389  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985211 
+JK   energy is: 53.6464095604   
+XC   -0.4921717782   
+MTAG KP14_MNDPAR1_BR94C   3   3 -129.0041607389  0.0033226978    
+GDM is in use
+DIIS error 0.0004195361    
+KP14_MNDPAR1_BR94C iter is: 4, @@@@@ total energy is: -129.0040757766  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1483760330 
+JK   energy is: 53.6373423393   
+XC   -0.4930420829   
+MTAG KP14_MNDPAR1_BR94C   4   3 -129.0040757766  0.0004195361    
+GDM is in use
+DIIS error 0.0029484772    
+KP14_MNDPAR1_BR94C iter is: 5, @@@@@ total energy is: -129.0041536026  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1574018364 
+JK   energy is: 53.6455069105   
+XC   -0.4922586767   
+MTAG KP14_MNDPAR1_BR94C   5   3 -129.0041536026  0.0029484772    
+GDM is in use
+DIIS error 0.0032852757    
+KP14_MNDPAR1_BR94C iter is: 6, @@@@@ total energy is: -129.0041600388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1582989083 
+JK   energy is: 53.6463193362   
+XC   -0.4921804667   
+MTAG KP14_MNDPAR1_BR94C   6   3 -129.0041600388  0.0032852757    
+GDM is in use
+DIIS error 0.0033189556    
+KP14_MNDPAR1_BR94C iter is: 7, @@@@@ total energy is: -129.0041606690  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583885604 
+JK   energy is: 53.6464005384   
+XC   -0.4921726470   
+MTAG KP14_MNDPAR1_BR94C   7   3 -129.0041606690  0.0033189556    
+GDM is in use
+DIIS error 0.0033223235    
+KP14_MNDPAR1_BR94C iter is: 8, @@@@@ total energy is: -129.0041607319  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583975250 
+JK   energy is: 53.6464086582   
+XC   -0.4921718651   
+MTAG KP14_MNDPAR1_BR94C   8   3 -129.0041607319  0.0033223235    
+GDM is in use
+DIIS error 0.0033226603    
+KP14_MNDPAR1_BR94C iter is: 9, @@@@@ total energy is: -129.0041607382  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583984215 
+JK   energy is: 53.6464094702   
+XC   -0.4921717869   
+MTAG KP14_MNDPAR1_BR94C   9   3 -129.0041607382  0.0033226603    
+GDM is in use
+DIIS error 0.0033226940    
+KP14_MNDPAR1_BR94C iter is: 10, @@@@@ total energy is: -129.0041607388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985111 
+JK   energy is: 53.6464095514   
+XC   -0.4921717791   
+MTAG KP14_MNDPAR1_BR94C  10   3 -129.0041607388  0.0033226940    
+GDM is in use
+DIIS error 0.0033226637    
+KP14_MNDPAR1_BR94C iter is: 11, @@@@@ total energy is: -129.0041607382  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583984305 
+JK   energy is: 53.6464094783   
+XC   -0.4921717861   
+MTAG KP14_MNDPAR1_BR94C  11   3 -129.0041607382  0.0033226637    
+GDM is in use
+DIIS error 0.0033226910    
+KP14_MNDPAR1_BR94C iter is: 12, @@@@@ total energy is: -129.0041607387  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985031 
+JK   energy is: 53.6464095441   
+XC   -0.4921717798   
+MTAG KP14_MNDPAR1_BR94C  12   3 -129.0041607387  0.0033226910    
+GDM is in use
+DIIS error 0.0033226937    
+KP14_MNDPAR1_BR94C iter is: 13, @@@@@ total energy is: -129.0041607388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985103 
+JK   energy is: 53.6464095507   
+XC   -0.4921717791   
+MTAG KP14_MNDPAR1_BR94C  13   3 -129.0041607388  0.0033226937    
+GDM is in use
+DIIS error 0.0033226913    
+KP14_MNDPAR1_BR94C iter is: 14, @@@@@ total energy is: -129.0041607387  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985038 
+JK   energy is: 53.6464095447   
+XC   -0.4921717797   
+MTAG KP14_MNDPAR1_BR94C  14   3 -129.0041607387  0.0033226913    
+GDM is in use
+DIIS error 0.0033226935    
+KP14_MNDPAR1_BR94C iter is: 15, @@@@@ total energy is: -129.0041607388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985097 
+JK   energy is: 53.6464095501   
+XC   -0.4921717792   
+MTAG KP14_MNDPAR1_BR94C  15   3 -129.0041607388  0.0033226935    
+GDM is in use
+DIIS error 0.0033226915    
+KP14_MNDPAR1_BR94C iter is: 16, @@@@@ total energy is: -129.0041607388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985044 
+JK   energy is: 53.6464095453   
+XC   -0.4921717796   
+MTAG KP14_MNDPAR1_BR94C  16   3 -129.0041607388  0.0033226915    
+GDM is in use
+DIIS error 0.0033226933    
+KP14_MNDPAR1_BR94C iter is: 17, @@@@@ total energy is: -129.0041607388  
+The most lowest energy so far is: -129.0041607389 , scf index is 3
+NucRepulsion 0.0000000000    
+core -182.1583985092 
+JK   energy is: 53.6464095496   
+XC   -0.4921717792   
+MTAG KP14_MNDPAR1_BR94C  17   3 -129.0041607388  0.0033226933    
+GDM is in use
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      0.00000000       -0.00000000    
+total dipole moment: 0.00000000     
+ 72.820269s wall, 142.370000s user + 718.560000s system = 860.930000s CPU (1182.3%)
+----------------------------------------------
+             THIRD SCF CALCULATION            
+----------------------------------------------
+Molecule information for section 3
+charge         : 0
+multiplicity   : 1
+nelectron      : 10
+nalpha         : 5
+nbeta          : 5
+the molecule is forced to the unrestricted 
+the input geometry data is in unit of angstrom 
+Ne   0       10   0.00000     0.00000     0.00000   
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+here nkey1
+DIIS error 0.0822747992    
+KP14_MNDPAR1_BR94C iter is: 0, @@@@@ total energy is: -128.5548861453  
+The most lowest energy so far is: -128.5548861453 , scf index is 0
+NucRepulsion 0.0000000000    
+core -177.1392545089 
+JK   energy is: 49.0701505178   
+XC   -0.4857821542   
+MTAG KP14_MNDPAR1_BR94C   0   0 -128.5548861453  0.0822747992    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.1391366269    
+KP14_MNDPAR1_BR94C iter is: 1, @@@@@ total energy is: -128.5010895702  
+The most lowest energy so far is: -128.5548861453 , scf index is 0
+NucRepulsion 0.0000000000    
+core -180.6643103470 
+JK   energy is: 52.6080727130   
+XC   -0.4448519362   
+MTAG KP14_MNDPAR1_BR94C   1   0 -128.5010895702  0.1391366269    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.4060358799    
+KP14_MNDPAR1_BR94C iter is: 2, @@@@@ total energy is: -127.4860476325  
+The most lowest energy so far is: -128.5548861453 , scf index is 0
+NucRepulsion 0.0000000000    
+core -169.2726154213 
+JK   energy is: 42.3112096537   
+XC   -0.5246418649   
+MTAG KP14_MNDPAR1_BR94C   2   0 -127.4860476325  0.4060358799    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0444373021    
+KP14_MNDPAR1_BR94C iter is: 3, @@@@@ total energy is: -128.5736915864  
+The most lowest energy so far is: -128.5736915864 , scf index is 3
+NucRepulsion 0.0000000000    
+core -177.9824191116 
+JK   energy is: 49.8947738334   
+XC   -0.4860463083   
+MTAG KP14_MNDPAR1_BR94C   3   3 -128.5736915864  0.0444373021    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0257421224    
+KP14_MNDPAR1_BR94C iter is: 4, @@@@@ total energy is: -128.5830881236  
+The most lowest energy so far is: -128.5830881236 , scf index is 4
+NucRepulsion 0.0000000000    
+core -178.2492742011 
+JK   energy is: 50.1507368853   
+XC   -0.4845508078   
+MTAG KP14_MNDPAR1_BR94C   4   4 -128.5830881236  0.0257421224    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0313924513    
+KP14_MNDPAR1_BR94C iter is: 5, @@@@@ total energy is: -128.5850477800  
+The most lowest energy so far is: -128.5850477800 , scf index is 5
+NucRepulsion 0.0000000000    
+core -178.3969872552 
+JK   energy is: 50.2935731951   
+XC   -0.4816337198   
+MTAG KP14_MNDPAR1_BR94C   5   5 -128.5850477800  0.0313924513    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0280625609    
+KP14_MNDPAR1_BR94C iter is: 6, @@@@@ total energy is: -128.5859701293  
+The most lowest energy so far is: -128.5859701293 , scf index is 6
+NucRepulsion 0.0000000000    
+core -178.4673719907 
+JK   energy is: 50.3616373782   
+XC   -0.4802355168   
+MTAG KP14_MNDPAR1_BR94C   6   6 -128.5859701293  0.0280625609    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0082549963    
+KP14_MNDPAR1_BR94C iter is: 7, @@@@@ total energy is: -128.5861497331  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4923781760 
+JK   energy is: 50.3860580896   
+XC   -0.4798296467   
+MTAG KP14_MNDPAR1_BR94C   7   7 -128.5861497331  0.0082549963    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0061596404    
+KP14_MNDPAR1_BR94C iter is: 8, @@@@@ total energy is: -128.5858879358  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4582350762 
+JK   energy is: 50.3530286513   
+XC   -0.4806815109   
+MTAG KP14_MNDPAR1_BR94C   8   7 -128.5858879358  0.0061596404    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0043813339    
+KP14_MNDPAR1_BR94C iter is: 9, @@@@@ total energy is: -128.5859313798  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4627434660 
+JK   energy is: 50.3573539790   
+XC   -0.4805418928   
+MTAG KP14_MNDPAR1_BR94C   9   7 -128.5859313798  0.0043813339    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0019323100    
+KP14_MNDPAR1_BR94C iter is: 10, @@@@@ total energy is: -128.5860171765  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4710764282 
+JK   energy is: 50.3653626958   
+XC   -0.4803034441   
+MTAG KP14_MNDPAR1_BR94C  10   7 -128.5860171765  0.0019323100    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0008996411    
+KP14_MNDPAR1_BR94C iter is: 11, @@@@@ total energy is: -128.5859849862  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4668403299 
+JK   energy is: 50.3612479037   
+XC   -0.4803925599   
+MTAG KP14_MNDPAR1_BR94C  11   7 -128.5859849862  0.0008996411    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0006015306    
+KP14_MNDPAR1_BR94C iter is: 12, @@@@@ total energy is: -128.5859767048  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4650068528 
+JK   energy is: 50.3594696072   
+XC   -0.4804394592   
+MTAG KP14_MNDPAR1_BR94C  12   7 -128.5859767048  0.0006015306    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0002588462    
+KP14_MNDPAR1_BR94C iter is: 13, @@@@@ total energy is: -128.5859752643  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4639039773 
+JK   energy is: 50.3583699316   
+XC   -0.4804412186   
+MTAG KP14_MNDPAR1_BR94C  13   7 -128.5859752643  0.0002588462    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0013194146    
+KP14_MNDPAR1_BR94C iter is: 14, @@@@@ total energy is: -128.5859777847  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.4649832027 
+JK   energy is: 50.3594200977   
+XC   -0.4804146797   
+MTAG KP14_MNDPAR1_BR94C  14   7 -128.5859777847  0.0013194146    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 15, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  15   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 16, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  16   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 17, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  17   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+the generated space vector is same with 3 in history data
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : the current SCF vector space for DIIS/EDIIS etc. is same with an old one in archive
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 18, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  18   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+the generated space vector is same with 4 in history data
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : the current SCF vector space for DIIS/EDIIS etc. is same with an old one in archive
+
+limit value is 5
+the generated space vector is same with 4 in history data
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : the current SCF vector space for DIIS/EDIIS etc. is same with an old one in archive
+
+the generated space vector is same with 0 in history data
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : the current SCF vector space for DIIS/EDIIS etc. is same with an old one in archive
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 19, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  19   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 20, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  20   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 21, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  21   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 22, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  22   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 23, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  23   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 24, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  24   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 25, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  25   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 26, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  26   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 27, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  27   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 28, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  28   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 29, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  29   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 30, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  30   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 31, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  31   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 32, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  32   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 33, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  33   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 34, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  34   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 35, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  35   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 36, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  36   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 37, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  37   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 38, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  38   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 39, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  39   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 40, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  40   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 41, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  41   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 42, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  42   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 43, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  43   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 44, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  44   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 45, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  45   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 46, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  46   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 47, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  47   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+current SCF problem is 103
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : SCFConv
+function          : deriveIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF convergence is not running in good status, but we ran out of solutions
+
+*******************************
+this is just a warning sign: 
+*******************************
+class/namespace   : DIISController
+function          : checkSCFIndexSpace
+exception status  : warning message arises during scf convergence progress
+detailed infor    : SCF seems in the oscillation status while SCF is still far away from convergence
+
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 48, @@@@@ total energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  48   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+DIIS error 0.0258740703    
+KP14_MNDPAR1_BR94C iter is: 49, @@@@@ scf converged energy is: -128.5853677518  
+The most lowest energy so far is: -128.5861497331 , scf index is 7
+NucRepulsion 0.0000000000    
+core -178.3929523148 
+JK   energy is: 50.2895472334   
+XC   -0.4819626704   
+MTAG KP14_MNDPAR1_BR94C  49   7 -128.5853677518  0.0258740703    
+for alpha spin mo
+mo begin index: 4, number of mos for scaled: 1
+for beta  spin mo
+mo begin index: 4, number of mos for scaled: 1
+number of electrons are reset, new alpha electron occupation number 5, and new beta electron occupation number 5
+please note that the occupation number includes the fractional spin so that occulation number does not equal to the original number of electrons
+========================================
+Dipole Moment(Debye) in post SCF process
+========================================
+dipole moment: -0.00000000      0.00000000       -0.00000000    
+total dipole moment: 0.00000000     
+ 314.796990s wall, 555.550000s user + 3159.800000s system = 3715.350000s CPU (1180.2%)

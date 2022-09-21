@@ -1,0 +1,35 @@
+# First job
+%molecule
+0 3
+he   0.  0.   0.0
+%end
+
+%basis
+He 0
+S 4 1.00
+     35.52322122       -0.0053088      
+      6.513143725      -0.0297144      
+      1.822142904      -0.1041907      
+      0.625955266      -0.2756566      
+S 2 1.00
+      0.243076747      -0.4030997      
+      0.100112428      -0.3217401 
+%end
+
+%xcfunc
+name kp14 
+%end
+
+%scf
+max_scf_cycles  50
+%end
+
+
+%xcints
+grid_points  128  302
+threshold   1.0e-14
+do_xc_energy_profile true
+do_odd_electron true
+%end
+
+

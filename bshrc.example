@@ -1,0 +1,9 @@
+export NETLIB_ROOT=/usr/lib/x86_64-linux-gnu/  #netlib location
+export TBBROOT=/usr  #TBB library location
+export EMUL_HOME=$HOME/xTron.mKP16
+export EMUL_SCRATCH_DIR=$HOME/scratch_xtron
+export GSLINCLUDE=/usr/include/gsl # GSL include folder.
+export EMUL_SETTING_FILE=$EMUL_HOME/setting  # this stores the setting files for running program
+export EMUL_BASIS_FILE_DIR=$EMUL_HOME/basis_data # this dir stores the basis set data
+
+alias xtron='$EMUL_HOME/build/xtron.exe'

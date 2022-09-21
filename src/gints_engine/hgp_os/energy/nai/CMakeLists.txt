@@ -1,0 +1,35 @@
+#
+# build the analytical integral engine for energy of nai
+#
+set(SRC_GINTS_ENGINE_NAI_D0
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/hgp_os_nai.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_d_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_d_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_d_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_d_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_f_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_f_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_f_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_f_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_f_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_g_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_h.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_h_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_p_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_p_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_p_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_s_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_sp_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/nai/hgp_os_nai_sp_sp.cpp
+   )
+add_library(gints_engine_nai_d0 ${SRC_GINTS_ENGINE_NAI_D0})

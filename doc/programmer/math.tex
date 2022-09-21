@@ -1,0 +1,350 @@
+%
+% set up in 2014
+% 1  BLAS and LAPACK;
+% 2  special functions;
+% 3  matrix class
+%
+\chapter{Math Library Module}
+%
+%
+%
+The math library module consist of four major components:
+\begin{itemize}
+ \item BLAS(Basic Linear Algebra Subprograms);
+ \item LAPACK(Linear Algebra PACKage);
+ \item matrix and its derived classes;
+ \item special functions
+\end{itemize}
+
+\section{BLAS and LAPACK}
+%
+%
+BLAS\footnote{see \url{http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms}} 
+and LAPACK\footnote{see \url{http://en.wikipedia.org/wiki/LAPACK}} are two widely 
+applied mathematical libraries. They also form an important foundation for building the 
+quantum chemistry software. The general idea for implementing the BLAS and LAPACK
+functions in this program is to construct some general and flexible wrapper for 
+calling the real working function from the vendors.
+
+\subsection{BLAS and LAPACK Functions}
+%
+%
+%
+This program focus on the following functions provided by the BLAS and 
+LAPACK:
+\begin{description}
+ \item [BLAS1] vector/vector and vector scaler operations;
+ \item [BLAS2] matrix and vector multiplication;
+ \item [BLAS3] matrix and matrix multiplication;
+ \item [matrix factorization] LU decomposition for general matrix;
+ and Cholesky decomposition for positively defined symmetrical matrix;
+ \item [matrix inverse] performed on the base of LU decomposition and Cholesky 
+ decomposition;
+ \item [singular value decomposition for general matrix];
+ \item [symmetric matrix eigenvalue and eigenvector problem];
+ \item [solving linear equation]
+\end{description}
+
+\subsection{The Design of Wrapper Functions and Parallel Consideration}
+%
+%
+%
+The key in designing the wrapper functions for BLAS and LAPACK vendors
+is flexibility. In general, the wrapper function is expected to adapt
+to variety of vendor functions and wrapper function is able to fit
+variety requirement for BLAS and LAPACK functions.
+
+More specifically, the design of wrapper functions for BLAS and LAPACK
+should considering the following factors:
+\begin{description}
+ \item [variety of vendors] The wrapper function should be able to fit
+ different BLAS and LAPACK vendors;
+ \item [parallel consideration] wrapper function should be able to 
+ dynamically switch on/off multi-threading mode (see the following content
+ for more discussion)
+\end{description}
+
+For adapting to variety of vendors, we use ``macro'' to control which 
+BLAS/LAPCK vendor the program is trying to link against. This is because
+in each compiling/linking time, only one BLAS/LAPACK vendor is accepted 
+to be included in the program.
+
+Parallelization is another important factor to consider. In this program
+there are many places that needs BLAS and LAPACK functions. Some places
+only deal with small size of matrices, for example; size varies from 20 
+to 100. More importantly; the calculation could be carried out inside
+threads, therefore such BLAS/LAPACK function are required to be performed
+in sequential way. In the other places, the code is manipulating great 
+size matrices (matrix dimension could be 10000, 20000 or even higher)
+then it's beneficial to switch on the multi-threads mode and the computation
+will be benefited from the use of multi-threading libraries. Therefore,
+it's important that the program can get support from multi-threading BLAS/LAPACK 
+libraries who are able to dynamically switch on/off multi-threads mode.
+
+\subsection{Practical Implementation}
+%
+%
+%
+The general idea for implementing BLAS and LAPCK is simple: all of ``dirty''
+work are done by the vendors, we just use them.
+
+For BLAS1 operations, we implemented it by ourself by following the general
+loop-unrolling skills \footnote{see \url{http://en.wikipedia.org/wiki/Loop_unwinding}
+for more information} in the standard BLAS1 code. Such reduplication seems
+conflicting our proposal of ``DRY(Do not repeat yourself)'' (see \ref{principle}
+for more information), however; such choice is made after careful consideration.
+
+In our program there are many places which require mixing the BLAS1 function
+so to finish some complicated operation. For example, the following operation:
+\begin{equation}
+ w[i] += a*x[i]y[i]z[i] + w[i]
+\end{equation}
+need to invoke BLAS1 library several times. However, from programming view 
+such operation is similar with the daxpy function since they are all element-wise 
+operation. Therefore, by applying the similar code structure to this operation
+it's able to create a new BLAS1 function that can perform the element-wise 
+operation within only one loop. Because of the reason, we implement our own
+BLAS1 functions and extend it as new operation requires.
+
+The rest of BLAS functions (BLAS2 and BLAS3) and the whole LAPACK functions
+are solely from vendors. We just construct the wrapper function and call
+the vendor functions. In particular, if the vendor functions provide the 
+muti-threading function which is realized with OpenMP, our wrapper function
+is able to dynamically turn on/off the multi-threading mode by setting 
+the number of threads \footnote{with the use of omp\_set\_num\_threads()
+function. See the OpenMP reference.}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementing General Matrix Class}
+
+\subsection{Order Arrangement in Multidimensional Matrix}
+%
+%
+For the multidimensional matrix, in general there are two ways 
+to store the data\footnote{see 
+ \url{http://en.wikipedia.org/wiki/Row-major_order}}:
+\begin{enumerate}
+ \item row major;
+ \item column major
+\end{enumerate}
+
+For an arbitrary multidimensional array, which is expressed as:
+\begin{equation}
+ M \Rightarrow  m[i][k][k][l]
+\end{equation} 
+row major means the last dimension $l$ is changing first, and column 
+major means the first dimension $i$ is changing first.
+
+In our program, the multidimensional array is actually stored in a
+continuous one dimensional storage space, and column major is used 
+for all the multidimensional arrays:
+\begin{equation}
+ A(d1,d2,d3,d4,...,dn) \Rightarrow d1+d2*S1+d3*S2+....+dn*Sn-1
+\end{equation} 
+$Sk$ is:
+\begin{equation}
+ Sk=D1*D2*D3....*Dk
+\end{equation} 
+$D_{i}$ is the $i$th dimension, and in C/C++ program the index starts from 0.
+
+\subsection{Leading Dimension}
+%
+%
+Suggest an array in dimension of $(5,6)$:
+\begin{equation}
+A = 
+\begin{bmatrix}
+1 &  6  &  11 &  16 &  21 &  26 \\ 
+2 &  7  &  12 &  17 &  22 &  27 \\
+3 &  8  &  13 &  18 &  23 &  28 \\
+4 &  9  &  14 &  19 &  24 &  29 \\
+5 &  10 &  15 &  20 &  25 &  30 \\
+\end{bmatrix}
+\end{equation} 
+
+If B is a sub matrix of A:
+\begin{equation}
+B = 
+\begin{bmatrix}
+13 & 18 \\ 
+14 & 19 \\ 
+15 & 20 \\ 
+\end{bmatrix}
+\end{equation} 
+
+Then for identifying B, the following information is needed:
+\begin{enumerate}
+	\item  B's original position: $A((3-1)+(3-1)*5)$
+	\item  B's row(3) and column(2)
+	\item  leading dimension is 5
+\end{enumerate}
+
+Therefore, leading dimension is used to identify the real 
+position of the sub matrix in the whole matrix. For example,
+suggest that B is the original position of $A((3-1)+(3-1)*5)$; 
+the position in the whole matrix and the value in matrix B are 
+corresponded as:
+\begin{align}
+13 &\Rightarrow  B[0+0]    \\ \nonumber  
+14 &\Rightarrow  B[1+0]    \\ \nonumber 
+15 &\Rightarrow  B[2+0]    \\ \nonumber 
+18 &\Rightarrow  B[0+1*5]  \\ \nonumber 
+19 &\Rightarrow  B[1+1*5]  \\ \nonumber 
+20 &\Rightarrow  B[2+1*5]  
+\end{align}
+Thus to access to B's element the leading dimension is necessary.
+
+\subsection{General Design for Matrix Class}
+%
+% 1 build the wrapper class;
+% 2 call the lapack and blas to do real job
+%
+The implementation of matrix function could be divided into
+two general categories:
+\begin{itemize}
+ \item functions to perform matrix operations;
+ \item wrapper class which is to build matrix object, and manipulates
+ the matrix operations
+\end{itemize}
+
+The matrix function in fact could be realized by a series of C style 
+functions. The implementation of GNU Scientific Library\footnote{See 
+\url{http://www.gnu.org/software/gsl/}} is a good example. The matrix
+class exists only as a simple wrapper of these operations. In general,
+the matrix wrapper class performs two important roles:
+\begin{itemize}
+ \item manipulates the memory hold by the matrix object;
+ \item provides a clean and simple interface for the user of matrix class
+\end{itemize}
+
+Currently there are a lot of excellent libraries providing the matrix
+functions (for example, Eigen, Armadillo etc.). In these libraries
+they are handling the matrix in a general way (matrix element type is
+generic), therefore generic programming skills is widely applied in these
+libraries. The required matrix operation in this program, however; is only
+a small subset of entire matrix operations. Furthermore, all of matrix
+operations used in this program is concentrating on floating point numbers.
+Therefore, we provide a self-own simple matrix class and in this class
+it uses the STL vector to manipulate the memory. Here we note that the 
+offering of this additional matrix class is only a purpose of convenience,
+it's possible to construct similar matrix wrapper class on base of 
+libraries of Eigen, Armadillo etc. as long as it satisfies the following 
+requirement:
+\begin{enumerate}
+ \item all the matrix classes should have the same class name, and 
+ public/protected method names; so that to keep the use of 
+ matrix class consistent in the rest of the program;
+ \item the matrix classes should support all of necessary matrix operations
+ listed in \ref{matrix_operations};
+ \item the matrix class should easily adding support for a new numerical 
+ libraries working back-end; 
+ \item the matrix class should support parallelization switch on/off per 
+ user's request;
+ \item the matrix class is able to be derived to form new matrix classes 
+\end{enumerate}
+
+\subsection{Functions for General Matrix}
+%
+%
+\label{matrix_operations}
+The functions for matrix used in this program could be divided into 
+several categories:
+\begin{description}
+  \item [dimension change/memory manipulation]: 
+  \begin{itemize}
+   \item initialization/destruction of matrix;
+	\item reset the dimension of matrix (enlarge matrix or shrink matrix);
+	\item memory release
+  \end{itemize}
+  \item [fetching data]: 
+  \begin{itemize}
+   \item return dimension information;
+   \item return constant floating point number pointer for a given row, column position;
+   \item return non-constant floating point number pointer for a given row, column position;
+   \item return matrix value for a given row, column position;
+  \end{itemize}
+ \item [data copying]:
+ \begin{itemize}
+  \item copy whole matrix to other matrix;
+  \item replace the whole content of matrix from another matrix;
+  \item copy part of matrix data to other matrix (copying in part between matrix);
+  \item replace part of matrix data from other matrix (copying in part between matrix);
+  \item copy matrix content to vector;
+  \item load a vector's content to matrix
+ \end{itemize}
+ \item [level 1 BLAS operations]: adding, scaling, dot product etc.
+ \item [matrix operation with itself]:
+ \begin{itemize}
+  \item matrix transpose;
+  \item copy lower triangular part to upper triangular part (only for debug purpose);
+  \item trace of matrix;
+  \item matrix itself with its transpose added in;
+ \end{itemize}
+ \item [vector and matrix operations]: level 2 BLAS operations;
+ \item [matrix and matrix operations]:
+ \begin{itemize}
+  \item symmetrical matrix multiplication;
+  \item general matrix multiplication;
+  \item submatrix multiplication;
+  \item direct sum operation: $A = \bigoplus^{n}_{i=1}A_{i}$ 
+ \end{itemize}
+ \item [LAPACK functions]:
+ \begin{itemize}
+  \item eigenvalue and eigenvector solver for symmetrical matrix;
+  \item power of matrix for symmetrical matrix;
+  \item inverse of matrix for square matrix and symmetrical matrix;
+  \item solve the rank of a matrix (based on singular value decomposition);
+  \item linear equation solver: $AX = B$;
+  \item orthogonal matrix forming (based on Lowdin orthogonalization etc.)
+ \end{itemize}
+ \item [other matrix utilities]:
+  \item matrix printing;
+  \item matrix difference compare (only for debugging purpose);
+  \item writing/reading matrix from files
+\end{description}
+
+Here it's worthy to note, that in the matrix power function and orthogonal 
+matrix forming procedure, the input matrix could be in a state of ``linear
+dependent'' therefore the matrix is not a full rank matrix. Similar cases 
+is also existing for general matrix inverse based on LU decomposition. 
+In these cases the linear dependent vectors are trying to be removed, and 
+such technique is similar with the derivation of ``Moore–Penrose pseudoinverse''
+\footnote{ see the page of \url{http://en.wikipedia.org/
+wiki/Moore\%E2\%80\%93Penrose_pseudoinverse} for more details}. The user should 
+be particular careful about this case, since the result matrix could be diverged 
+quite a lot from the one user expect to get. Please check the result if linear
+dependency exists in the matrix!
+
+\subsection{Matrix in Threads}
+%
+%
+%
+\label{matrix_threads}
+
+In the integral calculation\footnote{see the section \ref{parallel_imp_integral}
+for more information}, the matrix is extensively used within threads. Typically,
+the use of matrix in threads is divided into two kinds:
+\begin{enumerate}
+ \item matrix is used as local object inside the threads (local threading matrix);
+ \item matrix is used as output between threads
+\end{enumerate}
+
+The matrix used locally in threads is typically a normal matrix except that
+its memory management should be thread safe and scalable to the number of 
+threads. For achieving the scalability of memory management between threads,
+the matrix class uses the scalable memory allocator\footnote{see the discussion
+in \ref{mem_management}}.
+
+Since the scalable allocator is also applied to single threads environment,
+the matrix class uses the scalable allocator for both single-thread and 
+multi-threads purposes.
+
+When matrix is used as output between threads, there could be possible performance 
+lost due to the ``false sharing'' in the caches when different threads are 
+referring to data (this happens even if the threads refer to different region
+of data) in the matrix. This is because each thread has it's own copy of the caches
+and system requires the caches to be updated among all of threads. In this case,
+decreasing the granularity size in parallel will provide some help. 
+
+
+

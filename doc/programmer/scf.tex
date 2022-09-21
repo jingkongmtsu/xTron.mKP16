@@ -1,0 +1,75 @@
+%
+% set up June 2013
+%
+\chapter{SCF Module}
+
+SCF module is divided into two classes. One is SCF class, which is used to 
+monitor practical SCF calculation process. The other one is SCFDeriv class,
+this class is used to monitor the SCF derivatives calculation based on 
+given molecular orbitals.
+
+\section{SCF Class}
+
+\subsection{Data Member of SCF Class}
+
+
+
+\subsection{General SCF Procedure}
+
+\begin{itemize}
+ 1 pre-calculation for scf;
+ 2 get the guess density matrices;
+ 3 begin scf loop;
+   3.1 form Fock matrix;
+   3.2 start convergence check; and update Fock matrix;
+   3.3 form MO based on the final Fock;
+   3.4 if SCF continue; form new density matrix; else stock the final MO
+ 4 possible post-processing for scf;
+\end{itemize}
+
+\subsection{Member Class, Member Data and Member Functions Design Principle}
+%
+%
+principle:  1  conceptually clear;  2  good memory management;  3 code clear
+4 enough flexibility
+
+\subsection{Code Hierarchy}
+%
+%
+
+\subsection{Memory Management Consideration}
+%
+%
+
+\subsection{SCFPreProcessing Class}
+%
+%
+
+perform one electron matrix pre-calculation.
+core, overlap, and orthogonal matrix.
+
+\subsection{Fock Matrix Forming}
+%
+%
+
+\subsection{SCF Convergence Class Design}
+%
+%
+
+\subsection{Possible Post-Processing Procedure}
+%
+%
+
+\subsection{Relationship with GInts Module and XCInts Module}
+%
+%
+
+\section{SCF Convergence Controller Class}
+%
+%
+
+
+
+
+
+

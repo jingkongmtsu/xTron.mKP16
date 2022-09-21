@@ -1,0 +1,37 @@
+
+%
+% set up July 2013
+%
+\chapter{Van der Waals Interaction Calculation}
+
+
+\section{XDM Model}
+%
+%
+
+
+\subsection{Hirshfeld Weights}
+%
+%
+%
+Similar with the partition weights in DFT calculation, Hirshfeld weights 
+is used to partition the molecular property into atom based weights. 
+For achieving such purpose, Hirshfeld weights employs the free atom
+density:
+\begin{equation}
+\rho^{atom}(r) = \sum_{\mu\nu} P_{\mu\nu}^{free} \phi_{\mu}(r)\phi_{\nu}(r)
+\end{equation} 
+Here $\phi$ is the batch basis set, and $P_{\mu\nu}^{free}$ is the free
+atom density matrix generated from free atom SCF calculation. 
+The free atom density uses the both ``local'' and ``non-local'' data
+(local means the data is only related to the atom itself, and non-local
+implies the data is related to the whole molecule environment). Therefore,
+there will be a data matching work between the two types of data.
+
+Based on the free atom density, Hirshfeld weights could be expressed as:
+\begin{equation}
+  W_{i}(r) = \frac{\rho^{atom}(r)}{\sum_{n}\rho^{atom}_{n}(r)} 
+\end{equation} 
+
+
+

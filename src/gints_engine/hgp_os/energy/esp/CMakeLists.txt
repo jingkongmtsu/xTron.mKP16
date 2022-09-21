@@ -1,0 +1,35 @@
+#
+# build the analytical integral engine for energy of esp
+#
+set(SRC_GINTS_ENGINE_ESP_D0
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/hgp_os_esp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_d_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_d_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_d_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_d_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_f_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_f_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_f_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_f_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_f_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_g_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_d.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_f.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_g.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_h.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_h_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_p_p.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_p_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_p_sp.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_s_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_sp_s.cpp
+   ${PROJECT_SOURCE_DIR}/src/gints_engine/hgp_os/energy/esp/hgp_os_esp_sp_sp.cpp
+   )
+add_library(gints_engine_esp_d0 ${SRC_GINTS_ENGINE_ESP_D0})
