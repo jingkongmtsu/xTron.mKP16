@@ -85,7 +85,7 @@ void doSP(const string& inf, const string& outf)
 	globalInfor.print();
 	Molecule molecule(inf,1);
 	MolShell s(inf,molecule);
-	cout << "number of basis sets " << s.getNBas() << endl;
+	cout << "number of basis functions " << s.getNBas() << endl;
 
 	// set up scf
 	SCF scf(globalInfor,molecule,s);
