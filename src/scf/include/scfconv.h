@@ -115,7 +115,7 @@ namespace scfconv {
 			/// this function is the driver the derive the scf index vector 
 			/// for interpolating/extropolating the result fock matrix
 			///
-			bool deriveIndexSpace(); 
+			void deriveIndexSpace(); 
 
 			///
 			/// reset the current job

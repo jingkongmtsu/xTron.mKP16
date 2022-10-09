@@ -419,7 +419,7 @@ bool SCFConv::checkUpSCFSolutions(UInt status, UInt solution) const
 	return true;
 }
 
-bool SCFConv::deriveIndexSpace() 
+void SCFConv::deriveIndexSpace() 
 {
 	// let's try to derive the scf index array
 	// also update the scf status
